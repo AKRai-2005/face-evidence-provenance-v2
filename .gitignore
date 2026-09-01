@@ -1,0 +1,29 @@
+# --- secrets: never commit ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.consent
+
+# --- python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# --- run artifacts (audit trail, regenerated per run) ---
+runs/
+spikes/faces/
+spikes/out/
+
+# --- models (downloaded on first use, ~280MB) ---
+*.onnx
+models/
+
+# --- os ---
+Thumbs.db
+desktop.ini
+.DS_Store
