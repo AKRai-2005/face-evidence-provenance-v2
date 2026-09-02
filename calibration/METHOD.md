@@ -32,13 +32,26 @@ not in any standard benchmark, so it is calibrated here from first principles.
 
 ## Data
 
-**LFW**, funneled, colour, full 250×250 (no sklearn slicing or downscaling),
-`min_faces_per_person=3`, fetched via `sklearn.datasets.fetch_lfw_people`.
+**LFW**, funneled, full 250×250, identities with ≥3 images. The JPEGs are read
+**directly from disk** (`~/scikit_learn_data/lfw_home/lfw_funneled/`), not through
+`sklearn.datasets.fetch_lfw_people`.
+
+That is a deliberate change, not a stylistic one. `fetch_lfw_people` materialises
+every image into a single float32 array — roughly 3 GB at full-size colour —
+which pushed the development machine into swap and slowed embedding from 0.38 s
+to ~2.4 s per image, so a run that should take 16 minutes had not finished after
+106 minutes of CPU. Walking the directory keeps memory flat (≈680 MB) and
+restores the measured rate. `sklearn` is still used, for `roc_curve`.
+
+Fetch the data once with:
+
+```bash
+python -c "from sklearn.datasets import fetch_lfw_people; fetch_lfw_people(min_faces_per_person=3)"
+```
 
 Each image is embedded **once** with the exact pipeline used at run time
-(`FaceEngine.detect` → highest-confidence face → `normed_embedding`). Embeddings
-are cached to `_embeddings_cache.npz` so re-calibration does not repeat the
-~15-minute embedding pass.
+(`FaceEngine.detect` → highest-confidence face → `normed_embedding`), and cached
+to `_embeddings_cache.npz` so re-calibration does not repeat the embedding pass.
 
 ### Sample-size correction
 
@@ -56,12 +69,39 @@ negatives and resolves FAR to ~2e-5.
 LFW is severely imbalanced — George W. Bush alone has 530 images. A first pass
 that took *every* within-identity combination produced 236,225 positive pairs,
 of which C(530,2) ≈ 140,000 (**59%**) came from that one person. The reported
-TAR was effectively "TAR on George W. Bush", and AUC came out at 0.983 where
-ArcFace on LFW should reach ~0.999.
+TAR was effectively "TAR on George W. Bush" rather than a property of the model.
 
 The calibration therefore caps **images per identity** (`--max-images-per-identity`,
 default 6) and **positive pairs per identity** (`--max-pairs-per-identity`,
 default 15), so no single subject dominates the operating point.
+
+### Measured results
+
+```
+450 identities, 2534 images (capped at 6/identity), 9 rejected
+pairs: 5907 positive, 60000 negative
+threshold 0.2149 at FAR 7.83e-04  ->  TAR 0.9756   (AUC 0.98683)
+```
+
+**On the AUC.** ArcFace is often quoted at ~99.8% on LFW, so 0.9868 warrants an
+explanation rather than a shrug. Two things account for it, and neither is a bug:
+
+1. That headline figure is *accuracy on LFW's curated 6,000-pair protocol*, at
+   the best-performing threshold. This calibration instead builds pairs
+   combinatorially across 450 identities, which includes far harder positives —
+   the same person a decade apart, in different lighting and pose — that the
+   standard protocol does not weight so heavily. A harder pair set yields a
+   lower AUC for the same model.
+2. It is *not* label noise from face selection. LFW images frequently contain
+   background people — 17.4% of a 149-image sample had more than one detected
+   face — but because funneled LFW centres the subject, the highest-confidence
+   face is the centre face **98.7%** of the time. Measured mislabelling from
+   picking top-confidence is ~1.3%.
+
+The operating point is what matters here, and it is comfortable: the chosen
+threshold of 0.2149 sits well above the highest cross-identity score observed on
+real data during the risk spike (0.1284) and far below genuine same-subject
+matches (0.637-0.985).
 
 ---
 
@@ -97,6 +137,21 @@ candidates that separates cleanly:
 |---|---|---|
 | same photograph, republished | 0.968–0.985 | **4–14** |
 | different photograph, same subject | 0.637–0.841 | **26–40** |
+
+### Measured distributions
+
+```
+same photograph       n= 1061   median  2   p95 12   p99 24   max 32
+different photograph  n= 1345   median 28   p05 18   p01 14   min  4
+-> same_photo_phash_max = 15
+   captures 96.7% of republications and 98.3% of distinct photographs
+```
+
+The distributions overlap in the tails — a heavily reprocessed republication can
+reach 32, and an unusually similar pair of distinct photographs (same shoot, same
+pose) can fall to 4. A single scalar cannot separate those perfectly, and this
+one does not claim to. What it does is put the cut where total error is lowest
+while erring toward under-claiming.
 
 ### How the cut is chosen
 
