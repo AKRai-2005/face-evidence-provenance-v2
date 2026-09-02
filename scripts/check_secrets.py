@@ -19,8 +19,20 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
+# A bare 64-hex string cannot be classified by shape: a SHA-256 digest and a
+# secp256k1 private key are both exactly that. This project is full of legitimate
+# 64-hex values -- evidence hashes, subject commitments, image digests, tx hashes
+# -- so a shape-only rule flagged every evidence artifact in sample_run/ and the
+# proof block in the README. Require key-ish context on the same line instead.
+#
+# The authoritative checks are the two that do not depend on shape at all:
+# .env must be untracked and absent from history, and no live value from .env
+# may appear in any tracked file. Those catch a real leak whatever it looks like.
+KEYISH = r"(?:priv(?:ate)?[_-]?key|secret|passwd|password|mnemonic|seed[_-]?phrase)"
+
 PATTERNS = [
-    ("private key (hex)", re.compile(r"\b(?:0x)?[0-9a-fA-F]{64}\b")),
+    ("private key (hex, in key-ish context)",
+     re.compile(KEYISH + r"""["'\s:=]{0,12}(?:0x)?[0-9a-fA-F]{64}\b""", re.I)),
     ("AWS access key", re.compile(r"\bAKIA[0-9A-Z]{16}\b")),
     ("PEM block", re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----")),
     ("Slack token", re.compile(r"\bxox[abprs]-[0-9A-Za-z-]{10,}")),
