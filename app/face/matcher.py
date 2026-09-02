@@ -23,6 +23,7 @@ class Verdict(str, enum.Enum):
     """Ordered weakest -> strongest."""
 
     NO_MATCH = "NO MATCH ABOVE THRESHOLD"
+    UNCERTAIN = "UNCERTAIN -- confidence interval straddles the threshold"
     EXACT_DUPLICATE = "EXACT-DUPLICATE MATCH (weak evidence)"
     SAME_PHOTO = "SAME-PHOTOGRAPH REPUBLICATION (moderate evidence)"
     DISTINCT_PHOTO = "DISTINCT-PHOTOGRAPH SAME-SUBJECT CANDIDATE (strong evidence)"
@@ -74,11 +75,19 @@ def classify(
     input_face_phash: str,
     candidate_face_phash: str,
     thresholds: Thresholds,
+    similarity_lo: float | None = None,
+    similarity_hi: float | None = None,
 ) -> tuple[Verdict, int | None]:
     """Return (verdict, face_phash_distance).
 
     Order matters. Byte equality is checked first because it is decisive and
     cheap; a same-SHA match is weak evidence no matter how high the cosine is.
+
+    `similarity` is the MEDIAN over test-time augmentations of the input, and
+    similarity_lo/hi are that range. When the range straddles the threshold the
+    verdict is UNCERTAIN: the decision would flip depending on how the input
+    happened to be cropped, and reporting either side of it as settled would be
+    fabricating a confidence we do not have.
     """
     if input_sha256 == candidate_sha256:
         return Verdict.EXACT_DUPLICATE, 0
@@ -86,6 +95,10 @@ def classify(
     dist = None
     if input_face_phash and candidate_face_phash:
         dist = phash_distance(input_face_phash, candidate_face_phash)
+
+    if (similarity_lo is not None and similarity_hi is not None
+            and similarity_lo < thresholds.similarity <= similarity_hi):
+        return Verdict.UNCERTAIN, dist
 
     if similarity < thresholds.similarity:
         return Verdict.NO_MATCH, dist

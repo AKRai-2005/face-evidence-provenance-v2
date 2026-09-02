@@ -20,7 +20,9 @@ import datetime as _dt
 import unicodedata
 import urllib.parse
 
-SCHEMA = "hhgoa2026.task3.evidence.v1"
+# v2 adds the test-time-augmentation interval and view count. v1 bundles
+# remain verifiable: verify.py canonicalises whatever object it is given.
+SCHEMA = "hhgoa2026.task3.evidence.v2"
 
 # Stripped because they vary per referral and would change the hash for what is
 # demonstrably the same page. Observed live: Wikimedia's own API hands back URLs

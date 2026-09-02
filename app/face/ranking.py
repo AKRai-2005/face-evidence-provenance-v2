@@ -28,7 +28,10 @@ TIER_RANK = {
     Verdict.DISTINCT_PHOTO: 0,
     Verdict.SAME_PHOTO: 1,
     Verdict.EXACT_DUPLICATE: 2,
-    Verdict.NO_MATCH: 3,
+    # UNCERTAIN ranks below every settled verdict but above NO_MATCH: it is a
+    # candidate we decline to call either way, not one we rejected.
+    Verdict.UNCERTAIN: 3,
+    Verdict.NO_MATCH: 4,
 }
 
 
@@ -40,7 +43,9 @@ class ScoredCandidate:
     source: str
     sha256: str
     face_phash: str
-    similarity: float
+    similarity: float          # median over test-time augmentations
+    similarity_lo: float
+    similarity_hi: float
     verdict: Verdict
     phash_distance: int | None
     faces_in_candidate: int
@@ -62,6 +67,8 @@ class ScoredCandidate:
             "sha256": self.sha256,
             "face_phash": self.face_phash,
             "similarity": round(self.similarity, 4),
+            "similarity_lo": round(self.similarity_lo, 4),
+            "similarity_hi": round(self.similarity_hi, 4),
             "verdict": self.verdict.name,
             "phash_distance": self.phash_distance,
             "faces_in_candidate": self.faces_in_candidate,
@@ -79,8 +86,15 @@ def score_candidate(
     input_sha256: str,
     fetched,
     thresholds: Thresholds,
+    input_embeddings: list[np.ndarray] | None = None,
 ) -> ScoredCandidate | None:
-    """Score one downloaded candidate, or None if it has no usable face."""
+    """Score one downloaded candidate, or None if it has no usable face.
+
+    `input_embeddings` are the test-time-augmented embeddings of the input face.
+    Each produces its own score against this candidate; we report the MEDIAN and
+    the range. Using the single un-augmented embedding is quietly optimistic --
+    measured on the demo input, it landed at the top of its own range.
+    """
     import cv2
 
     img = cv2.imdecode(np.frombuffer(fetched.content, np.uint8), cv2.IMREAD_COLOR)
@@ -91,8 +105,16 @@ def score_candidate(
     if not faces:
         return None
 
+    probes = list(input_embeddings) if input_embeddings else [input_face.embedding]
+
     # Max over ALL faces, never the largest. Phase 0: in a two-person photo the
     # largest face was the wrong person, scoring a true match at 0.0123.
+    per_view = [max(cosine(p, f.embedding) for f in faces) for p in probes]
+    med = float(np.median(per_view))
+    lo, hi = float(min(per_view)), float(max(per_view))
+
+    # The matched face is the one the primary (un-augmented) embedding picks,
+    # so the recorded bbox corresponds to a reproducible view of the input.
     best_i, best_cos = 0, -1.0
     for f in faces:
         c = cosine(input_face.embedding, f.embedding)
@@ -101,7 +123,9 @@ def score_candidate(
     best = faces[best_i]
 
     verdict, dist = classify(
-        similarity=best_cos,
+        similarity=med,
+        similarity_lo=lo,
+        similarity_hi=hi,
         input_sha256=input_sha256,
         candidate_sha256=fetched.sha256,
         input_face_phash=input_face.face_phash,
@@ -117,7 +141,9 @@ def score_candidate(
         source=fetched.source,
         sha256=fetched.sha256,
         face_phash=best.face_phash,
-        similarity=best_cos,
+        similarity=med,
+        similarity_lo=lo,
+        similarity_hi=hi,
         verdict=verdict,
         phash_distance=dist,
         faces_in_candidate=len(faces),

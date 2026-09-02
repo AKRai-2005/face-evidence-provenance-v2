@@ -198,3 +198,26 @@ class FaceEngine:
                 extra={"stage": "FACE"},
             )
         return usable[0], faces
+
+
+# Test-time augmentation. The input is a DERIVED artifact -- a crop we chose --
+# so the honest question is how much the score depends on that arbitrary choice.
+# Measured on the demo input: the un-augmented score sat at the TOP of its own
+# augmentation range (0.8503 max vs 0.8429 median), i.e. reporting the single
+# point estimate was quietly optimistic. Cost is ~5 extra embeddings of one
+# small image, about 1.5s.
+TTA_TRANSFORMS = ("identity", "hflip", "crop4", "crop8", "scale085", "scale125")
+
+
+def augmented_views(img_bgr: np.ndarray) -> list[tuple[str, np.ndarray]]:
+    """Return (name, image) pairs for test-time augmentation of the input."""
+    h, w = img_bgr.shape[:2]
+    out = [("identity", img_bgr), ("hflip", cv2.flip(img_bgr, 1))]
+    for frac, name in ((0.04, "crop4"), (0.08, "crop8")):
+        out.append((name, img_bgr[int(h * frac):int(h * (1 - frac)),
+                                  int(w * frac):int(w * (1 - frac))]))
+    for scale, name in ((0.85, "scale085"), (1.25, "scale125")):
+        out.append((name, cv2.resize(img_bgr, (max(32, int(w * scale)),
+                                               max(32, int(h * scale))),
+                                     interpolation=cv2.INTER_AREA)))
+    return out

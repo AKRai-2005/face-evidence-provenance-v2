@@ -22,11 +22,13 @@ def _classify(sim, cand_sha=None, cand_ph="ffffffffffffffff"):
                     thresholds=TH)
 
 
-def _cand(pos, sim, verdict, dist):
+def _cand(pos, sim, verdict, dist, lo=None, hi=None):
     return ScoredCandidate(
         position=pos, page_url=f"https://e{pos}.example/p", image_url="",
         source=f"src{pos}", sha256=f"{pos:02x}" * 32,
         face_phash="0" * 16, similarity=sim,
+        similarity_lo=sim if lo is None else lo,
+        similarity_hi=sim if hi is None else hi,
         verdict=verdict, phash_distance=dist, faces_in_candidate=1,
         matched_face_index=0, matched_face_bbox=(0, 0, 10, 10),
         image_size=(100, 100))
@@ -143,3 +145,47 @@ def test_threshold_is_loaded_from_calibration_not_hardcoded():
     assert 0.0 < t.similarity < 1.0
     assert t.pairs > 1000
     assert t.same_photo_phash > 0
+
+
+# --- uncertainty from test-time augmentation ----------------------------
+def test_interval_straddling_the_threshold_is_uncertain():
+    """If the decision would flip depending on how the input happened to be
+    cropped, we say so rather than picking the flattering side."""
+    v, _ = classify(similarity=0.31, similarity_lo=0.28, similarity_hi=0.34,
+                    input_sha256=INPUT_SHA, candidate_sha256="bb" * 32,
+                    input_face_phash=INPUT_PH, candidate_face_phash=_shift(INPUT_PH, 30),
+                    thresholds=TH)
+    assert v is Verdict.UNCERTAIN
+
+
+def test_interval_entirely_above_threshold_is_a_settled_match():
+    v, _ = classify(similarity=0.70, similarity_lo=0.68, similarity_hi=0.72,
+                    input_sha256=INPUT_SHA, candidate_sha256="bb" * 32,
+                    input_face_phash=INPUT_PH, candidate_face_phash=_shift(INPUT_PH, 30),
+                    thresholds=TH)
+    assert v is Verdict.DISTINCT_PHOTO
+
+
+def test_interval_entirely_below_threshold_is_no_match():
+    v, _ = classify(similarity=0.10, similarity_lo=0.08, similarity_hi=0.14,
+                    input_sha256=INPUT_SHA, candidate_sha256="bb" * 32,
+                    input_face_phash=INPUT_PH, candidate_face_phash=_shift(INPUT_PH, 30),
+                    thresholds=TH)
+    assert v is Verdict.NO_MATCH
+
+
+def test_uncertain_ranks_below_settled_verdicts_but_above_no_match():
+    cands = [_cand(1, 0.31, Verdict.UNCERTAIN, 30, lo=0.28, hi=0.34),
+             _cand(2, 0.65, Verdict.DISTINCT_PHOTO, 30),
+             _cand(3, 0.05, Verdict.NO_MATCH, 40)]
+    order = [c.position for c in rank(cands)]
+    assert order == [2, 1, 3]
+
+
+def test_exact_duplicate_still_wins_over_interval_logic():
+    """Byte equality is decisive and is checked before the interval."""
+    v, d = classify(similarity=0.31, similarity_lo=0.28, similarity_hi=0.34,
+                    input_sha256=INPUT_SHA, candidate_sha256=INPUT_SHA,
+                    input_face_phash=INPUT_PH, candidate_face_phash=INPUT_PH,
+                    thresholds=TH)
+    assert v is Verdict.EXACT_DUPLICATE and d == 0

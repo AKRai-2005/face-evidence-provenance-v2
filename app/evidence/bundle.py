@@ -32,6 +32,9 @@ class EvidenceInputs:
     matched_image_phash: str
     phash_hamming_distance: int | None
     face_similarity: float
+    face_similarity_lo: float
+    face_similarity_hi: float
+    tta_views: int
     threshold: float
     faces_in_candidate: int
     matched_face_index: int
@@ -61,6 +64,9 @@ def build_evidence(i: EvidenceInputs) -> dict:
             int(i.phash_hamming_distance) if i.phash_hamming_distance is not None else None
         ),
         "face_similarity_bp": to_basis_points(i.face_similarity),
+        "face_similarity_lo_bp": to_basis_points(i.face_similarity_lo),
+        "face_similarity_hi_bp": to_basis_points(i.face_similarity_hi),
+        "tta_views": int(i.tta_views),
         "threshold_bp": to_basis_points(i.threshold),
         "faces_in_candidate": int(i.faces_in_candidate),
         "matched_face_index": int(i.matched_face_index),

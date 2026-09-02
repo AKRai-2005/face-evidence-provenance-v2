@@ -27,7 +27,8 @@ from .config import ConfigError, get_settings
 from .evidence.bundle import EvidenceInputs, build_bundle, build_evidence, write_artifacts
 from .evidence.canonicalizer import domain_of, normalise_url
 from .evidence.hasher import evidence_hash
-from .face.detector import FaceEngine, FaceTooBlurry, FaceTooSmall, NoFaceDetected
+from .face.detector import (FaceEngine, FaceTooBlurry, FaceTooSmall,
+                            NoFaceDetected, augmented_views)
 from .face.encoder import subject_commitment
 from .face.matcher import CalibrationMissing, Thresholds, Verdict
 from .face.ranking import rank, score_candidate, score_spread
@@ -135,7 +136,8 @@ def run_search(providers, image_bytes, raw_dir, cfg, log, hosted_url=None):
     raise last or ProviderUnavailable("no search provider is configured")
 
 
-def distinct_artifact_panel(con, *, input_sha, input_dims, best, thresholds, verdict):
+def distinct_artifact_panel(con, *, input_sha, input_dims, best, thresholds,
+                            verdict, tta_views):
     identical = (best.sha256 == input_sha)
     lines = [
         f"  input image   sha256: {input_sha}",
@@ -146,7 +148,9 @@ def distinct_artifact_panel(con, *, input_sha, input_dims, best, thresholds, ver
         "",
         f"  identical files: {'YES' if identical else 'NO'}"
         f"{'' if identical else '          <- reverse-image-hash matching is ruled out'}",
-        f"  face cosine similarity: {best.similarity:.4f}",
+        f"  face cosine similarity: {best.similarity:.4f}   "
+        f"[{best.similarity_lo:.4f} - {best.similarity_hi:.4f}] over "
+        f"{tta_views} augmented views of the input",
         f"  calibrated threshold:   {thresholds.similarity:.4f}  "
         f"(TAR {thresholds.tar:.3f} @ FAR {thresholds.far:g}, see calibration/)",
         f"  face-region pHash distance: {best.phash_distance}"
@@ -155,7 +159,8 @@ def distinct_artifact_panel(con, *, input_sha, input_dims, best, thresholds, ver
         f"  verdict: {verdict.value}",
     ]
     colour = {"DISTINCT_PHOTO": "green", "SAME_PHOTO": "yellow",
-              "EXACT_DUPLICATE": "red", "NO_MATCH": "red"}[verdict.name]
+              "EXACT_DUPLICATE": "red", "UNCERTAIN": "magenta",
+              "NO_MATCH": "red"}[verdict.name]
     con.print(Panel("\n".join(lines), title="[bold]DISTINCT-ARTIFACT PROOF[/]",
                     border_style=colour, expand=False))
 
@@ -264,6 +269,22 @@ def main(argv: list[str] | None = None) -> int:
          len(all_faces), face.index, face.det_score, face.face_px, face.sharpness)
     fsay("model %s, 512-d embedding, metric cosine_l2normed", engine.model_id())
 
+    # Test-time augmentation of the INPUT. The input is a derived crop we chose,
+    # so the honest question is how far the score depends on that choice. Each
+    # view yields its own score per candidate; we report the median and range.
+    input_embeddings, tta_used = [face.embedding], ["identity"]
+    for name, view in augmented_views(img):
+        if name == "identity":
+            continue
+        vf = engine.detect(view)
+        if vf:
+            input_embeddings.append(max(vf, key=lambda f: f.det_score).embedding)
+            tta_used.append(name)
+    self_cons = [float(np.dot(input_embeddings[0], e)) for e in input_embeddings[1:]]
+    fsay("test-time augmentation: %d views (%s); self-consistency min %.4f",
+         len(input_embeddings), ", ".join(tta_used[1:]),
+         min(self_cons) if self_cons else 1.0)
+
     # ---------------- HOST + SEARCH --------------------------------------
     raw_dir = run_dir / "raw"
     if replaying:
@@ -339,13 +360,15 @@ def main(argv: list[str] | None = None) -> int:
     scored = []
     for f in usable:
         s = score_candidate(engine=engine, input_face=face, input_sha256=input_sha,
-                            fetched=f, thresholds=thresholds)
+                            fetched=f, thresholds=thresholds,
+                            input_embeddings=input_embeddings)
         if s is None:
             vsay("candidate %d: no face detected", f.position)
             continue
         scored.append(s)
-        vsay("candidate %d %-22s cos=%+.4f pHashD=%s %s",
-             s.position, s.source[:22], s.similarity, s.phash_distance, s.verdict.name)
+        vsay("candidate %d %-22s cos=%+.4f [%.4f-%.4f] pHashD=%s %s",
+             s.position, s.source[:22], s.similarity, s.similarity_lo,
+             s.similarity_hi, s.phash_distance, s.verdict.name)
 
     if not scored:
         con.print("[red]NO FACES FOUND IN ANY CANDIDATE[/]")
@@ -355,14 +378,22 @@ def main(argv: list[str] | None = None) -> int:
     spread = score_spread(scored)
 
     t = Table(title="Ranked candidates (strongest evidence first)", show_lines=False)
-    for c in ("#", "source", "cosine", "pHashD", "faces", "verdict"):
-        t.add_column(c)
+    for c, j in (("#", "right"), ("source", "left"), ("cosine", "right"),
+                 ("range (TTA)", "center"), ("pHashD", "right"), ("verdict", "left")):
+        t.add_column(c, justify=j, no_wrap=True)
+    # Short labels: the full enum names overflow an 80-100 column terminal and
+    # render as "DISTINCT_PHO...", which reads as a bug on camera.
+    LABEL = {"DISTINCT_PHOTO": ("green", "DISTINCT PHOTO"),
+             "SAME_PHOTO": ("yellow", "same photo"),
+             "EXACT_DUPLICATE": ("red", "exact duplicate"),
+             "UNCERTAIN": ("magenta", "UNCERTAIN"),
+             "NO_MATCH": ("dim", "below threshold")}
     for s in ranked[:12]:
-        style = {"DISTINCT_PHOTO": "green", "SAME_PHOTO": "yellow",
-                 "EXACT_DUPLICATE": "red", "NO_MATCH": "dim"}[s.verdict.name]
-        t.add_row(str(s.position), s.source[:26], f"{s.similarity:+.4f}",
-                  str(s.phash_distance), str(s.faces_in_candidate),
-                  f"[{style}]{s.verdict.name}[/]")
+        style, label = LABEL[s.verdict.name]
+        t.add_row(str(s.position), s.source[:20], f"{s.similarity:+.4f}",
+                  f"{s.similarity_lo:.3f}-{s.similarity_hi:.3f}",
+                  str(s.phash_distance),
+                  f"[{style}]{label}[/]")
     con.print(t)
 
     best = ranked[0] if ranked and ranked[0].verdict is not Verdict.NO_MATCH else None
@@ -378,7 +409,8 @@ def main(argv: list[str] | None = None) -> int:
         return EXIT_NO_MATCH
 
     distinct_artifact_panel(con, input_sha=input_sha, input_dims=(w, h), best=best,
-                            thresholds=thresholds, verdict=best.verdict)
+                            thresholds=thresholds, verdict=best.verdict,
+                            tta_views=len(input_embeddings))
 
     # ---------------- EVIDENCE -------------------------------------------
     esay = stage(log, "EVIDENCE")
@@ -389,6 +421,9 @@ def main(argv: list[str] | None = None) -> int:
         matched_image_phash=best.face_phash,
         phash_hamming_distance=best.phash_distance,
         face_similarity=best.similarity,
+        face_similarity_lo=best.similarity_lo,
+        face_similarity_hi=best.similarity_hi,
+        tta_views=len(input_embeddings),
         threshold=thresholds.similarity,
         faces_in_candidate=best.faces_in_candidate,
         matched_face_index=best.matched_face_index,
