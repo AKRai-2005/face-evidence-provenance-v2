@@ -40,4 +40,11 @@ matplotlib==3.11.1
 # --- contract compilation + tests -------------------------------------------
 py-solc-x==2.0.5
 pytest==9.1.1
+
+# eth-tester provides the in-process EVM the chain tests run against, but it is
+# only a front end: WITHOUT py-evm it silently degrades to a stub that does not
+# implement eth_estimateGas, and every chain test errors with MethodUnavailable.
+# Installing `web3[tester]` pulls both, which is why this was invisible during
+# development and only surfaced on a clean install. Pin both explicitly.
 eth-tester==0.14.0b1
+py-evm==0.12.1b1
