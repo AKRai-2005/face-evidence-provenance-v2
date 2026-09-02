@@ -1,0 +1,38 @@
+# Fallback install path: use this ONLY if `pip install insightface` tries to
+# compile Cython extensions on your machine and fails for want of MSVC Build
+# Tools.
+#
+#   .venv\Scripts\python.exe -m pip install -r requirements-fallback.txt
+#
+# HONEST STATUS: this path was NOT needed on the development machine and is
+# therefore NOT the tested path. insightface 1.0.1 installed from a prebuilt
+# wheel on Windows 11 / CPython 3.12.10 with no compiler involved. This file
+# exists so a judge on a machine without MSVC is not stranded; it is documented
+# as untested rather than presented as verified.
+#
+# Behavioural difference to expect: deepface's ArcFace weights are not identical
+# to insightface's buffalo_l (w600k_r50), so cosine values -- and therefore the
+# calibrated threshold -- will differ. Re-run scripts/calibrate_threshold.py
+# before trusting any verdict produced on this path. The threshold in
+# calibration/results.json was measured with buffalo_l and does not transfer.
+
+deepface==0.0.93
+tf-keras==2.19.0
+
+# everything below is unchanged from requirements.txt
+opencv-python-headless==5.0.0.93
+pillow==12.3.0
+ImageHash==4.3.2
+numpy==2.5.2
+web3==8.0.0
+eth-account==0.14.0
+pydantic==2.13.5
+pydantic-settings==2.15.0
+python-dotenv==1.2.3
+requests==2.34.2
+rich==15.0.0
+scikit-learn==1.9.0
+matplotlib==3.11.1
+py-solc-x==2.0.5
+pytest==9.1.1
+eth-tester==0.14.0b1

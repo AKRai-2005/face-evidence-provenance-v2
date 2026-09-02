@@ -1,0 +1,43 @@
+# task3 -- pinned to the versions this project was actually built and run on
+# (Windows 11, Python 3.12.10, CPU-only). See README for the install walkthrough.
+#
+#   python -m venv .venv
+#   .venv\Scripts\python.exe -m pip install -r requirements.txt
+#
+# NOTE ON verify.py: the standalone verifier needs ONLY web3. A judge verifying a
+# bundle should NOT install this file -- see README "Independent verification".
+
+# --- face detection + embedding -------------------------------------------
+# insightface ships prebuilt wheels for CPython 3.12 on Windows, so no MSVC
+# build step was required here despite the usual warnings. If pip does try to
+# compile on your machine, use requirements-fallback.txt instead.
+insightface==1.0.1
+onnxruntime==1.29.0
+
+# --- imaging / hashing ------------------------------------------------------
+opencv-python-headless==5.0.0.93
+pillow==12.3.0
+ImageHash==4.3.2
+numpy==2.5.2
+
+# --- blockchain -------------------------------------------------------------
+# web3 v8: raw_transaction, not the v6 rawTransaction spelling most tutorials use.
+web3==8.0.0
+eth-account==0.14.0
+
+# --- config, CLI, http ------------------------------------------------------
+pydantic==2.13.5
+pydantic-settings==2.15.0
+python-dotenv==1.2.3
+requests==2.34.2
+rich==15.0.0
+
+# --- calibration ------------------------------------------------------------
+# scikit-learn also fetches the LFW benchmark used by scripts/calibrate_threshold.py
+scikit-learn==1.9.0
+matplotlib==3.11.1
+
+# --- contract compilation + tests -------------------------------------------
+py-solc-x==2.0.5
+pytest==9.1.1
+eth-tester==0.14.0b1
