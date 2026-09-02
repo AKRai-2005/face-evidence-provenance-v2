@@ -38,6 +38,7 @@ class Settings(BaseSettings):
     evidence_registry_address: str = Field(
         default="", alias="EVIDENCE_REGISTRY_ADDRESS"
     )
+    basescan_api_key: str = Field(default="", alias="BASESCAN_API_KEY")
 
     # --- privacy ---
     subject_commitment_salt: str = Field(default="", alias="SUBJECT_COMMITMENT_SALT")
@@ -100,6 +101,7 @@ class Settings(BaseSettings):
                 self.brightdata_api_token,
                 self.deployer_private_key,
                 self.subject_commitment_salt,
+                self.basescan_api_key,
             ) if v and len(v) >= 8
         ]
 
