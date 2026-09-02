@@ -121,3 +121,39 @@ class CandidateFetcher:
         ok = sum(1 for f in out if f.ok)
         self._say("downloaded %d/%d candidates", ok, len(out))
         return out
+
+
+def load_cached(candidates, out_dir: pathlib.Path, logger=None) -> list[FetchedCandidate]:
+    """Rebuild fetch results from images already on disk, with NO network access.
+
+    This is what --replay uses. Re-downloading during a replay would make the
+    banner's "no live network calls" a lie, and would leave the replay just as
+    exposed to a network failure as a live run -- which defeats the point of
+    having it.
+    """
+    out = []
+    for c in candidates:
+        base = dict(position=c.position, page_url=c.page_url,
+                    image_url=c.image_url, source=c.source)
+        hits = sorted(out_dir.glob(f"cand{c.position:02d}_*"))
+        if not hits:
+            out.append(FetchedCandidate(**base, ok=False, reason="not in capture"))
+            if logger:
+                logger("candidate %d MISSING from capture", c.position)
+            continue
+        p = hits[0]
+        content = p.read_bytes()
+        ctype = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png",
+                 ".webp": "image/webp", ".gif": "image/gif",
+                 ".bmp": "image/bmp"}.get(p.suffix.lower(), "application/octet-stream")
+        out.append(FetchedCandidate(
+            **base, ok=True, content=content,
+            sha256=hashlib.sha256(content).hexdigest(),
+            content_type=ctype, path=p))
+        if logger:
+            logger("candidate %d from capture %s %.0fKB", c.position, p.name,
+                   len(content) / 1024)
+    if logger:
+        logger("loaded %d/%d candidates from capture (no network)",
+               sum(1 for f in out if f.ok), len(out))
+    return out

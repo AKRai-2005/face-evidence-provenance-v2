@@ -34,7 +34,7 @@ from .face.ranking import rank, score_candidate, score_spread
 from .logging_setup import setup_logging, stage
 from .search.base import (ProviderAuthError, ProviderError, ProviderRateLimited,
                           ProviderUnavailable)
-from .search.candidate_extractor import CandidateFetcher
+from .search.candidate_extractor import CandidateFetcher, load_cached
 from .search.image_host import ImageHostError, get_host
 from .search.providers.brightdata_lens import BrightDataLens
 from .search.providers.serpapi_lens import SerpApiLens
@@ -319,10 +319,16 @@ def main(argv: list[str] | None = None) -> int:
         return EXIT_NO_CANDIDATES
 
     # ---------------- FETCH ----------------------------------------------
-    fetcher = CandidateFetcher(timeout=cfg.fetch_timeout_s,
-                               max_bytes=cfg.max_download_bytes,
-                               logger=stage(log, "FETCH"))
-    fetched = fetcher.fetch_all(search_res.candidates, run_dir / "candidates")
+    if replaying:
+        # Replay must be fully offline, or the banner is a lie and a network
+        # failure would break a replay exactly as it breaks a live run.
+        fetched = load_cached(search_res.candidates, run_dir / "candidates",
+                              logger=stage(log, "FETCH"))
+    else:
+        fetcher = CandidateFetcher(timeout=cfg.fetch_timeout_s,
+                                   max_bytes=cfg.max_download_bytes,
+                                   logger=stage(log, "FETCH"))
+        fetched = fetcher.fetch_all(search_res.candidates, run_dir / "candidates")
     usable = [f for f in fetched if f.ok]
     if not usable:
         con.print("[red]NO CANDIDATE IMAGES COULD BE DOWNLOADED[/]")
