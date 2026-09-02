@@ -200,10 +200,10 @@ def main(argv: list[str] | None = None) -> int:
     say = stage(log, "RUN")
 
     if replaying:
-        meta = json.loads((run_dir / "run.json").read_text(encoding="utf-8"))
+        _m = json.loads((run_dir / "run.json").read_text(encoding="utf-8"))
         con.print(Panel(
             f"[bold yellow]REPLAY MODE[/] -- using captured responses from run {run_id}\n"
-            f"No live network calls. Original capture: {meta.get('started_at')}",
+            f"No live network calls. Original capture: {_m.get('started_at')}",
             border_style="yellow", expand=False))
 
     t_start = time.time()
@@ -211,9 +211,11 @@ def main(argv: list[str] | None = None) -> int:
 
     # ---------------- FACE ------------------------------------------------
     import cv2
-    src = pathlib.Path(meta["input_path"]) if replaying else args.image
     if replaying:
+        meta = json.loads((run_dir / "run.json").read_text(encoding="utf-8"))
         src = run_dir / "input" / meta["input_name"]
+    else:
+        src = args.image
     if not src.exists():
         con.print(f"[red]INPUT NOT FOUND[/] {src}")
         return EXIT_BAD_INPUT
@@ -363,7 +365,7 @@ def main(argv: list[str] | None = None) -> int:
         input_image_sha256=input_sha,
         input_face_phash=face.face_phash,
         matched_image_sha256=best.sha256,
-        matched_image_phash=best.sha256 and "",   # filled below
+        matched_image_phash=best.face_phash,
         phash_hamming_distance=best.phash_distance,
         face_similarity=best.similarity,
         threshold=thresholds.similarity,

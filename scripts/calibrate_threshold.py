@@ -46,34 +46,65 @@ TARGET_FAR = 1e-3
 
 
 def _republication_variants(img_bgr: np.ndarray) -> list[np.ndarray]:
-    """Transforms a news outlet plausibly applies when republishing a photo."""
+    """Transforms a news outlet plausibly applies when republishing a photo.
+
+    These were initially too gentle: they produced a same-photo p95 of 6, while
+    REAL republications measured against live Google Lens results in Phase 0
+    spanned 4-14. Calibrating on the gentle set gave same_photo_phash_max=6,
+    which would have mislabelled a genuinely republished press photo as a
+    DISTINCT PHOTOGRAPH -- inflating the project's strongest claim, in the one
+    direction we must never err. The set below models real republication:
+    heavier rescaling, harder JPEG, sharpening, tonal shifts and small rotation.
+    """
     import cv2
 
     h, w = img_bgr.shape[:2]
     out = []
 
-    for scale in (0.6, 1.4):
+    for scale in (0.35, 0.6, 1.4):
         nw, nh = max(32, int(w * scale)), max(32, int(h * scale))
         out.append(cv2.resize(img_bgr, (nw, nh), interpolation=cv2.INTER_AREA))
 
-    # modest re-crop (outlets crop to their aspect ratio)
-    out.append(img_bgr[int(h * 0.06):int(h * 0.94), int(w * 0.08):int(w * 0.92)])
+    # re-crops to a house aspect ratio, gentle and aggressive
+    out.append(img_bgr[int(h * .06):int(h * .94), int(w * .08):int(w * .92)])
+    out.append(img_bgr[int(h * .14):int(h * .90), int(w * .18):int(w * .86)])
 
-    # aggressive JPEG re-compression
-    ok, enc = cv2.imencode(".jpg", img_bgr, [int(cv2.IMWRITE_JPEG_QUALITY), 45])
-    if ok:
-        out.append(cv2.imdecode(enc, cv2.IMREAD_COLOR))
+    for q in (45, 25):
+        ok, enc = cv2.imencode(".jpg", img_bgr, [int(cv2.IMWRITE_JPEG_QUALITY), q])
+        if ok:
+            out.append(cv2.imdecode(enc, cv2.IMREAD_COLOR))
+
+    # unsharp mask -- CMS pipelines routinely sharpen after resize
+    blur = cv2.GaussianBlur(img_bgr, (0, 0), 2.0)
+    out.append(cv2.addWeighted(img_bgr, 1.6, blur, -0.6, 0))
+
+    # brightness / contrast regrade
+    out.append(cv2.convertScaleAbs(img_bgr, alpha=1.18, beta=12))
+    out.append(cv2.convertScaleAbs(img_bgr, alpha=0.85, beta=-10))
+
+    # small rotation (scan/auto-straighten artefacts)
+    M = cv2.getRotationMatrix2D((w / 2, h / 2), 2.0, 1.0)
+    out.append(cv2.warpAffine(img_bgr, M, (w, h), borderMode=cv2.BORDER_REPLICATE))
+
+    # greyscale republication
+    out.append(cv2.cvtColor(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY),
+                            cv2.COLOR_GRAY2BGR))
     return out
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--identities", type=int, default=280,
+    ap.add_argument("--identities", type=int, default=450,
                     help="LFW identities to use (each with >=3 images)")
+    ap.add_argument("--max-images-per-identity", type=int, default=6,
+                    help="cap per identity; LFW is severely imbalanced")
+    ap.add_argument("--max-pairs-per-identity", type=int, default=15,
+                    help="cap positive pairs per identity")
     ap.add_argument("--max-negatives", type=int, default=60000)
-    ap.add_argument("--phash-subjects", type=int, default=60)
+    ap.add_argument("--phash-subjects", type=int, default=90)
     ap.add_argument("--far", type=float, default=TARGET_FAR)
     ap.add_argument("--seed", type=int, default=20260901)
+    ap.add_argument("--no-cache", action="store_true", help="ignore cached embeddings")
     args = ap.parse_args()
 
     import cv2
@@ -95,17 +126,37 @@ def main() -> int:
     by_id: dict[int, list[int]] = {}
     for i, y in enumerate(labels):
         by_id.setdefault(int(y), []).append(i)
+
+    # LFW is severely imbalanced: George W. Bush alone has 530 images. Taking
+    # every within-identity combination let him contribute C(530,2) ~ 140k of
+    # 236k positive pairs -- 59% of the positive set -- so the reported TAR was
+    # effectively "TAR on one man", and AUC came out at 0.983 where ArcFace on
+    # LFW should reach ~0.999. Cap images per identity so no one dominates.
     chosen = sorted(by_id, key=lambda k: -len(by_id[k]))[: args.identities]
-    idxs = [i for k in chosen for i in by_id[k]]
-    print(f"  using {len(chosen)} identities, {len(idxs)} images")
+    capped: dict[int, list[int]] = {
+        k: sorted(by_id[k])[: args.max_images_per_identity] for k in chosen
+    }
+    idxs = [i for k in chosen for i in capped[k]]
+    print(f"  using {len(chosen)} identities, {len(idxs)} images "
+          f"(capped at {args.max_images_per_identity}/identity)")
 
     engine = FaceEngine.shared()
 
     # ---- embed each image exactly once -------------------------------------
     emb: dict[int, np.ndarray] = {}
     ph: dict[int, str] = {}
+    cache = OUT_DIR / "_embeddings_cache.npz"
+    if cache.exists() and not args.no_cache:
+        z = np.load(cache, allow_pickle=True)
+        cached_idx, cached_emb, cached_ph = z["idx"], z["emb"], z["ph"]
+        emb = {int(k): cached_emb[n] for n, k in enumerate(cached_idx)}
+        ph = {int(k): str(cached_ph[n]) for n, k in enumerate(cached_idx)}
+        print(f"  loaded {len(emb)} cached embeddings from {cache.name} "
+              f"(--no-cache to re-embed)")
+
+    todo = [i for i in idxs if i not in emb]
     t0, rejected = time.time(), 0
-    for n, i in enumerate(idxs, 1):
+    for n, i in enumerate(todo, 1):
         arr = images[i]
         bgr = cv2.cvtColor((arr * 255).astype(np.uint8) if arr.max() <= 1.0
                            else arr.astype(np.uint8), cv2.COLOR_RGB2BGR)
@@ -117,20 +168,32 @@ def main() -> int:
         emb[i] = f.embedding
         ph[i] = f.face_phash
         if n % 100 == 0:
-            print(f"    embedded {n}/{len(idxs)}  ({time.time()-t0:.0f}s, "
+            print(f"    embedded {n}/{len(todo)}  ({time.time()-t0:.0f}s, "
                   f"{rejected} without a detectable face)")
-    print(f"  embedded {len(emb)} images in {time.time()-t0:.0f}s "
-          f"({rejected} rejected)")
+    if todo:
+        print(f"  embedded {len(todo)-rejected} new images in {time.time()-t0:.0f}s "
+              f"({rejected} rejected)")
+        keys = sorted(emb)
+        np.savez_compressed(
+            cache,
+            idx=np.array(keys),
+            emb=np.stack([emb[k] for k in keys]),
+            ph=np.array([ph[k] for k in keys]),
+        )
+        print(f"  cached {len(keys)} embeddings -> {cache.name}")
 
     usable: dict[int, list[int]] = {}
     for k in chosen:
-        got = [i for i in by_id[k] if i in emb]
+        got = [i for i in capped[k] if i in emb]
         if len(got) >= 2:
             usable[k] = got
 
-    # ---- positive pairs: every within-identity combination ------------------
-    pos = [(a, b) for got in usable.values()
-           for x, a in enumerate(got) for b in got[x + 1:]]
+    # ---- positive pairs, capped per identity --------------------------------
+    pos = []
+    for got in usable.values():
+        all_pairs = [(a, b) for x, a in enumerate(got) for b in got[x + 1:]]
+        rng.shuffle(all_pairs)
+        pos.extend(all_pairs[: args.max_pairs_per_identity])
     # ---- negative pairs: sampled across identities --------------------------
     keys = list(usable)
     neg = set()
@@ -177,15 +240,46 @@ def main() -> int:
                     diff_photo.append(phash_distance(ph[a], ph[b]))
 
     sp, dp = np.array(same_photo), np.array(diff_photo)
-    # Separate at the same-photo 95th percentile: republication variants must
-    # almost always fall below it, and it stays well under the different-photo
-    # median so genuine matches are not misfiled as republications.
-    phash_max = int(np.percentile(sp, 95)) if len(sp) else 20
-    print(f"  same photograph      n={len(sp):5d} median {np.median(sp) if len(sp) else -1:.0f} "
-          f"p95 {np.percentile(sp,95) if len(sp) else -1:.0f}")
-    print(f"  different photograph n={len(dp):5d} median {np.median(dp) if len(dp) else -1:.0f} "
-          f"p05 {np.percentile(dp,5) if len(dp) else -1:.0f}")
-    print(f"  -> same_photo_phash_max = {phash_max}")
+
+    # Choose the cut that best separates the TWO distributions, rather than a
+    # percentile of one of them. A percentile ignores where the other
+    # distribution sits: the p95 of the same-photo set gave 6, which sat below
+    # real republications measured at 4-14 in Phase 0 and would have promoted a
+    # republished press photo to DISTINCT_PHOTO. Sweep instead, and break ties
+    # toward the HIGHER cut, because the costly error is calling a
+    # republication a distinct photograph, not the reverse.
+    phash_max, best_score = 20, -1.0
+    if len(sp) and len(dp):
+        for t in range(0, 65):
+            score = (sp <= t).mean() + (dp > t).mean()
+            if score >= best_score:
+                best_score, phash_max = score, t
+
+    print(f"  same photograph      n={len(sp):6d} median {np.median(sp) if len(sp) else -1:.0f} "
+          f"p95 {np.percentile(sp,95) if len(sp) else -1:.0f} "
+          f"p99 {np.percentile(sp,99) if len(sp) else -1:.0f} "
+          f"max {sp.max() if len(sp) else -1}")
+    print(f"  different photograph n={len(dp):6d} median {np.median(dp) if len(dp) else -1:.0f} "
+          f"p05 {np.percentile(dp,5) if len(dp) else -1:.0f} "
+          f"p01 {np.percentile(dp,1) if len(dp) else -1:.0f} "
+          f"min {dp.min() if len(dp) else -1}")
+    if len(sp) and len(dp):
+        print(f"  -> same_photo_phash_max = {phash_max}  "
+              f"(captures {100*(sp<=phash_max).mean():.1f}% of republications, "
+              f"{100*(dp>phash_max).mean():.1f}% of distinct photos)")
+
+    # Independent sanity check against the REAL Lens candidates measured in
+    # Phase 0, whose labels were established by eye. Synthetic transforms can
+    # only approximate republication; these twelve are the ground truth.
+    REAL_REPUBLICATION = [4, 6, 8, 8, 8, 14]
+    REAL_DISTINCT = [26, 26, 28, 28, 34, 40]
+    ok_rep = sum(d <= phash_max for d in REAL_REPUBLICATION)
+    ok_dis = sum(d > phash_max for d in REAL_DISTINCT)
+    print(f"  real-world check (Phase 0 Lens candidates): "
+          f"republications {ok_rep}/{len(REAL_REPUBLICATION)}, "
+          f"distinct {ok_dis}/{len(REAL_DISTINCT)} correctly classified")
+    if ok_rep < len(REAL_REPUBLICATION) or ok_dis < len(REAL_DISTINCT):
+        print("  WARNING: the calibrated cut misclassifies real observed cases.")
 
     # ---- outputs ------------------------------------------------------------
     results = {

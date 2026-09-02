@@ -93,8 +93,12 @@ def face_sharpness(img_bgr: np.ndarray, bbox, *, size: int = 112) -> float:
 
 
 def phash_distance(a: str, b: str) -> int:
-    """Hamming distance between two hex pHash strings."""
-    return imagehash.hex_to_hash(a) - imagehash.hex_to_hash(b)
+    """Hamming distance between two hex pHash strings.
+
+    int() is load-bearing: imagehash returns a numpy int64, which json.dumps
+    refuses to serialise, and the evidence bundle is JSON.
+    """
+    return int(imagehash.hex_to_hash(a) - imagehash.hex_to_hash(b))
 
 
 class FaceEngine:

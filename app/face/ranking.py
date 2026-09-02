@@ -39,6 +39,7 @@ class ScoredCandidate:
     image_url: str
     source: str
     sha256: str
+    face_phash: str
     similarity: float
     verdict: Verdict
     phash_distance: int | None
@@ -59,6 +60,7 @@ class ScoredCandidate:
             "page_url": self.page_url,
             "image_url": self.image_url,
             "sha256": self.sha256,
+            "face_phash": self.face_phash,
             "similarity": round(self.similarity, 4),
             "verdict": self.verdict.name,
             "phash_distance": self.phash_distance,
@@ -114,6 +116,7 @@ def score_candidate(
         image_url=fetched.image_url,
         source=fetched.source,
         sha256=fetched.sha256,
+        face_phash=best.face_phash,
         similarity=best_cos,
         verdict=verdict,
         phash_distance=dist,
