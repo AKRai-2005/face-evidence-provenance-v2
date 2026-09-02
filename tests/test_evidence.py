@@ -201,3 +201,35 @@ def test_canonical_bytes_survive_a_crlf_roundtrip():
     blob = canonical_bytes(ev)
     assert blob.replace(b"\n", b"\r\n") == blob
     assert evidence_hash(ev) == hashlib.sha256(blob).hexdigest()
+
+
+def test_verifier_tolerates_a_utf8_bom(tmp_path):
+    """Notepad and PowerShell 5.1's Set-Content -Encoding utf8 both write a BOM.
+
+    A reviewer hand-editing bundle.json to try the tamper demo would otherwise
+    be told 'not valid JSON' and reasonably conclude the tool was broken,
+    instead of seeing TAMPER DETECTED.
+    """
+    import json
+
+    import verify as v
+
+    bundle = {"run_id": "t", "evidence": {"a": 1}, "evidence_sha256": "0" * 64}
+    p = tmp_path / "bundle.json"
+    p.write_text(json.dumps(bundle), encoding="utf-8-sig")   # with BOM
+    assert p.read_bytes().startswith(b"\xef\xbb\xbf")
+
+    loaded = v.load_bundle(p)
+    assert loaded["evidence"] == {"a": 1}
+
+
+def test_verifier_still_reads_a_bomless_bundle(tmp_path):
+    import json
+
+    import verify as v
+
+    bundle = {"run_id": "t", "evidence": {"a": 1}, "evidence_sha256": "0" * 64}
+    p = tmp_path / "bundle.json"
+    p.write_text(json.dumps(bundle), encoding="utf-8")
+    assert not p.read_bytes().startswith(b"\xef\xbb\xbf")
+    assert v.load_bundle(p)["evidence"] == {"a": 1}

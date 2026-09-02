@@ -93,7 +93,13 @@ def load_bundle(path: pathlib.Path) -> dict:
         print(f"\n  BUNDLE NOT FOUND: {path}\n")
         sys.exit(EXIT_USAGE)
     try:
-        b = json.loads(path.read_text(encoding="utf-8"))
+        # utf-8-sig, not utf-8: it strips a leading BOM if present and behaves
+        # identically when there is none. This matters in practice -- Notepad,
+        # and PowerShell 5.1's Set-Content -Encoding utf8, both write UTF-8 WITH
+        # a BOM. A reviewer hand-editing the bundle to try the tamper demo would
+        # otherwise be told "not valid JSON" and reasonably conclude the tool was
+        # broken, instead of seeing the TAMPER DETECTED they were looking for.
+        b = json.loads(path.read_text(encoding="utf-8-sig"))
     except json.JSONDecodeError as e:
         print(f"\n  BUNDLE IS NOT VALID JSON: {e}\n")
         sys.exit(EXIT_USAGE)
