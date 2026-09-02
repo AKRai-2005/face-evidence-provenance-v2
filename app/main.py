@@ -193,6 +193,11 @@ def main(argv: list[str] | None = None) -> int:
             con.print(f"[red]No such run: {run_dir}[/]")
             return EXIT_BAD_INPUT
         run_id = args.replay
+        if not (run_dir / "run.json").exists():
+            con.print(f"[red]RUN IS NOT REPLAYABLE[/] {run_dir}")
+            con.print("  No run.json manifest. Only runs captured by a live")
+            con.print("  execution of this pipeline can be replayed.")
+            return EXIT_BAD_INPUT
     else:
         run_dir, run_id = new_run_dir()
 
@@ -230,6 +235,16 @@ def main(argv: list[str] | None = None) -> int:
     if not replaying:
         (run_dir / "input").mkdir(exist_ok=True)
         (run_dir / "input" / src.name).write_bytes(raw)
+        # run.json is the manifest --replay reads. Written here, before any
+        # network call, so a run that fails midway is still replayable.
+        (run_dir / "run.json").write_text(json.dumps({
+            "run_id": run_id,
+            "started_at": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "input_name": src.name,
+            "input_sha256": input_sha,
+            "input_width": img.shape[1],
+            "input_height": img.shape[0],
+        }, indent=2), encoding="utf-8")
 
     fsay = stage(log, "FACE")
     engine = FaceEngine.shared(logger=log)
