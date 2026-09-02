@@ -184,6 +184,45 @@ input image, raw provider responses, downloaded candidates, `evidence.json`,
 
 ---
 
+## Model and metric
+
+```
+detector    RetinaFace  (buffalo_l / det_10g)
+embedder    ArcFace     (buffalo_l / w600k_r50)   512-d, L2-normalised
+metric      cosine similarity on L2-normalised embeddings
+recorded    insightface_buffalo_l_arcface_w600k_r50
+runtime     onnxruntime 1.29.0, CPU, ~0.35 s/image
+```
+
+Not Euclidean distance, and not a "confidence percentage" — every number the
+pipeline prints traces to a line of code that computed it.
+
+**One correction worth flagging.** `buffalo_l`'s recognition network is
+**`w600k_r50`** — ArcFace on a ResNet-50 — not the `r100` that the project's
+original schema specified. Since that string is canonicalised, hashed and
+notarised, shipping it unchecked would have written a false model claim into an
+immutable public record. `FaceEngine.model_id()` therefore reads the identifier
+from the **loaded ONNX graph at runtime** rather than trusting a constant.
+
+### Quality gate
+
+Faces are rejected before embedding if they are too small, too low-confidence,
+or **too blurred** — the last of which detection score does not catch. Measured
+on the committed fixtures, out-of-focus faces score 0.74–0.80 detection
+confidence at 86–87 px, clearing any size-and-confidence gate, while embedding to
+noise (~0.01 cosine against every identity). A scale-normalised Laplacian
+variance separates them by three orders of magnitude:
+
+```
+blurred, unusable   5.3   6.4
+usable            995 - 4219      threshold 100
+```
+
+`data/fixtures/A1_pichai_hanoi2015.jpg` is kept specifically to test this, and is
+correctly rejected with exit code 11.
+
+---
+
 ## Evidence canonicalization
 
 The evidence hash must be reproducible by a stranger on a different OS, Python
