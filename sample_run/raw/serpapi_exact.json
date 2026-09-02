@@ -1,0 +1,129 @@
+{
+  "search_metadata": {
+    "id": "6a9826cfb2c61385e834db38",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/Y0Nl-7MjgEmF4gdMJ_uuni_vUx8U4Xid4Mj7JcKvwas/6a9826cfb2c61385e834db38.json",
+    "markdown_endpoint": "https://serpapi.com/searches/Y0Nl-7MjgEmF4gdMJ_uuni_vUx8U4Xid4Mj7JcKvwas/6a9826cfb2c61385e834db38.md",
+    "created_at": "2026-09-02 13:38:23 UTC",
+    "processed_at": "2026-09-02 13:38:23 UTC",
+    "raw_html_file": "https://serpapi.com/searches/Y0Nl-7MjgEmF4gdMJ_uuni_vUx8U4Xid4Mj7JcKvwas/6a9826cfb2c61385e834db38.html",
+    "total_time_taken": 3.81
+  },
+  "search_parameters": {
+    "engine": "google_lens",
+    "type": "exact_matches",
+    "image_id": "1pIcbHicu2mQZGpibpBoYWBqZm6QnGJqnmZgaWZqnGicaGBoaGZpnKqXVZCaHm9obmFhbGpmZGkBAGAkDVE"
+  },
+  "exact_matches": [
+    {
+      "position": 1,
+      "title": "Digital Ecosystems: They Own the Future | Bosch Global",
+      "source": "Bosch Global",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAAA90lEQVR4Aa3SIayDMBQF0OvFF7PzmZn3ZhI575OpmSYIkiq8qauqwFaRoFHf19RUIbD14n5RoN3gT-2ql5zkpa-54Id8B6de6346RIOTUKo-w-ww4DGnaX7Cv-IvHLd4jCUGRFq3kGWELxCOLWzCAQ09MpoH7a1dUVYdhd4QM0HZJxxrghErTid2ki2WSLaal7BgL3h3bNa1gq6itAtqxZ9YYgS1yoh_sa_f197y2ulM07496BoOTxleT6F5sqvyJ9wNa7Uh4dlgRQgGMKNHZOcSuo4RrkCO8NwSMLBEeoiYpljD7WqicZFayyvUYcGCVcqGr_d2lz-22ZpFePJGGAAAAABJRU5ErkJggg.png",
+      "link": "https://www.google.com/goto?url=CAESaQHrOzAVqwlxz4rbrDo8iZdZw2WcGl65PhwAPIv-RlZ6aL0fcF50kVILQ2N6egrLL2GOVIcVrRVSQ8kHOZSnxsur7bLIuN5b_eaB61iDW5MVA6oTOnyTPnoAI52o74UWwRsn8QDOuc_a4g",
+      "thumbnail": "https://serpapi.com/searches/6a9826cfb2c61385e834db38/images/ykgCx-GljV3nPz78aFAozBnlpEKJWoyCpqTsZXR-yKs.jpeg",
+      "date": "Aug 11, 2021",
+      "actual_image_width": 400,
+      "actual_image_height": 225
+    },
+    {
+      "position": 2,
+      "title": "Microsoft Chairman & CEO Satya Nadella Earns $1 Billion Since ...",
+      "source": "Caproasia",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAAAb0lEQVR4AWOgGIwCgUAGN1MlHwFTUQYGa2sBx0yBQA245Prqzin711Qv2R9RELFy_ZKVU5YU7EBITmlceW7NlJXzAxkadxxrPLZmyYT9CHM1GKQZpgBN0spkEOAEsoECWEAmPqdV43U3hsgoEMUDAOPXIDpKdji9AAAAAElFTkSuQmCC.png",
+      "link": "https://www.google.com/goto?url=CAES5AEB6zswFaCb7fg-AfCDUBfOiIjOZfSJRoOUI9p2k9HCri6Je_9GHg-hF9xjFnRS3JbQ0Z4qqAGLNfKCrxjN1r2c0wB1DRsBbr-zSJqSRxFU17LmSgmPJ-YQmVrNORXJM7mv0w_zMC4ID_XuTZ7pBVVucEPBZcH2Rafd7V-GGk_A306IrcRVbS3ATomN2b9TFnFqFpxBm2rxHo0ntigGwH6GaxzIyfD23FrjHcaooLVXI4qdKmK37vYg1QfrsddS77jH2rXaWDCm0Xbv7o1OM6wXNwxl-N1gc9I95LA93ZM-3dkOqS8",
+      "thumbnail": "https://serpapi.com/searches/6a9826cfb2c61385e834db38/images/P-UDzw41nNXLe8Gdje6uFYqKVHu3qu4hvlrcSN8vd10.jpeg",
+      "date": "Jul 21, 2023",
+      "actual_image_width": 800,
+      "actual_image_height": 547
+    },
+    {
+      "position": 3,
+      "title": "Microsoft Chairman & CEO Satya Nadella 2024 Pay Package at ...",
+      "source": "Caproasia",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAAAb0lEQVR4AWOgGIwCgUAGN1MlHwFTUQYGa2sBx0yBQA245Prqzin711Qv2R9RELFy_ZKVU5YU7EBITmlceW7NlJXzAxkadxxrPLZmyYT9CHM1GKQZpgBN0spkEOAEsoECWEAmPqdV43U3hsgoEMUDAOPXIDpKdji9AAAAAElFTkSuQmCC.png",
+      "link": "https://www.google.com/goto?url=CAESoQIB6zswFTMbE0CYCj9sFG0zicvYT_1Z8YLQwmYTiEX9VEKOQtGZBJpJdlakBxWEDyAO6kEVun_m_FsqeIVBIy8BQRj2UWRcy6FhY-63W1841aGe2_FYHRb3vsIGq5aXcEklo9y7ZpJ8bDrV8KEOc0ox3Mec-P0q5pGnC79kfb8aUXPLfy71nFpCKO19GZCm9Fr3ZE12AYdauR2IVP1q-gObGXXLeiN7pmU5_Mlw5fI8ipxULCuhRwowWiaAygWQWQywF2jw6EK8axK0H22Abd5fpeQMeOCMdYMLyHKQdOXPgwfdlKQ30hiiPISGOIXw140JqXdIDoW522klsz4nN-6bSsFAy7d6RtKpgzzI1SLJxtZ8v9ssQuhWgzLXLTIooLhn",
+      "thumbnail": "https://serpapi.com/searches/6a9826cfb2c61385e834db38/images/J1zCAHV5UpJKx7GJo9OOpS35pRHRPWLBOgEfXsm3wOQ.jpeg",
+      "date": "Nov 1, 2024",
+      "actual_image_width": 800,
+      "actual_image_height": 547
+    },
+    {
+      "position": 4,
+      "title": "Microsoft reaping the benefits of Altman hire | NASDAQ:MSFT",
+      "source": "Proactive Investors",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8_9hAAABP0lEQVR4AWPABT5O1W943230_l297vu3JRoNDMSCb8vkAj7PU7v_aZre_w89Rv-BBvx_W6z-_3W64v1XMXIBODX-3MFn8GOj6P5vK2T_f5mv-h_DgDTF_6-i5P-_8Ffa_8xd1QBF859DLP2_dvH8BxrwH8mA-R_6jRXe1egovClSn48wQPn_Mxf1_08stfrBmv8eZ3D4c5jlP5IB-4FeWA80YD_QALhNr1MUHF5Gyu-HG2Ch_R_TgE3C80Fin-dqNMC90KA7_22ZpgLMoOe-yutxGvBzs1ADzAD0MHiTpewANsBHpYFcAxroaMAcDQeyDYCnxMkGCsCUOB_TAOV-_AaggXfV2gbAdLAemBL70aMRJSGhhUECOCFNMBZ4V6UtgCchIcCvHXwKQAMUUAMRkpnwJGVMAA3EAmIzE8XZGQDUupLcWvrAqwAAAABJRU5ErkJggg.png",
+      "link": "https://www.google.com/goto?url=CAESrgEB6zswFSLw7lm9-Zo35zKMd0QW5_3Rj0vIudFhiSxIemXkMLmMjUY_xfL3v61C6CmPNedO-LOieJdUxJrn0r6R90blJaew-0i1vvRXDitNCz-Kj1BDNl9r3S_lUtRv03EWzOtWjHaDixkbRk2mswKTFI-Pc5tPx-XJfj743ZAJb4GD-kZbLtJmt_PEeHyYrHScWeDz2pSm2dbMSsQgk4vNMsY_PkdyDEPv1FgOKNw",
+      "thumbnail": "https://serpapi.com/searches/6a9826cfb2c61385e834db38/images/K6M66Pd5QmS_BIsLpy9EChdDG-cp0jCc4FTpXteZbGM.jpeg",
+      "date": "Nov 20, 2023",
+      "actual_image_width": 420,
+      "actual_image_height": 195
+    },
+    {
+      "position": 5,
+      "title": "Satya Nadella: Microsoft is \"well positioned\" to expand beyond ...",
+      "source": "GamesIndustry.biz",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAABIElEQVR4AY3SIYyDMBTG8eflzLw7VYPBYskUshqfOuwSbL2bxQc5hZ9C4CprK2pISEi-u9cCZblk2V81-fW9VJTwoS9x7qTIc1E93D9cVPGcw2GQ0r3j6zrhyIr-jH2Ftxqd8FUiFbXbcbkgZeOS3G6oRqR8C84VEedimzEYPabeg1MmYPcEN9KfkHVkwJl7QOnBEe8rK-QRkQX8AbdSx8vowCJghtBVA7ilydqf0NAMQxb02jGtxdoM_Nrh2c_gbitjtYCLd1ICjI8BHF2k0p3bzaqArgLndX0TRANi7RgQ0uKoI4QWgYhOIFUjJKcN0auEd3APjR2hm93cHKxGQvSZw9EiNc4IW6ppO7ViQsKYafOirsusGYGEp7xfv_7xv4J9t1aQKt4UAAAAAElFTkSuQmCC.png",
+      "link": "https://www.google.com/goto?url=CAESpAEB6zswFb46f8A82IXnXjfFfRAnQLRTS5Tl7kYU5QfVB-nWbkE3fMUHDnJK66UvabLjefYA7CyVts42xpQ2yd6ZYdIsiHP_jqCnnq5EvtkjPg5j5CP9JQ05Ssq8qbOfjndc26LPKqPbGkwBb9AUsI5JBdZlXSbcMVuiuCDwxTke4ZLst1UHHdtOV3NK4zmOg39In9LgtSZcwmjBc8NbMcZgmGiyNQ",
+      "thumbnail": "https://serpapi.com/searches/6a9826cfb2c61385e834db38/images/R01Pyrz82YPM7aEliLNoVu-YvYto82aLYjKLA56ussY.jpeg",
+      "date": "Jul 19, 2019",
+      "actual_image_width": 1200,
+      "actual_image_height": 630
+    },
+    {
+      "position": 6,
+      "title": "Promise and peril in the journey to DevOps - Computerworld",
+      "source": "Computerworld",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y-mAAAAbFBMVEWqqfqrqvysq_2xsP-urf-wr_-ZmOEtLUMAAAAhITCHhsa0s_8aGiYVFR8sLEAODhVCQWFiYZBcW4c9PVoRERlISGtvbqN1dKxTU3poZ5mjovAvL0Z7erVPTnSTktidnOeMi844OFN5eLKJiMkx_QYpAAABMUlEQVR4AWKgFDAy4pQC1EZeSRKCUABE4Dk9yZyz7v3vuBSmqv1fJTepedrowFglxgTKlaKUNcYeLHzA8_X-fAkDieJEbBrH2UHxX5jDS1sojJRQeWjrHTYptNIBgenh5aHkUA3wdXk0EzCbGELtITDNwAuitytYLKCuI8MOWABTAcMMsXjF2cMofVmgy4B2glV2ERzUItZEsJRA83J5h_4Kzl7JCFsPrPVpckPbQgpPCle-_sIBVmgggUnfUGvtW18YoIBOXReaVR2KVQDMvjTqVHEQmN4xwBugl_sR5g4ITQ5E7w_exH8ChDPQSQaU7xVo7QFXqDeIxccnfY_AoD27QyZ6ATbT4k3uQ72rv9uPbEB3Mt0l8JjcKRKt0ayXaL0u62zEiOyxFQmUdqX6x-8XMisVyOVq-XMAAAAASUVORK5CYII.png",
+      "link": "https://www.google.com/goto?url=CAESlwEB6zswFS2RhFaUJPlMZli_3pJzNCNSsnjJnmqrDpPeZjvkVcFQQkS5RAhxws81sEO_gxT0c9cdy825kI9tkZCnKlO0mMlAzULp0LI6RasyrF_LA9tyS1h_jt0uTqLb_p34cT86FJGqz8W4ON5Do5GxCIh1pkzB4X7uV97LLMAgJgDPhrRKjkSD0NDZ9ltGWvpuv5S_ybrq",
+      "thumbnail": "https://serpapi.com/searches/6a9826cfb2c61385e834db38/images/3oyNbuwnBOcv_1eoZneMItcYv2V4sVrrRc8Uo-7_R4c.jpeg",
+      "date": "Aug 24, 2015",
+      "actual_image_width": 400,
+      "actual_image_height": 250
+    },
+    {
+      "position": 7,
+      "title": "曾是开源“最大的敌人”，现在要买GitHub，微软是怎么想的？ - 虎嗅网",
+      "source": "虎嗅",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAZlBMVEVHcEz___________________________________________8EWYf___8EAABbWVmHhodmZGT19PUsKSnLysrs6-uamZqNjIyko6R8e3uxsLHa2tpTUFH7-_sfGhs1MjO_vr48OTqft1OeAAAADHRSTlMATuwl4aTJkhf86007XxtKAAABNElEQVQ4jY1T27KDIAxEqyLtBBUVkHrr___kAVogMp3pyRMma7JJNoQke9Dmzti9oQ_yxdoakNVtHqeQGb3-XuVxgAolubHo7uf4ZLf4f4rDwaeECDlw_rHHVb7wGzujUw7PtA1f3j8uYhbwDD5XJPa_LrC5EtsGnQrzsICYr3tpqfdVSyl5AAAhRQIMgeRTRmeBKFqA2CwHsYlEmpIGA4zeO426AGhImZXw1WMXUBJ2BRyHVHJJHFgOOLmzEwGyErmVV5Jnb-doFAI01zZPLo3heF8UDWrtLWDOFlqgUb80TBEQdIOXxZ9gOHwA5u2r0bqFDS4u5mY1L29niwQzKdh2t4VjH4Z9-VBEklMClB_x1K3r6l_VRbQTzEnR3qJosexxPMr-9-H8Pr1_HK-zIpx_gZx_4uktodoLizEAAAAASUVORK5CYII.png",
+      "link": "https://www.google.com/goto?url=CAESXwHrOzAVSoWaaR2StGokWo1YxW62I0wgwJpXUQu2v52vYxFT_lY0LH-2el0wdhA2yz8wusiOZKSSxodnm1L5FMFjXXTMXOvU55aAloH97ptjOYaqEgNRKdABZK3KJaA6",
+      "thumbnail": "https://serpapi.com/searches/6a9826cfb2c61385e834db38/images/1x0nPGpo2uMdEvd_KgJZnjEnXDmMqppjyTYV9XKX86E.jpeg",
+      "date": "Jun 4, 2018",
+      "actual_image_width": 600,
+      "actual_image_height": 336
+    },
+    {
+      "position": 8,
+      "title": "Microsoft supera a Apple como la empresa cotizada más valiosa",
+      "source": "www.revistaeyn.com",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y-mAAAAclBMVEUaGhoaGRgaFxYaHR4aISMZJywZIiUVPkkKkLIOcosUSlgMgqALh6cbCAAXLTIXO0UTUmIXKCoFwfETTVsMe5cIp9ANbIMbAAAAyfsLl7saFBEXNDsDuugHn8UUWWwaDQAA0f8QZnwDr9kA1_8NboUaGBicaidYAAAAnklEQVR4Ae1QgwHAMBCMXdvef8WaM_SCN8GPExAub7loeQu_3AcwxoQARCgCeKGYkYeZC6kEV9pIyzbCsbWLLhvyfIFFEEaxnyQmzfKweBrLytRNnfpc8Vi3sivekZ1b98bPyiq2xJDZb2MiS98VrQ5MY0e-dxuhEtI1sqo6EY1Lfl7R2wgIXrpHhAJICWEwZ98tQDAhANG2gOky_JgBQ_AIlr309WEAAAAASUVORK5CYII.png",
+      "link": "https://www.google.com/goto?url=CAESrAEB6zswFRIOm0NZ0EWbKEmmRTp1irLu7lUEP7kjLfFezoErWrjUZKAX7XHyT8AJBT828HD59O0o2suP3-1gUhopyeooZKzSet9cJS26ByOTmY3YLl6IRJzA_3msAzv9Z6VjRmiyhbSbLZBJNZYgR12cDhorc7KTBd01qCwHkhCssJad9m_Bvg2JbdtoJl4MHTY0wBQrPk4zqr68OlbvMhgzklyjvK2q5i9YkErF",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNtDPSPsGq9gI0A7MuQ3AYnRLNgvTkhA6Dz2OOp7yg4G8keKbtEKnFQE3O&s",
+      "date": "Oct 29, 2021",
+      "actual_image_width": 1200,
+      "actual_image_height": 630
+    },
+    {
+      "position": 9,
+      "title": "Digitale Ökosysteme für die Zukunft | Bosch Global",
+      "source": "Bosch Global",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAAA90lEQVR4Aa3SIayDMBQF0OvFF7PzmZn3ZhI575OpmSYIkiq8qauqwFaRoFHf19RUIbD14n5RoN3gT-2ql5zkpa-54Id8B6de6346RIOTUKo-w-ww4DGnaX7Cv-IvHLd4jCUGRFq3kGWELxCOLWzCAQ09MpoH7a1dUVYdhd4QM0HZJxxrghErTid2ki2WSLaal7BgL3h3bNa1gq6itAtqxZ9YYgS1yoh_sa_f197y2ulM07496BoOTxleT6F5sqvyJ9wNa7Uh4dlgRQgGMKNHZOcSuo4RrkCO8NwSMLBEeoiYpljD7WqicZFayyvUYcGCVcqGr_d2lz-22ZpFePJGGAAAAABJRU5ErkJggg.png",
+      "link": "https://www.google.com/goto?url=CAESbgHrOzAVj-MXSIB0RFjMvuL74p5-jKBeU0XU5dGYA9I1CrPh8gyrcnZwp1eKVVp_GvkQE_GauSN5tjXezwrSYSY-afVFiNjKga_kP8KTMyfcd0KxY3cQH8xYnjObA5-oDEkDDyeCLPYNERQLWDbG",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWIugj_TyuxShlYteao1FC2b4Z66g5kVwCv8QhpP1BkzbFaxYnxA_uQjY7&s",
+      "date": "Aug 11, 2021",
+      "actual_image_width": 400,
+      "actual_image_height": 225
+    },
+    {
+      "position": 10,
+      "title": "OpenAI crea una división para abordar los riesgos de la futura IA ...",
+      "source": "COMPUTERWORLD ESPAÑA",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y-mAAAAbFBMVEWqqfqrqvysq_2xsP-urf-wr_-ZmOEtLUMAAAAhITCHhsa0s_8aGiYVFR8sLEAODhVCQWFiYZBcW4c9PVoRERlISGtvbqN1dKxTU3poZ5mjovAvL0Z7erVPTnSTktidnOeMi844OFN5eLKJiMkx_QYpAAABMUlEQVR4AWKgFDAy4pQC1EZeSRKCUABE4Dk9yZyz7v3vuBSmqv1fJTepedrowFglxgTKlaKUNcYeLHzA8_X-fAkDieJEbBrH2UHxX5jDS1sojJRQeWjrHTYptNIBgenh5aHkUA3wdXk0EzCbGELtITDNwAuitytYLKCuI8MOWABTAcMMsXjF2cMofVmgy4B2glV2ERzUItZEsJRA83J5h_4Kzl7JCFsPrPVpckPbQgpPCle-_sIBVmgggUnfUGvtW18YoIBOXReaVR2KVQDMvjTqVHEQmN4xwBugl_sR5g4ITQ5E7w_exH8ChDPQSQaU7xVo7QFXqDeIxccnfY_AoD27QyZ6ATbT4k3uQ72rv9uPbEB3Mt0l8JjcKRKt0ayXaL0u62zEiOyxFQmUdqX6x-8XMisVyOVq-XMAAAAASUVORK5CYII.png",
+      "link": "https://www.google.com/goto?url=CAESvQEB6zswFaengUufZ_44yZPXFAlIVo-Jh411HJtZ_i-UB9k49eniiMgAP8g2pum9mYBwzAT1BuRoq2NYxXKhXbKRpeAecBxSP3v4xsePKKMI_I8t2Kr-Pcx_K6B6ffPeEOADBWgyDoAx_-hkxWIVJwhDCNsjAdsttHE6Uwmto7U1BPn5IP06Nq2_DiWxJ5AH6-9wbUmbFGcGxuuuBjyItavPGU0Gs9rlTnU4e0z2G2gPrrC6pE0FbdGsMgFZyLc",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2pCY6_jNRxKNbM6IRjk188TT7jIAfiMxCJJP3X6u5x6f4FNF_RhnaEcG4&s",
+      "date": "Jul 10, 2023",
+      "actual_image_width": 400,
+      "actual_image_height": 250
+    }
+  ]
+}

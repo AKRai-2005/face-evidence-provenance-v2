@@ -1,0 +1,22 @@
+# Default: let git normalise text.
+* text=auto
+
+# EXCEPT the canonical evidence bytes. canonical.json is the exact byte string
+# that was SHA-256'd and notarised on chain, so ANY end-of-line translation
+# would change its hash and break verification for anyone who cloned on a
+# different platform. core.autocrlf=true is set on the development machine, so
+# this is not hypothetical.
+#
+# In practice the file contains no newline at all -- json.dumps with
+# separators=(",", ":") emits a single line -- but relying on that would leave
+# the guarantee accidental. This makes it explicit.
+canonical.json     -text
+**/canonical.json  -text
+
+# Fixtures and models are binary.
+*.jpg  binary
+*.jpeg binary
+*.png  binary
+*.webp binary
+*.onnx binary
+*.npz  binary

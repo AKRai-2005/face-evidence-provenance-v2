@@ -177,3 +177,27 @@ def test_verifier_also_rejects_floats():
     import verify as v
     with pytest.raises(ValueError):
         v.canonicalize({"similarity": 0.74})
+
+
+def test_canonical_output_contains_no_newline():
+    """Guards the on-disk bytes against end-of-line translation.
+
+    canonical.json is hashed verbatim and the digest goes on chain. If the
+    canonical form ever gained a newline, a clone on a platform with
+    core.autocrlf=true would rewrite it to CRLF and the published hash would
+    stop reproducing. .gitattributes marks the file -text as well; this test
+    keeps the property true at the source.
+    """
+    ev = {"a": "x", "nested": {"b": [1, 2]}, "t": "café", "u": "spotkał"}
+    blob = canonical_bytes(ev)
+    assert b"\n" not in blob
+    assert b"\r" not in blob
+
+
+def test_canonical_bytes_survive_a_crlf_roundtrip():
+    """A CRLF round-trip must not change the hash, because there is nothing to
+    translate. If this ever fails, the evidence hash is platform-dependent."""
+    ev = {"schema": "hhgoa2026.task3.evidence.v1", "face_similarity_bp": 8503}
+    blob = canonical_bytes(ev)
+    assert blob.replace(b"\n", b"\r\n") == blob
+    assert evidence_hash(ev) == hashlib.sha256(blob).hexdigest()

@@ -217,6 +217,28 @@ Compare that against the transaction input data on BaseScan.
 
 ---
 
+## Verify the sample run — no keys, no models, no pipeline
+
+A complete real run is committed at [`sample_run/`](sample_run/README.md) so the
+central claim can be checked with nothing installed but `web3`:
+
+```bash
+# 1. reproduce the notarised hash with the standard library alone
+python -c "import hashlib,sys;print(hashlib.sha256(open(sys.argv[1],'rb').read()).hexdigest())" sample_run/canonical.json
+#    -> 9fe3f99176aeb9c2523d1b6363d6ea20788e7a87188dfd616bf821de11d43da6
+
+# 2. check it against the chain
+pip install web3
+python verify.py --bundle sample_run/bundle.json
+#    -> VERIFIED
+```
+
+It also ships the untouched provider responses, including the separate
+`type=exact_matches` query, so the search can be confirmed to have happened
+rather than taken on trust.
+
+---
+
 ## Independent verification
 
 `verify.py` depends on **`web3` and the standard library only**. No InsightFace,

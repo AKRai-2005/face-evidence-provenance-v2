@@ -1,0 +1,152 @@
+{
+  "schema": "hhgoa2026.task3.bundle.v1",
+  "run_id": "20260902T133815Z_f8d116",
+  "evidence": {
+    "schema": "hhgoa2026.task3.evidence.v1",
+    "input_image_sha256": "1f6c56c41df11f00006220fb8776d6cf70a4a15d92487ff687dbd12d6864783a",
+    "input_face_phash": "a5a15287a35cbe33",
+    "matched_image_sha256": "bd093ddea8e4bf18895bd533ce2a4a405450a940cc25786c4500a039b319e7e9",
+    "matched_image_phash": "a9bc5e9c7c393610",
+    "phash_hamming_distance": 28,
+    "face_similarity_bp": 8503,
+    "threshold_bp": 2149,
+    "faces_in_candidate": 1,
+    "matched_face_index": 0,
+    "matched_face_bbox": [
+      354,
+      108,
+      738,
+      592
+    ],
+    "source_url": "https://siliconangle.com/2025/10/01/satya-nadella-reshuffles-microsofts-executive-team-time-focus-ai/",
+    "source_domain": "siliconangle.com",
+    "page_title": "Satya Nadella reshuffles Microsoft's executive team so he ...",
+    "search_provider": "serpapi_google_lens",
+    "search_query_image_sha256": "1f6c56c41df11f00006220fb8776d6cf70a4a15d92487ff687dbd12d6864783a",
+    "candidates_examined": 12,
+    "retrieved_at": "2026-09-02T13:38:43Z",
+    "model": "insightface_buffalo_l_arcface_w600k_r50",
+    "metric": "cosine_l2normed",
+    "verdict": "DISTINCT_PHOTO",
+    "provider_exact_match_count": 10
+  },
+  "evidence_sha256": "9fe3f99176aeb9c2523d1b6363d6ea20788e7a87188dfd616bf821de11d43da6",
+  "chain": {
+    "network": "base-sepolia",
+    "chain_id": 84532,
+    "contract": "0x38157D4652304BA251edCcffa435A0bC3F55305a",
+    "tx_hash": "0xac901c81786683551c6cee2d91fa46073bd3239214a5e17da7f505a8ae57bd71",
+    "block_number": 46294022,
+    "recorded_at_unix": 1788356332,
+    "subject_commitment": "0e90f3517523d6a99c59443d973127af2b6d8ec8f20086d2397aab350d736043",
+    "explorer": "https://sepolia.basescan.org/tx/0xac901c81786683551c6cee2d91fa46073bd3239214a5e17da7f505a8ae57bd71"
+  },
+  "runner_up_scores": [
+    {
+      "position": 11,
+      "source": "Barron's",
+      "page_url": "https://www.barrons.com/articles/microsoft-satya-nadella-top-ceo-stock-price-ccf7f49c",
+      "image_url": "https://images.barrons.com/im-16460591?width=1280&size=1.33333333",
+      "sha256": "39284fbfc410c2559d954f2bcea16440129eb90c6f271738800c167ec534911a",
+      "face_phash": "ecb117b1166895ea",
+      "similarity": 0.7626,
+      "verdict": "DISTINCT_PHOTO",
+      "phash_distance": 28,
+      "faces_in_candidate": 1,
+      "matched_face_index": 0,
+      "matched_face_bbox": [
+        423,
+        149,
+        711,
+        524
+      ],
+      "image_width": 1280,
+      "image_height": 960
+    },
+    {
+      "position": 9,
+      "source": "Yahoo Finance",
+      "page_url": "https://finance.yahoo.com/technology/ai/articles/microsofts-ceo-takes-aim-ai-094609863.html",
+      "image_url": "https://media.zenfs.com/en/Benzinga/93aa3069fff9bbd40b03d5025f9251d8",
+      "sha256": "30dbae267a5703d13f3b90b70587b47126049c3091948ca2bc5332a09040677a",
+      "face_phash": "91b47b4a656b8c35",
+      "similarity": 0.7596,
+      "verdict": "DISTINCT_PHOTO",
+      "phash_distance": 28,
+      "faces_in_candidate": 1,
+      "matched_face_index": 0,
+      "matched_face_bbox": [
+        353,
+        81,
+        621,
+        425
+      ],
+      "image_width": 1024,
+      "image_height": 576
+    },
+    {
+      "position": 10,
+      "source": "MarTech",
+      "page_url": "https://martech.org/satya-nadella-new-microsoft-ceo/",
+      "image_url": "https://martech.org/wp-content/uploads/2014/02/Screen-Shot-2014-02-04-at-6.11.03-AM.png",
+      "sha256": "191820c38a2ed8acaa3b17590a5a9103eeb87ceb3f0009de2e79a3db8883ca04",
+      "face_phash": "c6913a8f386939c7",
+      "similarity": 0.7587,
+      "verdict": "DISTINCT_PHOTO",
+      "phash_distance": 28,
+      "faces_in_candidate": 1,
+      "matched_face_index": 0,
+      "matched_face_bbox": [
+        452,
+        46,
+        667,
+        343
+      ],
+      "image_width": 942,
+      "image_height": 550
+    },
+    {
+      "position": 2,
+      "source": "Wikipedia",
+      "page_url": "https://en.wikipedia.org/wiki/Satya_Nadella",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/MS-Exec-Nadella-Satya-2017-08-31-22_(cropped).jpg/250px-MS-Exec-Nadella-Satya-2017-08-31-22_(cropped).jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "sha256": "65d82ffa092018f6139877d22a7a16a318283c139a49aa703bba1baad013cc49",
+      "face_phash": "ecb197b01aa991ea",
+      "similarity": 0.7585,
+      "verdict": "DISTINCT_PHOTO",
+      "phash_distance": 34,
+      "faces_in_candidate": 1,
+      "matched_face_index": 0,
+      "matched_face_bbox": [
+        72,
+        60,
+        173,
+        197
+      ],
+      "image_width": 250,
+      "image_height": 319
+    },
+    {
+      "position": 7,
+      "source": "YouTube",
+      "page_url": "https://www.youtube.com/watch?v=rtgN27z0oi0",
+      "image_url": "https://i.ytimg.com/vi/rtgN27z0oi0/sddefault.jpg",
+      "sha256": "d170a48ae2a4ef0278a296c7e016942e53fa2c4cae1c33a4bff171afaf4ab236",
+      "face_phash": "ed115731327915ce",
+      "similarity": 0.7567,
+      "verdict": "DISTINCT_PHOTO",
+      "phash_distance": 30,
+      "faces_in_candidate": 1,
+      "matched_face_index": 0,
+      "matched_face_bbox": [
+        289,
+        78,
+        505,
+        358
+      ],
+      "image_width": 640,
+      "image_height": 480
+    }
+  ],
+  "notes": "score spread: {'n': 12, 'best': 0.9855, 'runner_up': 0.9845, 'margin': 0.001, 'median': 0.7592, 'min': 0.6411}"
+}
