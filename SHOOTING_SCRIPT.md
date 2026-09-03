@@ -283,6 +283,54 @@ rests on those numbers being measured rather than chosen.
 
 ---
 
+## Hard questions, with the measured answers
+
+Have these numbers ready. Every one is reproducible from a script in the repo.
+
+**"Does it ever say yes to the wrong person?"**
+`scripts/demo_negative_control.py` — highest impostor 0.0629 vs threshold
+0.2149, a 3.4x margin, 0/11 false accepts. Passed on two independent candidate
+sets from different days.
+
+**"Your threshold is calibrated on LFW, but you point this at the open web."**
+The best question anyone can ask, and it is measured:
+`scripts/validate_in_domain.py` — 297 genuine and 264 impostor pairs built
+entirely from images the pipeline downloaded. 0 false accepts, 0 false rejects,
+separation 0.4131. Any threshold in (0.1185, 0.5316] separates perfectly; the
+calibrated 0.2149 sits inside that window.
+
+**"How confident is 0.83?"**
+It is a median over six augmented views, range 0.810-0.842. When that range
+straddles the threshold the verdict is UNCERTAIN rather than a call. Reporting
+the un-augmented number was quietly optimistic — it sits at the top of its own
+range — which is why the median is reported instead.
+
+**"Isn't 0.9868 AUC low for ArcFace on LFW?"**
+The ~99.8% headline is accuracy on LFW's curated 6,000-pair protocol. This uses
+harder combinatorial pairs across 450 identities. It is not label noise: the
+highest-confidence face is the centred subject face in 98.7% of a 149-image
+sample.
+
+**"Why gate the input's face quality but not the candidates'?"**
+Measured: 0 of 34 matched candidate faces would fail the input gate, and quality
+correlates with score at r = -0.02. A gate there would prevent no observed
+failure. The input is the one image a user can get wrong, and a bad input
+poisons every comparison; a bad candidate just scores low.
+
+**"What if the match is wrong?"**
+Then the chain notarises a wrong claim, tamper-evidently. It records *when* a
+claim was made and that it has not changed — never that it is true. Say this
+before it is asked.
+
+**"Could someone use this to find a private individual?"**
+Recall depends entirely on what a search engine has already indexed. For a
+well-photographed public figure it returns dozens of candidates; for someone
+with no indexed images it returns nothing useful. That asymmetry is a property
+of the index, not of our matching — and it is why a null result is weak evidence
+of absence. See ETHICS.md.
+
+---
+
 ## Post-recording checklist
 
 - [ ] Every number spoken matches what is on screen
