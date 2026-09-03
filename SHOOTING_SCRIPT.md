@@ -17,7 +17,7 @@ camera when you are improvising.
 |---|---|
 | "high face similarity" | "identity confirmed" |
 | "same-subject candidate" | "verified person" |
-| "cosine 0.8503 against a calibrated threshold of 0.2149" | "85% match", "99.9% confident" |
+| "cosine 0.83 against a calibrated threshold of 0.2149" | "83% match", "99.9% confident" |
 | "the chain notarises when the claim was made" | "the blockchain proves it's him" |
 
 If you fumble a number, **stop and retake**. A wrong number on camera is worse
@@ -113,14 +113,23 @@ anything can be doubted.*
 **0:38–1:00 — when the ranked table lands. SLOW DOWN. This is the differentiator.**
 
 > "Now look at the ranking, because this is the part most people get wrong.
-> The three *highest* scores — 0.9855, 0.9845, 0.9813 — are all the same press
-> photograph, republished by Windows Central, Axios and Forbes. Their
-> face-region perceptual hash distance is 6, 12 and 10: nearly identical images.
+> The *highest* scores — around 0.97 — are the same press photograph republished
+> by different outlets. Their face-region perceptual hash distance is around 12:
+> near-identical images.
 >
-> The one we select scores *lower*, 0.8503, from SiliconANGLE — with a hash
-> distance of 28. That is a genuinely different photograph of the same person,
-> and it is much stronger evidence. Ranking by similarity would have returned
-> the weakest result with the biggest number."
+> The one we select scores *lower* — around 0.83 — with a hash distance above 28.
+> That is a genuinely different photograph of the same person, and it is much
+> stronger evidence. Ranking by similarity alone would have returned the weakest
+> result with the biggest number.
+>
+> And the score is an interval, not a point. The input is a crop we chose, so we
+> embed it six ways and report the median with its range."
+
+**Read the numbers off the screen, not off this page.** Lens returns a different
+candidate set from one day to the next — the frozen `sample_run/` matched
+forbes.com, an earlier run matched siliconangle.com. The *structure* is stable
+(republications ~0.97 at distance <= 12, distinct photographs lower at >= 26);
+the individual outlets are not.
 
 *This is the single most important 20 seconds in the video. If anything gets cut,
 it is not this.*
@@ -133,8 +142,8 @@ it is not this.*
 
 **Say:**
 
-> "Different SHA-256. Perceptual hash distance 28 against a same-photo cutoff of
-> 15. Cosine 0.8503 against a threshold of 0.2149, which was calibrated at a
+> "Different SHA-256. Perceptual hash distance well above the same-photo cutoff
+> of 15. The cosine is far above a threshold of 0.2149, which was calibrated at a
 > false-accept rate of 7.8 times ten-to-the-minus-four on sixty-five thousand
 > LFW pairs — not a number we picked.
 >
@@ -196,22 +205,45 @@ Then change exactly one character — `siliconangle` → `sil**1**conangle`:
 **Expect:**
 
 ```
-claimed   : 9fe3f991...
-recomputed: b6cdb60b...
+claimed   : c5ae5ff8...
+recomputed: <completely different>
 TAMPER DETECTED -- evidence modified
 ```
 
 **Say:**
 
-> "One character. An `i` becomes a `1` in the source URL. The recomputed hash no
-> longer matches what is on chain, and the verifier rejects it."
+> "One character. An `o` becomes a zero in the source URL. The recomputed hash
+> no longer matches what is on chain, and the verifier rejects it."
 
 *Do this demo. It is the most convincing eight seconds in the video and most
 teams will not have it.*
 
 ---
 
-## Scene 6 — 1:46–2:00 · First-seen semantics, and the honest close
+## Scene 6 — 1:46–1:58 · The negative control
+
+**Screen:**
+
+```powershell
+.venv\Scripts\python.exe scripts\demo_negative_control.py --run runs\<run_id>
+```
+
+**Expect:** `0 / 11` false accepts, roughly a 3x margin, `PASS`.
+
+**Say:**
+
+> "And the obvious question — does it ever say yes to the wrong person? Same
+> candidates, same threshold, but a different public figure as the probe. The
+> highest impostor score is 0.06 against a threshold of 0.21. Zero false
+> accepts, and every genuine score beats every impostor by nearly half a point."
+
+*This is the answer to the sharpest question a judge can ask, and it costs no
+network, no quota and no gas — so it works even if everything else is down.
+Twelve seconds well spent.*
+
+---
+
+## Scene 7 — 1:58–2:12 · First-seen semantics, and the honest close
 
 ```powershell
 .venv\Scripts\python.exe scripts\demo_duplicate.py --bundle runs\<run_id>\bundle.json

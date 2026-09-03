@@ -25,45 +25,75 @@ similarity on ArcFace embeddings against a calibrated threshold).
 DISTINCT-ARTIFACT PROOF
   input image   sha256: 1f6c56c41df11f00006220fb8776d6cf70a4a15d92487ff687dbd12d6864783a
                         460x306, local
-  matched image sha256: bd093ddea8e4bf18895bd533ce2a4a405450a940cc25786c4500a039b319e7e9
-                        1024x780, from siliconangle.com
+  matched image sha256: 39acef1d441f80b4bec8ee77c507075c9b05dbce5f9ce0545b81ed5f687c1bb1
+                        320x480, from forbes.com
 
   identical files: NO          <- reverse-image-hash matching is ruled out
-  face cosine similarity: 0.8503
+  face cosine similarity: 0.8346   [0.8099 - 0.8421] over 6 augmented views
   calibrated threshold:   0.2149  (TAR 0.976 @ FAR 7.83e-04, see calibration/)
-  face-region pHash distance: 28   (same-photo cutoff 15)
+  face-region pHash distance: 34   (same-photo cutoff 15)
 
   verdict: DISTINCT-PHOTOGRAPH SAME-SUBJECT CANDIDATE (strong evidence)
 ```
 
-Real output from run `20260902T133815Z_f8d116`. The input is a 460×306 re-encoded
-crop that exists nowhere on the web; the match is a 1024×780 press photo on
-siliconangle.com. **Different files, different photographs, same person.**
+This is the run frozen in [`sample_run/`](sample_run/README.md), reproducible by
+anyone with `web3` alone. Evidence hash
+`c5ae5ff891162c418fcef8f227e74faeb7cd229559d1ffd634f88a63e153b712`, notarised at
+[`0xc866adad…`](https://sepolia.basescan.org/tx/0xc866adadf35a8b8150c99ef56c355ffa2b8744dcb10b2ccc0dd7b6d87db3c460).
 
-Notarised on Base Sepolia:
-[`0xac901c81…`](https://sepolia.basescan.org/tx/0xac901c81786683551c6cee2d91fa46073bd3239214a5e17da7f505a8ae57bd71)
-· evidence hash `9fe3f99176aeb9c2523d1b6363d6ea20788e7a87188dfd616bf821de11d43da6`
+**The similarity is an interval, not a point.** The input is a crop *we chose*,
+so the honest question is how much the score depends on that choice. The pipeline
+embeds the input under six views (identity, horizontal flip, two crops, two
+scales) and reports the **median** with the full range. This was not cosmetic:
+the un-augmented score sits at the *top* of its own range, so reporting a single
+number was quietly flattering. When an interval straddles the threshold the
+verdict is `UNCERTAIN` rather than a coin-flip presented as settled.
 
-The full ranked table from that run — note what is *not* selected:
+The ranked table from that run — note what is *not* selected:
 
 ```
- #  source            cosine   pHashD  verdict
- 4  SiliconANGLE     +0.8503     28    DISTINCT_PHOTO   <- selected
- 2  Wikipedia        +0.7585     34    DISTINCT_PHOTO
- 9  YouTube          +0.7567     30    DISTINCT_PHOTO
- 8  Microsoft Source +0.7262     36    DISTINCT_PHOTO
- 6  Fortune          +0.7181     26    DISTINCT_PHOTO
-12  Fast Company     +0.6411     34    DISTINCT_PHOTO
- 1  Windows Central  +0.9855      6    SAME_PHOTO
- 5  Axios            +0.9845     12    SAME_PHOTO
- 3  Forbes           +0.9813     10    SAME_PHOTO
+ #  source                cosine   range (TTA)   pHashD  verdict
+11  Forbes               +0.8346  0.810-0.842      34    DISTINCT PHOTO  <- selected
+ 8  Technology Magazine  +0.8345  0.813-0.841      28    DISTINCT PHOTO
+ 9  AI Magazine          +0.7634  0.751-0.770      36    DISTINCT PHOTO
+ 7  Fortune              +0.7605  0.750-0.772      28    DISTINCT PHOTO
+ 5  Wikipedia            +0.7599  0.743-0.764      34    DISTINCT PHOTO
+ 6  LinkedIn             +0.7412  0.732-0.752      30    DISTINCT PHOTO
+ 1  Axios                +0.9761  0.958-0.986      12    same photo
+ 2  eBay                 +0.9684  0.952-0.975      12    same photo
 ```
 
-The three **highest-scoring** candidates are the same press photograph
-republished, and are correctly demoted. A pipeline that ranked by cosine would
-have reported Windows Central at 0.9855 and called a republished file "strong
-evidence". Axios at distance 12 is exactly the case an earlier, badly calibrated
-cutoff of 6 got wrong — see [`calibration/METHOD.md`](calibration/METHOD.md).
+The two **highest-scoring** candidates are the same press photograph republished,
+and are correctly demoted. A pipeline that ranked by cosine would have reported
+Axios at 0.9761 and called a republished file "strong evidence".
+
+> **Live results vary, and that is not a defect.** Google Lens returns a
+> different candidate set from one day to the next — an earlier run of this exact
+> input matched siliconangle.com at 0.8429 with a completely different field. The
+> committed `sample_run/` is frozen so the documented numbers stay checkable; a
+> live run will find its own match. What has held across every run is the
+> *structure*: republications cluster near 0.97 with pHash distance ≤ 12, and
+> distinct photographs sit lower with distance ≥ 26.
+
+### Does it reject the wrong person?
+
+A pipeline that only ever demonstrates matches has said nothing about its false
+accept rate. `scripts/demo_negative_control.py` scores an **impostor** — a
+different public figure — against the same real candidate set, with the same
+threshold:
+
+```
+highest impostor score : +0.0629
+calibrated threshold   : +0.2149      (3.4x margin)
+genuine score range    : +0.5448 to +0.9837
+false accepts          : 0 / 11
+```
+
+Every genuine score beats every impostor score by at least **0.4819**, and the
+threshold sits inside that gap rather than near either distribution. This held on
+two independent candidate sets captured on different days. It needs no network,
+no API quota and no gas, so it can be demonstrated even with every external
+service down.
 
 ### Three outcomes, not two
 
