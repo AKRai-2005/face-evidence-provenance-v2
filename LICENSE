@@ -1,0 +1,40 @@
+MIT License
+
+Copyright (c) 2026 Ashutosh Kumar Rai
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+THIRD-PARTY NOTICE — MODEL WEIGHTS ARE NOT COVERED BY THIS LICENCE
+
+This licence covers the source code in this repository only. It does NOT cover
+the pretrained face-recognition models the pipeline downloads at runtime.
+
+InsightFace's pretrained models, including the `buffalo_l` pack used here
+(RetinaFace `det_10g` + ArcFace `w600k_r50`), are released by their authors for
+NON-COMMERCIAL RESEARCH PURPOSES ONLY. This project is a non-commercial
+research and hackathon artefact and falls within that grant. Any commercial use
+would require different models or a separate licence from the InsightFace
+authors.
+
+Fixture images under `data/fixtures/` are Wikimedia Commons photographs of
+public figures, each under its own licence; see `data/fixtures/SOURCES.md`.
+
+See README.md ("Licensing") and ETHICS.md for the full statement.
