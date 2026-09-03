@@ -190,6 +190,43 @@ closest thing to ground truth available here.
 
 ---
 
+## Two things deliberately NOT built
+
+### A quality gate on candidate faces
+
+The input face is gated on size, detection score and sharpness. Candidate faces
+are not. That asymmetry was questioned and then measured across 34 matched
+candidate faces from three real runs:
+
+```
+face_px    min  64   p10  102   median  252   max  683
+sharpness  min 293   p10  492   median 1137   max 3089
+det_score  min 0.691             median 0.817
+
+candidates that would fail the input gate : 0 of 34
+quality vs score correlation : px r=-0.018,  sharpness r=-0.047
+```
+
+Real search results are press and editorial photography, which is already
+well-lit and adequately resolved; nothing came close to the gate, and face
+quality does not predict the score in this range at all. A gate here would be a
+control with no measured failure to prevent, so it is not implemented.
+
+The asymmetry is also principled rather than lazy. The input is the one image a
+*user* supplies and can get wrong -- a blurred phone snap, a face 20px across --
+and a bad input silently poisons every comparison. A bad candidate merely scores
+low and drops out on its own.
+
+### Symmetric test-time augmentation
+
+Augmentation is applied to the input only, not to candidates. Augmenting both
+sides would roughly double the embedding cost for a symmetric estimate of a
+quantity whose spread is already only 0.02-0.03. The question TTA exists to
+answer is "how much does this depend on the crop *we* chose?", and only the
+input side is ours to have chosen.
+
+---
+
 ## Known limitations
 
 - **LFW is not demographically representative.** It is predominantly male and
