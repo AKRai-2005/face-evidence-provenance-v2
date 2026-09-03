@@ -1,0 +1,19 @@
+{
+  "schema": "hhgoa2026.task3.in_domain.v1",
+  "subjects": {
+    "input.jpg": 22,
+    "input_pichai.jpg": 12
+  },
+  "n_genuine_pairs": 297,
+  "n_impostor_pairs": 264,
+  "genuine_min": 0.5316,
+  "genuine_median": 0.7684,
+  "impostor_max": 0.1185,
+  "impostor_median": 0.0209,
+  "separation": 0.4131,
+  "threshold_cosine": 0.2149,
+  "in_domain_false_accepts": 0,
+  "in_domain_false_rejects": 0,
+  "in_domain_far": 0.0,
+  "in_domain_frr": 0.0
+}

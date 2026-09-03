@@ -404,6 +404,43 @@ face is the centred subject face in 98.7% of a sampled 149 images.
 
 Full method, including the corrections below, in [`calibration/METHOD.md`](calibration/METHOD.md).
 
+### Does the benchmark threshold transfer to the open web?
+
+Calibrating on LFW and then quoting "FAR 7.83e-04" while pointing the tool at
+whatever Google Lens returns is a claim about *LFW*, not about what this pipeline
+does. LFW is funneled, frontal, 250×250 press photography; real candidates are
+arbitrary resolution, pose, crop and compression. That gap between calibration
+domain and deployment domain is where face recognition quietly fails in public.
+
+So `scripts/validate_in_domain.py` measures the operating point on the deployment
+distribution itself, using only images the pipeline actually downloaded:
+
+```
+subjects        : 2 (both public figures, from real Lens searches)
+genuine pairs   :  297   min +0.5316  median +0.7684  max +0.9988
+impostor pairs  :  264   min -0.0681  median +0.0209  max +0.1185
+
+LFW-calibrated threshold : +0.2149
+in-domain false accepts  : 0 / 264      (FAR 0.00e+00)
+in-domain false rejects  : 0 / 297      (FRR 0.00e+00)
+separation               : +0.4131
+```
+
+Every genuine pair outscores every impostor pair. **Any** threshold in
+(0.1185, 0.5316] would separate them perfectly on this data, and the
+LFW-calibrated 0.2149 sits inside that window — so the benchmark number
+transfers, with room to spare, on this distribution.
+
+**The caveat matters more than the result.** Two subjects is a *narrow*
+validation set, and both are male technology executives of South Asian descent.
+This says the threshold transfers from curated benchmark photography to
+uncurated web photography. It says **nothing** about demographic generalisation,
+which remains the project's most consequential open limitation — see
+[ETHICS.md §6](ETHICS.md). Zero false accepts out of 264 pairs also cannot
+resolve a rate of 1e-3; it bounds it loosely, no more.
+
+---
+
 ### Why whole-image pHash fails
 
 The plan for distinguishing "different photograph" from "same photograph
