@@ -8,7 +8,7 @@ Hypothesis: pHash computed over the ALIGNED FACE REGION is crop- and
 scale-invariant, so it stays low for the same photograph and high for a
 different one -- giving us a real three-way verdict.
 """
-import hashlib, io, json, pathlib, sys
+import hashlib, io, json, pathlib
 import numpy as np, requests
 from PIL import Image
 import imagehash
@@ -43,7 +43,6 @@ def main() -> None:
     from insightface.app import FaceAnalysis
 
     qb = (OUT / "derived_query.jpg").read_bytes()
-    q_sha = hashlib.sha256(qb).hexdigest()
     vm = json.loads((OUT / "serpapi_lens_raw.json").read_text(encoding="utf-8"))["visual_matches"]
 
     app = FaceAnalysis(name="buffalo_l", providers=["CPUExecutionProvider"])

@@ -97,7 +97,7 @@ def main() -> None:
         best = max(scored, key=lambda r: r[3])
         print(f"\n  BEST: {best[0]}  cosine={best[3]:+.4f}  pHashDistance={best[2]}  sha differs={best[1]!=q_sha}")
         strong = [r for r in scored if r[3] >= 0.63 and r[2] is not None and r[2] >= 25]
-        print(f"  Candidates that are a DIFFERENT PHOTOGRAPH of the same person")
+        print("  Candidates that are a DIFFERENT PHOTOGRAPH of the same person")
         print(f"  (cosine >= 0.63 AND pHash distance >= 25): {len(strong)}")
         for r in sorted(strong, key=lambda r: -r[3])[:5]:
             print(f"     {r[0]:22s} cos={r[3]:+.4f} pHashD={r[2]}")

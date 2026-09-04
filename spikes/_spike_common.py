@@ -49,5 +49,6 @@ def check_interpreter() -> None:
         print(f"  Running: {sys.executable}")
         print("  This is the Windows Store alias, not the venv. Project deps are")
         print("  NOT installed there. Use the venv interpreter explicitly:")
-        print("      .venv\Scripts\python.exe spikes/<script>.py\n")
+        print(r"      .venv\Scripts\python.exe spikes/<script>.py")
+        print()
         sys.exit(3)

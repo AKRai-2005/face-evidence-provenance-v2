@@ -11,7 +11,7 @@ Costs 1-2 SerpApi searches (free tier = 250/month).
 
     .venv\Scripts\python.exe spikes/spike_lens.py
 """
-import hashlib, io, json, pathlib, sys
+import hashlib, io, pathlib, sys
 import requests
 from _spike_common import (OUT, PUBLIC_TEST_IMAGE, UA, check_interpreter,
                            load_env, require)

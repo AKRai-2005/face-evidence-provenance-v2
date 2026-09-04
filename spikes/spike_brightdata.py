@@ -5,7 +5,7 @@ Costs 1 credit per run (free tier = 5,000/month).
 
     .venv\Scripts\python.exe spikes/spike_brightdata.py
 """
-import json, sys, urllib.parse
+import sys, urllib.parse
 import requests
 from _spike_common import (OUT, PUBLIC_TEST_IMAGE, UA, check_interpreter,
                            load_env, require)

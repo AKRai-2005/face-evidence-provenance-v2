@@ -394,8 +394,11 @@ Three unambiguous outcomes, with distinct exit codes:
 
 Three design decisions worth defending:
 
-**Nothing biometric goes on chain.** Only `subjectCommitment = SHA-256(salt ||
-int8-quantised embedding)`, with the salt held locally in `.env`. A public ledger
+**Nothing biometric goes on chain.** Only `subjectCommitment = SHA-256(record_salt
+|| int8-quantised embedding)`, where `record_salt = HMAC-SHA256(master, run_id)`
+and the master is held locally in `.env`. Per-record derivation is the point: a
+single shared salt would mean that proving *one* record concerned a subject
+required publishing the salt protecting *every* record. A public ledger
 is immutable and world-readable, which makes it the worst possible place for a
 face template — one published there could never be withdrawn, by us or by the
 subject. The commitment still lets us later prove a record concerns a given

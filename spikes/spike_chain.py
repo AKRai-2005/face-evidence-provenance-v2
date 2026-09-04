@@ -71,7 +71,7 @@ def main() -> None:
         print(f"\n  BROADCAST FAILED: {type(e).__name__}: {e}\n"); sys.exit(1)
 
     print(f"  tx hash : {txh.hex()}")
-    print(f"  waiting for receipt ...")
+    print("  waiting for receipt ...")
     try:
         rcpt = w3.eth.wait_for_transaction_receipt(txh, timeout=180)
     except Exception as e:

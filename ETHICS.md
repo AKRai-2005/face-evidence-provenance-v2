@@ -67,12 +67,25 @@ record concerns a given subject, without ever having broadcast biometrics. The
 salt lives only in `.env`, which is gitignored and checked by
 `scripts/check_secrets.py`.
 
-**Honest weakness:** the commitment is only as strong as the salt. If the salt
-leaks, an adversary holding a gallery of candidate faces could brute-force the
-commitment by embedding each face, quantising, and hashing. The salt is
-therefore a secret, not a formality. A per-record random salt would be stronger
-still than the single deployment-wide salt used here; that is a known
-limitation, chosen for simplicity of verification and stated rather than hidden.
+**Each record has its own salt.** `record_salt = HMAC-SHA256(master_salt,
+run_id)`, and the commitment is over that. This is damage containment, and the
+earlier single-salt design failed at it badly: proving that one record concerned
+a given subject meant publishing the one salt protecting every record, so the
+act of substantiating a single claim would have made every past record
+brute-forceable against a face gallery. Per-record derivation means a record can
+be opened by revealing only its own salt.
+`scripts/prove_subject.py` demonstrates exactly that.
+
+**Remaining weakness:** compromise of the *master* salt is still total, because
+any scheme we can re-derive from is. That is now a single catastrophic failure
+rather than a routine consequence of ordinary use, but it is not nothing — the
+master lives in `.env`, which is gitignored and checked by
+`scripts/check_secrets.py`, and that is the whole of its protection.
+
+Note also the asymmetry when a record is opened: a match is strong evidence that
+the record concerns that person, but a non-match is weak. The commitment covers
+a quantised embedding, so a sufficiently different photograph of the *right*
+person can fail to reproduce it.
 
 **Only the domain, not the full URL, is stored on chain.** The full URL lives in
 the evidence bundle and is covered by `evidenceHash`, so it is provably fixed at
