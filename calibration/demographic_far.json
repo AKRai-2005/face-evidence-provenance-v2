@@ -1,4 +1,8 @@
 {
+  "RETRACTED": true,
+  "DO_NOT_CITE": "This FAR was withdrawn from the README and ETHICS.md. It is kept as the record of a discarded attempt, not as a result.",
+  "retraction_reason": "FairFace repeats individuals and labels those repeats inconsistently, so 'impostor' pairs are contaminated by genuine same-person pairs. Image-level deduplication catches the same SHOT twice, never the same person at a different event, and deduplicating on face similarity would be circular -- it removes the very false accepts being counted. The max impostor score here is +0.6400, which is a same-person pair that survived every filter.",
+  "what_is_claimed_instead": "scripts/demo_negative_control.py: 0 false accepts in 11 real web candidates with known identities, at a 3x threshold margin. Trustworthy, not demographic.",
   "schema": "hhgoa2026.task3.demographic_far.v1",
   "generated_at": "2026-09-04T15:09:17Z",
   "dataset": "FairFace 1.25 validation (labels supplied by the dataset)",

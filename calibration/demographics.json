@@ -1,4 +1,9 @@
 {
+  "RETRACTED": true,
+  "DO_NOT_CITE": "Every number below is an artefact of contaminated identity labels, not a property of the model. Retained as the record of a discarded attempt.",
+  "retraction_reason": "Subject images were gathered from Wikimedia Commons by name search, which returns files that merely MENTION a name. Several subjects' sets are therefore mostly other people: genuine_min is NEGATIVE for five of six subjects, and a person cannot score -0.128 against himself. The by_gender_frr split below (f 0.895 vs m 0.177) tracks how contaminated each subject's set happened to be -- the female subjects kept 3-5 usable images each against 12 for the least contaminated male subject -- and is NOT evidence that the system fails more for women.",
+  "what_is_claimed_instead": "Per-identity false rejects on LFW, where the directory IS the label: calibration/per_identity.json. Demographic performance remains unmeasured and ETHICS.md section 6 names it as the project's largest open limitation.",
+  "superseded_by": "calibration/per_identity.json",
   "schema": "hhgoa2026.task3.demographics.v1",
   "generated_at": "2026-09-04T10:29:33Z",
   "threshold_cosine": 0.2149,

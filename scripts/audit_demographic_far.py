@@ -314,8 +314,15 @@ def main() -> int:
         "schema": "hhgoa2026.task3.demographic_far.v1",
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "dataset": "FairFace 1.25 validation (labels supplied by the dataset)",
+        # Marker names match calibration/demographics.json and are asserted by
+        # tests/test_docs_consistency.py, so re-running this script cannot
+        # quietly produce a file that reads as a result.
+        "RETRACTED": True,
+        "DO_NOT_CITE": (
+            "This FAR was withdrawn from the README and ETHICS.md. It is kept "
+            "as the record of a discarded attempt, not as a result."),
         "PUBLISHABLE": False,
-        "why_not_publishable": (
+        "retraction_reason": (
             "FairFace repeats individuals and labels those repeats "
             "inconsistently across their images. Image-level dedup cannot catch "
             "a repeat photographed at a different event, and face-level dedup "

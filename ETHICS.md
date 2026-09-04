@@ -168,7 +168,16 @@ removing high-scoring pairs removes the false accepts being counted.
 
 **FairFace cannot support this measurement, and no figure from it is quoted
 anywhere in this project.** Four plausible-looking numbers were produced and all
-four were discarded. The demographic question is therefore open, and it remains
+four were discarded.
+
+The discarded outputs are **kept, not deleted** — the record of what was tried
+is part of the argument — but each one now declares its own status in-band, so
+a reader who opens the raw JSON without reading this file cannot mistake a
+withdrawn figure for a result: `calibration/demographic_far.json` and
+`calibration/demographics.json` both carry `"RETRACTED": true` with the reason
+the measurement failed. `tests/test_docs_consistency.py` enforces that, and
+that any *new* calibration artifact is explicitly classified as live or
+withdrawn rather than defaulting to looking authoritative. The demographic question is therefore open, and it remains
 the most consequential limitation here.
 
 What IS measured, on known identities: `scripts/demo_negative_control.py` gives
