@@ -520,10 +520,24 @@ Set `GOOGLE_VISION_API_KEY` in `.env` to enable it; it registers automatically a
 the **first** fallback, ahead of Bright Data, because it is a real index with a
 working free tier rather than a path that measured 1-in-6.
 
-> **Status: implemented and unit-tested against mocked responses; not yet
-> exercised against the live API.** That distinction is deliberate. This README
-> does not claim a provider has been called until it has been — the run logs and
-> `runs/<id>/raw/google_vision_web.json` are what will settle it.
+**Exercised live, and it works** — 50 pages plus 20 visually-similar results for
+the demo input, from an entirely different source set than Lens returns
+(ndtv.com, computerworld.com, news.microsoft.com, servicetoamericamedals.org).
+With SerpApi disabled the pipeline runs end to end through Vision alone.
+
+**But it produces weaker evidence, and that is worth saying.** Measured on the
+same input, the two providers differ sharply in what they surface:
+
+| | SerpApi Lens | Cloud Vision |
+|---|---|---|
+| `DISTINCT_PHOTO` face-pHash distances | 26, 28, 30, 34, 36 | 16, 20, 22 |
+| cosine spread across candidates | 0.64 – 0.98 | 0.93 – 0.98 |
+
+Web Detection answers "where does this image appear", so it is near-duplicate
+biased. Its distinct-photograph candidates sit just above the cutoff of 15,
+whereas Lens routinely surfaces photographs at distance 28–36. **Vision keeps the
+pipeline alive; it does not match Lens for evidence strength.** That is the right
+trade for a fallback, and it is stated rather than implied.
 
 ### Provider reliability (measured, not assumed)
 
