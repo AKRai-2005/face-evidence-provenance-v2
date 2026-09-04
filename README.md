@@ -488,6 +488,7 @@ Checked 2026-09-01, each confirmed with a real call.
 | option | status | decision |
 |---|---|---|
 | **SerpApi `google_lens`** | live; free tier 250/month; accepts direct upload | **primary** |
+| **Cloud Vision `WEB_DETECTION`** | live; free tier **1,000/month**; accepts inline image | **first fallback** (set `GOOGLE_VISION_API_KEY`) |
 | Bright Data SERP | live; 5,000/month free; reverse-image paths unreliable | fallback, see below |
 | Bing Visual Search | **retired** Aug 2025, no new keys | not used |
 | TinEye | live, but **exact/near-duplicate only** | **rejected** — cannot find a *different* photo of the same person, which is the entire point here |
@@ -509,13 +510,20 @@ a different problem:
 | Bing Visual Search | Retired Aug 2025; no new keys issuable. |
 | Yandex | No commercial API, and face search there is a documented legal grey area. |
 
-**One genuine candidate exists: Google Cloud Vision `WEB_DETECTION`.** It is truly
-web-scale, returns `visuallySimilarImages` and `pagesWithMatchingImages`, and its
-free tier is **1,000 units/month — four times SerpApi's 250**. It is not wired up
-here because it requires a Google Cloud billing account (a card, even though
-nothing is charged within quota), and shipping an *untested* provider would be a
-worse failure than documenting a real one — see the fabricated-provider
-anti-pattern this project is built against. It is the obvious next integration.
+**One genuine alternative exists, and it is now implemented: Google Cloud Vision
+`WEB_DETECTION`.** It is truly web-scale, returns `visuallySimilarImages` and
+`pagesWithMatchingImages`, and its free tier is **1,000 units/month — four times
+SerpApi's 250**. Like the SerpApi path it needs no public image host: the image
+is sent base64-encoded in the request body, so it reaches only Google.
+
+Set `GOOGLE_VISION_API_KEY` in `.env` to enable it; it registers automatically as
+the **first** fallback, ahead of Bright Data, because it is a real index with a
+working free tier rather than a path that measured 1-in-6.
+
+> **Status: implemented and unit-tested against mocked responses; not yet
+> exercised against the live API.** That distinction is deliberate. This README
+> does not claim a provider has been called until it has been — the run logs and
+> `runs/<id>/raw/google_vision_web.json` are what will settle it.
 
 ### Provider reliability (measured, not assumed)
 

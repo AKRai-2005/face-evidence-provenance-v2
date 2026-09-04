@@ -3,6 +3,7 @@
 Every one of these paths must produce a typed error with an actionable message,
 never a traceback and never a silent substitution.
 """
+import base64
 import json
 import pathlib
 
@@ -197,3 +198,109 @@ def test_catbox_delete_reports_failure_honestly():
     perform -- the 1h expiry is the actual control (ETHICS.md SS4)."""
     from app.search.image_host import HostedImage
     assert CatboxHost().delete(HostedImage("https://x", "catbox")) is False
+
+
+# ------------------------------------------------- google cloud vision
+from app.search.providers.google_vision import GoogleVisionWebDetection  # noqa: E402
+
+
+def _vision_body(**web):
+    return json.dumps({"responses": [{"webDetection": web}]}).encode()
+
+
+def test_vision_unconfigured_raises_auth_error(tmp_path):
+    with pytest.raises(ProviderAuthError):
+        GoogleVisionWebDetection("").search(b"x", raw_dir=tmp_path, max_candidates=5)
+
+
+@pytest.mark.parametrize("status,exc", [
+    (401, ProviderAuthError), (403, ProviderAuthError),
+    (429, ProviderRateLimited), (500, ProviderUnavailable),
+])
+def test_vision_http_errors_map_to_typed_exceptions(tmp_path, monkeypatch, status, exc):
+    monkeypatch.setattr(requests, "post", lambda *a, **k: _Resp(status, b"{}"))
+    with pytest.raises(exc):
+        GoogleVisionWebDetection("k").search(b"x", raw_dir=tmp_path, max_candidates=5)
+
+
+def test_vision_auth_error_explains_the_two_easy_mistakes(tmp_path, monkeypatch):
+    """Enabling the API and attaching billing are both required and both easy to
+    miss; the message must say so rather than just 'forbidden'."""
+    monkeypatch.setattr(requests, "post", lambda *a, **k: _Resp(403, b"{}"))
+    with pytest.raises(ProviderAuthError) as ei:
+        GoogleVisionWebDetection("k").search(b"x", raw_dir=tmp_path, max_candidates=5)
+    msg = str(ei.value)
+    assert "ENABLED" in msg and "billing" in msg
+
+
+def test_vision_body_level_quota_error_is_rate_limited(tmp_path, monkeypatch):
+    """Vision can return HTTP 200 with the failure nested in the body."""
+    body = json.dumps({"responses": [{"error": {"message": "Quota exceeded"}}]}).encode()
+    monkeypatch.setattr(requests, "post", lambda *a, **k: _Resp(200, body))
+    with pytest.raises(ProviderRateLimited):
+        GoogleVisionWebDetection("k").search(b"x", raw_dir=tmp_path, max_candidates=5)
+
+
+def test_vision_oversized_image_refused_before_the_network(tmp_path, monkeypatch):
+    called = []
+    monkeypatch.setattr(requests, "post", lambda *a, **k: called.append(1))
+    with pytest.raises(ProviderError):
+        GoogleVisionWebDetection("k").search(b"x" * (5 * 1024 * 1024),
+                                             raw_dir=tmp_path, max_candidates=5)
+    assert not called
+
+
+def test_vision_prefers_pages_which_carry_both_urls(tmp_path, monkeypatch):
+    body = _vision_body(
+        pagesWithMatchingImages=[{
+            "url": "https://news.example/story",
+            "pageTitle": "A story",
+            "partialMatchingImages": [{"url": "https://cdn.example/a.jpg"}],
+        }],
+        visuallySimilarImages=[{"url": "https://other.example/b.jpg"}],
+    )
+    monkeypatch.setattr(requests, "post", lambda *a, **k: _Resp(200, body))
+    res = GoogleVisionWebDetection("k").search(b"x", raw_dir=tmp_path, max_candidates=10)
+    first = res.candidates[0]
+    assert first.page_url == "https://news.example/story"
+    assert first.image_url == "https://cdn.example/a.jpg"
+    assert first.source == "news.example"
+    assert first.title == "A story"
+
+
+def test_vision_visually_similar_uses_image_url_as_its_own_source(tmp_path, monkeypatch):
+    """No hosting page is known for these, so the image URL stands in -- that is
+    honestly where the image lives, and the evidence needs a source_url."""
+    body = _vision_body(visuallySimilarImages=[{"url": "https://cdn.example/c.jpg"}])
+    monkeypatch.setattr(requests, "post", lambda *a, **k: _Resp(200, body))
+    res = GoogleVisionWebDetection("k").search(b"x", raw_dir=tmp_path, max_candidates=10)
+    assert res.candidates[0].page_url == "https://cdn.example/c.jpg"
+    assert res.candidates[0].source == "cdn.example"
+
+
+def test_vision_empty_web_detection_yields_no_candidates(tmp_path, monkeypatch):
+    monkeypatch.setattr(requests, "post", lambda *a, **k: _Resp(200, _vision_body()))
+    res = GoogleVisionWebDetection("k").search(b"x", raw_dir=tmp_path, max_candidates=10)
+    assert res.candidates == []
+
+
+def test_vision_writes_raw_response_for_audit(tmp_path, monkeypatch):
+    monkeypatch.setattr(requests, "post", lambda *a, **k: _Resp(200, _vision_body()))
+    GoogleVisionWebDetection("k").search(b"x", raw_dir=tmp_path, max_candidates=5)
+    assert (tmp_path / "google_vision_web.json").exists()
+
+
+def test_vision_sends_the_image_inline_not_a_url(tmp_path, monkeypatch):
+    """No public host on this path -- the image goes only to Google, as base64."""
+    seen = {}
+
+    def cap(url, **kw):
+        seen.update(kw.get("json") or {})
+        return _Resp(200, _vision_body())
+
+    monkeypatch.setattr(requests, "post", cap)
+    GoogleVisionWebDetection("k").search(b"\xff\xd8\xffdata", raw_dir=tmp_path,
+                                         max_candidates=5)
+    img = seen["requests"][0]["image"]
+    assert "content" in img and "source" not in img
+    assert base64.b64decode(img["content"]) == b"\xff\xd8\xffdata"

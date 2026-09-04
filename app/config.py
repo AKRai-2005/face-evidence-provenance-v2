@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     serpapi_key: str = Field(default="", alias="SERPAPI_KEY")
     brightdata_api_token: str = Field(default="", alias="BRIGHTDATA_API_TOKEN")
     brightdata_serp_zone: str = Field(default="", alias="BRIGHTDATA_SERP_ZONE")
+    google_vision_api_key: str = Field(default="", alias="GOOGLE_VISION_API_KEY")
     image_host_backend: Literal["serpapi_upload", "catbox", "tmpfiles"] = Field(
         default="serpapi_upload", alias="IMAGE_HOST_BACKEND"
     )
@@ -60,12 +61,14 @@ class Settings(BaseSettings):
 
     # --- explicit, actionable requirement checks ---
     def require_search(self) -> None:
-        if not self.serpapi_key and not (
+        if not self.serpapi_key and not self.google_vision_api_key and not (
             self.brightdata_api_token and self.brightdata_serp_zone
         ):
             raise ConfigError(
                 "No search provider configured.\n"
                 "  Set SERPAPI_KEY in .env (free 250/month: https://serpapi.com/manage-api-key)\n"
+                "  or GOOGLE_VISION_API_KEY (free 1,000/month; needs the Vision\n"
+                "     API enabled and billing attached to the GCP project)\n"
                 "  or BRIGHTDATA_API_TOKEN + BRIGHTDATA_SERP_ZONE."
             )
 
@@ -99,6 +102,7 @@ class Settings(BaseSettings):
             v for v in (
                 self.serpapi_key,
                 self.brightdata_api_token,
+                self.google_vision_api_key,
                 self.deployer_private_key,
                 self.subject_commitment_salt,
                 self.basescan_api_key,

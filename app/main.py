@@ -38,6 +38,7 @@ from .search.base import (ProviderAuthError, ProviderError, ProviderRateLimited,
 from .search.candidate_extractor import CandidateFetcher, load_cached
 from .search.image_host import ImageHostError, get_host
 from .search.providers.brightdata_lens import BrightDataLens
+from .search.providers.google_vision import GoogleVisionWebDetection
 from .search.providers.serpapi_lens import SerpApiLens
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -99,6 +100,11 @@ def build_providers(cfg, log):
     out = []
     if cfg.serpapi_key:
         out.append(SerpApiLens(cfg.serpapi_key, logger=stage(log, "SEARCH")))
+    # Ahead of Bright Data: Vision is a real web-scale index with a working
+    # free tier, whereas Bright Data's Lens path measured 1/6 non-empty.
+    if cfg.google_vision_api_key:
+        out.append(GoogleVisionWebDetection(cfg.google_vision_api_key,
+                                            logger=stage(log, "SEARCH")))
     if cfg.brightdata_api_token and cfg.brightdata_serp_zone:
         out.append(BrightDataLens(cfg.brightdata_api_token, cfg.brightdata_serp_zone,
                                   logger=stage(log, "SEARCH")))
