@@ -149,45 +149,31 @@ essentially does not work for them, and the headline number conceals it
 completely. If this were ever deployed, that tail — not the average — is what
 would matter to the person affected.
 
-**A demographic false-accept audit, and what it does and does not show.**
-`scripts/audit_demographic_far.py` measures the half of fairness that is
-measurable here. False rejects need identity-paired data labelled by group (RFW,
-BUPT-Balancedface), which is access-gated. False accepts need only
-different-person pairs with group labels, which FairFace provides freely — and
-false accepts are the safety-critical direction: a false reject inconveniences
-someone, a false accept attaches a stranger's face to someone else's record.
+**A demographic false-accept audit was attempted four times and produced no
+publishable number.** The goal was the measurable half of fairness: false rejects
+need identity-paired data labelled by group (RFW, BUPT-Balancedface), which is
+access-gated, while false accepts need only different-person pairs with group
+labels, which FairFace supplies freely. False accepts are also the
+safety-critical direction — a false reject inconveniences someone, a false
+accept attaches a stranger's face to someone else's evidence record.
 
-```
-cross-group impostor pairs, FairFace validation, 383 faces, 8,400 pairs
-overall FAR        0.00131  (11 false accepts)   <- ~2x the 6.8e-04 predicted
-max impostor       +0.2931                       <- above the 0.2149 threshold
-```
+Every attempt was defeated by a different confound: within-group pairs were
+contaminated by FairFace repeating individuals (the same woman twice at one
+event, the same child in the same hat); cross-group pairs failed because
+FairFace labels one person's images with different races; image-level
+deduplication at a borrowed threshold destroyed 76% of the sample; and at a
+properly measured threshold it still cannot catch the same person photographed
+at a different event. Deduplicating on face similarity would be circular —
+removing high-scoring pairs removes the false accepts being counted.
 
-**The threshold is roughly twice as permissive in practice as LFW calibration
-implied.** LFW is not representative of arbitrary web faces, and an operating
-point measured on it does not transfer unchanged. That is a real finding and it
-is the only one this sample supports.
+**FairFace cannot support this measurement, and no figure from it is quoted
+anywhere in this project.** Four plausible-looking numbers were produced and all
+four were discarded. The demographic question is therefore open, and it remains
+the most consequential limitation here.
 
-**The per-group breakdown is deliberately not reported, because it is noise.**
-The 11 false accepts fall across seven groups as 0, 0, 1, 2, 2, 2, 4. Under a
-constant rate the expected count per group is 1.6, and Poisson variation around
-that mean covers every observed value. Running the identical script twice flipped
-the ordering — one group went 0.00333 → 0.00083 while another went 0.00167 →
-0.00333. Distinguishing a genuine 2x difference at these rates needs roughly
-20,000 pairs per group against the 1,200 available. Publishing that table would
-have been fiction dressed as measurement, which is the specific failure this
-document exists to avoid.
-
-**What this measurement cannot support.** It uses CROSS-group pairs, which is the
-easy case; within-group pairs are where demographic disparity really shows, and
-they are not measurable here. The first attempt did use them and reported an
-alarming 0.00726 FAR with a 15x spread — then inspection of the top-scoring
-"impostor" pairs showed the same woman photographed twice at one event, the same
-child in the same hat, and that woman twice more. **FairFace's validation split
-repeats individuals**, so those were genuine same-person pairs, not false
-accepts. Filtering them by score would have been circular. The 15x headline was
-an artefact of how repeats fall across groups and was discarded rather than
-published.
+What IS measured, on known identities: `scripts/demo_negative_control.py` gives
+0 false accepts in 11 real web candidates at a 3x threshold margin. Trustworthy,
+and not demographic.
 
 **We could not turn the per-identity result into a demographic claim either, and
 did not fake one.** A

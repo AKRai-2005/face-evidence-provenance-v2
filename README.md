@@ -136,40 +136,33 @@ moment the two disagreed.
 
 ### Does it fail more for some people than others?
 
-`scripts/audit_demographic_far.py` measures false accepts by demographic group on
-**FairFace**, whose labels come from the dataset — nothing here infers race or
-gender from a face, which is the capability this project argues against.
+**We do not know, and this project does not claim to.**
 
-**The one conclusion the data supports:**
+That answer cost four attempts, and the attempts are more useful than a number
+would have been. A demographic false-accept audit was built on **FairFace** —
+freely available, labels supplied by the dataset, nothing inferred from a face.
+Each attempt was defeated by a different confound:
 
-```
-cross-group impostor pairs -- 383 faces, 8,400 pairs, shipped threshold 0.2149
-overall FAR    0.00131   (11 false accepts)   <- about 2x the 6.8e-04 calibration predicted
-max impostor  +0.2931                          <- above threshold
-```
+| attempt | result | why it was discarded |
+|---|---|---|
+| within-group pairs | FAR 0.00726, **15× spread** | top "impostor" pairs were the same woman twice at one event, and the same child in the same hat — FairFace repeats individuals |
+| cross-group pairs | FAR 0.00131 | the same child survived a *different-race* filter — FairFace labels one person's images inconsistently |
+| + image dedup at pHash ≤ 22 | 94 faces left | threshold borrowed from the face-region scale; on a whole-image hash it flags 4.1% of *distinct* pairs (measured: min 10, p1 20, median 30) |
+| + image dedup at measured pHash ≤ 10 | FAR 0.00226, max **+0.6400** | image dedup catches the same *shot* twice, not the same *person* at a different event — and dedup on face similarity would be circular |
 
-The threshold is roughly **twice as permissive in practice** as LFW calibration
-implied. LFW is not representative of arbitrary web faces, and an operating point
-measured on it does not transfer unchanged.
+**The terminal finding:** FairFace cannot support this measurement. It repeats
+individuals, labels those repeats inconsistently, and the only signal strong
+enough to catch the repeats is the very quantity being measured. A trustworthy
+answer needs identity-labelled data — RFW or BUPT-Balancedface — which is
+access-gated behind signed agreements.
 
-**The conclusion the data does NOT support — and this is the interesting part.**
-Those 11 false accepts spread across seven groups as 0, 0, 1, 2, 2, 2, 4. Under a
-*constant* rate the expected count per group is 1.6, and the Poisson spread for
-that mean comfortably covers every value observed. Running the identical script
-twice flipped the ordering outright — Indian went 0.00333 → 0.00083 while
-Southeast Asian went 0.00167 → 0.00333.
+**What is claimed instead.** `scripts/demo_negative_control.py` measures false
+accepts on real web candidates with *known* identities: **0 of 11 at a 3×
+threshold margin**. That is trustworthy, and it is not demographic. The
+demographic question stays open and [ETHICS.md](ETHICS.md) names it as the
+project's most consequential limitation.
 
-So **the per-group differences are noise at this sample size**, and a per-group
-bias table drawn from them would be fiction dressed as measurement. Resolving a
-genuine 2× difference at these rates needs on the order of 20,000 pairs per
-group; this has 1,200. The audit reports the aggregate, which is real, and
-declines to report the breakdown, which is not.
-
-Two earlier versions of this measurement were discarded rather than published:
-one used within-group pairs and reported an alarming 15× spread until inspection
-showed **the same woman photographed twice and the same child in the same hat** —
-FairFace's validation split repeats individuals, so those were genuine
-same-person pairs. See [ETHICS.md](ETHICS.md).
+The script is kept, and it now prints its own unreliability before its numbers.
 
 ### Who does it fail for?
 

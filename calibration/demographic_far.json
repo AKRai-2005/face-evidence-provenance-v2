@@ -1,64 +1,66 @@
 {
   "schema": "hhgoa2026.task3.demographic_far.v1",
-  "generated_at": "2026-09-04T14:13:37Z",
+  "generated_at": "2026-09-04T15:09:17Z",
   "dataset": "FairFace 1.25 validation (labels supplied by the dataset)",
   "measures": "cross-group false accept rate only. False rejects need identity-paired data (RFW/BUPT), which is access-gated. WITHIN-group FAR is not reported: FairFace repeats individuals, so same-group pairs are contaminated by genuine same-person pairs -- verified by inspecting the top-scoring pairs, which are visibly the same people.",
   "threshold_cosine": 0.2149,
-  "n_faces": 380,
+  "n_faces": 385,
   "n_impostor_pairs": 8400,
-  "overall_far": 0.0025,
-  "overall_max_impostor": 0.3054,
+  "overall_far": 0.002262,
+  "overall_max_impostor": 0.64,
   "per_group": {
     "East Asian": {
-      "n": 54,
+      "n": 55,
       "pairs": 1200,
-      "max": 0.305419,
-      "p999": 0.266179,
-      "far": 0.005
+      "max": 0.387431,
+      "p999": 0.319364,
+      "far": 0.001667
     },
     "Indian": {
       "n": 55,
       "pairs": 1200,
-      "max": 0.275984,
-      "p999": 0.24691,
-      "far": 0.003333
+      "max": 0.253018,
+      "p999": 0.248841,
+      "far": 0.004167
     },
     "Black": {
-      "n": 53,
+      "n": 55,
       "pairs": 1200,
-      "max": 0.23423,
-      "p999": 0.211788,
-      "far": 0.000833
+      "max": 0.274018,
+      "p999": 0.251211,
+      "far": 0.003333
     },
     "White": {
-      "n": 54,
+      "n": 55,
       "pairs": 1200,
-      "max": 0.275727,
-      "p999": 0.239517,
-      "far": 0.001667
+      "max": 0.274608,
+      "p999": 0.185634,
+      "far": 0.000833
     },
     "Middle Eastern": {
-      "n": 54,
+      "n": 55,
       "pairs": 1200,
-      "max": 0.220785,
-      "p999": 0.196749,
-      "far": 0.000833
+      "max": 0.201884,
+      "p999": 0.18995,
+      "far": 0.0
     },
     "Latino_Hispanic": {
       "n": 55,
       "pairs": 1200,
-      "max": 0.221412,
-      "p999": 0.173112,
-      "far": 0.000833
+      "max": 0.640046,
+      "p999": 0.246718,
+      "far": 0.003333
     },
     "Southeast Asian": {
       "n": 55,
       "pairs": 1200,
-      "max": 0.27163,
-      "p999": 0.264785,
-      "far": 0.005
+      "max": 0.387431,
+      "p999": 0.227253,
+      "far": 0.0025
     }
   },
   "far_spread": 0.004167,
+  "per_group_spread_is_noise": true,
+  "per_group_spread_note": "11 false accepts across 7 groups (0,0,1,2,2,2,4). Expected ~1.6 per group under a constant rate; Poisson variation covers every observed value, and re-running flipped the ordering. Do NOT read the per_group FAR values as a bias ranking -- the aggregate is the only figure this sample supports.",
   "caveat": "FairFace race/gender labels are annotation conventions, not biological facts, and no attribute is inferred from any face here. Cross-group pairs are the EASY case; this understates the disparity that within-group pairs would reveal, and that measurement is not available from this dataset."
 }

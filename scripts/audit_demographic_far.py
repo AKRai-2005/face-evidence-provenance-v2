@@ -1,70 +1,78 @@
-r"""Does the false-accept rate hold across demographic groups?
+r"""Attempted demographic false-accept audit -- and why its number is NOT published.
 
     .venv\Scripts\python.exe scripts/audit_demographic_far.py
 
-WHY THIS IS POSSIBLE WHEN A FULL AUDIT IS NOT
----------------------------------------------
-A complete fairness audit needs BOTH error directions, and false rejects require
-identity-labelled pairs (multiple photographs of the same person, labelled by
-group). Those datasets -- RFW, BUPT-Balancedface -- are access-gated behind
-signed agreements and are not obtainable here.
+READ THIS BEFORE QUOTING ANY FIGURE THIS SCRIPT PRINTS.
 
-False ACCEPTS need only different-person pairs with group labels, and FairFace
-is freely available with those labels. So this measures the half that is
-measurable, and says plainly that it is a half.
+The goal was a demographic false-accept rate. False rejects need identity-paired
+data labelled by group (RFW, BUPT-Balancedface), which is access-gated; false
+accepts need only different-person pairs with group labels, which FairFace
+provides freely. False accepts are also the safety-critical direction: a false
+reject inconveniences someone, a false accept attaches a stranger's face to
+someone else's evidence record.
 
-BUT NOT NAIVELY -- FAIRFACE REPEATS PEOPLE.
+Four attempts were made. Each was defeated by a different confound, and the
+measurement is reported here as UNRESOLVED rather than dressed up as a result.
 
-The first version of this script assumed every FairFace image is a distinct
-person. It is not. Inspecting the highest-scoring "impostor" pairs showed the
-same woman photographed twice at one event (0.8766), the same child in the same
-hat and jacket (0.8295), and that woman again twice more. Those are genuine
-same-person pairs, not false accepts, and they inflated within-group FAR to
-0.00726 with an apparent 15x disparity between groups -- a bias headline that
-would have been an artefact of how repeats happen to fall across groups.
+1. WITHIN-GROUP PAIRS, no deduplication.
+   FAR 0.00726 with an apparent 15x spread between groups. Inspecting the
+   highest-scoring "impostor" pairs showed the same woman photographed twice at
+   one event, the same child in the same hat and jacket, and that woman twice
+   more. FairFace's validation split repeats individuals, so those were genuine
+   same-person pairs. Discarded.
 
-Filtering them out by similarity would be circular: dropping high-scoring pairs
-trivially lowers the false accept rate you are trying to measure. So this
-reports CROSS-GROUP pairs instead. Two faces labelled with different races are
-almost certainly different people, which breaks the duplicate problem without
-touching the scores.
+2. CROSS-GROUP PAIRS, on the assumption that different race labels imply
+   different people.
+   FAR 0.00131. Then the gender cut -- same gender, DIFFERENT race -- still
+   reported a max of 0.8295, which is the duplicate child pair. FairFace assigns
+   the same individual different race labels across their images, so the
+   assumption is false. Discarded.
 
-That is a weaker measurement and it is described as one: cross-group pairs are
-the easy case, and within-group FAR -- where demographic disparity actually
-shows up -- is NOT measurable from this dataset.
+3. CROSS-GROUP PAIRS with image-level deduplication at pHash <= 22.
+   Rejected 76% of the sample and finished with 94 faces. The threshold was
+   borrowed from the FACE-region pHash scale and is far too loose for a
+   whole-image hash: measured across 378 sampled images the pair distribution
+   runs min 10, p1 20, median 30 on a 64-bit hash, so 22 flags 4.1% of
+   legitimately distinct pairs. Discarded.
 
-False accepts remain the safety-critical direction either way. A false reject
-inconveniences someone; a false accept attaches a stranger's face to someone
-else's evidence record.
+4. CROSS-GROUP PAIRS with deduplication at a measured pHash <= 10.
+   FAR 0.00226, 19 false accepts in 8,400 pairs, max impostor +0.6400 -- a score
+   the pipeline would call a STRONG match. That figure cannot be trusted either.
+   Image-level dedup catches the same shot twice; it cannot catch the same
+   person photographed at a different event, which is exactly what FairFace's
+   repeats look like. Deduplicating on FACE similarity instead would be
+   circular: removing high-scoring pairs is removing the false accepts you set
+   out to count.
 
-ON THE LABELS
--------------
-Race, gender and age labels come from FairFace itself. Nothing here infers them
-from a face -- that inference is the capability this project argues against, and
-using it to make a fairness claim would be self-defeating. FairFace's categories
-are annotation conventions, not biological facts, and are reported as given.
+THE TERMINAL FINDING. FairFace cannot support a reliable false-accept
+measurement for this purpose. It repeats individuals, labels those repeats
+inconsistently, and the only dedup signal strong enough to catch the repeats is
+the very quantity under measurement. A trustworthy answer needs a dataset with
+identity labels -- which is precisely the access-gated data the exercise was
+trying to work around.
 
-METHOD
-------
-* Sample N images per race group from the FairFace validation split, via the
-  HuggingFace datasets-server rows API (no 236MB parquet download).
-* Embed each with the exact pipeline used at run time.
-* Form CROSS-GROUP impostor pairs -- faces with different race labels, which
-  cannot be the same person and so are not contaminated by the repeats above.
-  The gender cut is likewise same-gender / different-race, for the same reason.
-* Report FAR at the SHIPPED threshold, per group. Nothing is re-tuned here.
+WHAT THIS PROJECT CLAIMS INSTEAD. The negative control in
+scripts/demo_negative_control.py measures false accepts on real web candidates
+with KNOWN identities: 0 of 11 at a 3x threshold margin. That is trustworthy and
+it is not demographic. The demographic question stays open, and ETHICS.md says so.
+
+The script still runs, and prints its numbers with the caveats attached, because
+the attempt and its failure modes are the useful artefact.
 """
 from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
 import pathlib
 import sys
 import time
 
+import imagehash
 import numpy as np
 import requests
+from PIL import Image
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
@@ -76,6 +84,14 @@ DATASET = {"dataset": "HuggingFaceM4/FairFace", "config": "1.25", "split": "vali
 RACES = ["East Asian", "Indian", "Black", "White",
          "Middle Eastern", "Latino_Hispanic", "Southeast Asian"]
 GENDERS = ["Male", "Female"]
+
+# Whole-image pHash distance below which two images are treated as the same
+# shoot. Measured, not guessed: across 378 sampled FairFace images the pair
+# distance distribution runs min 10, p1 20, median 30, max 50 on a 64-bit hash,
+# and identical files score 0. A cutoff of 10 flags one pair; 22 flagged 4.1% of
+# them and starved the sample -- 22 was borrowed from the FACE-region pHash
+# scale, which is a different measurement on a different crop.
+IMAGE_DUP_MAX = 10
 
 
 def fetch_rows(offset: int, length: int) -> list[dict]:
@@ -129,9 +145,13 @@ def main() -> int:
     print(f"  target               : {args.per_group} images per race group\n")
 
     # ---- collect a balanced sample -------------------------------------
+    # Over-sample. Dedup happens during embedding, so collecting exactly
+    # per_group URLs per group guarantees finishing short of target -- an
+    # earlier version did exactly that and ended with 94 usable faces.
+    target_urls = args.per_group * 3
     wanted = {r: [] for r in RACES}
     offset, page = 0, 100
-    while offset < args.scan and any(len(v) < args.per_group for v in wanted.values()):
+    while offset < args.scan and any(len(v) < target_urls for v in wanted.values()):
         try:
             rows = fetch_rows(offset, page)
         except requests.RequestException as e:
@@ -141,7 +161,7 @@ def main() -> int:
             break
         for row in rows:
             race = RACES[int(row["race"])]
-            if len(wanted[race]) >= args.per_group:
+            if len(wanted[race]) >= target_urls:
                 continue
             src = (row.get("image") or {}).get("src")
             if src:
@@ -152,19 +172,48 @@ def main() -> int:
     # ---- embed ----------------------------------------------------------
     embs: dict[str, list] = {r: [] for r in RACES}
     genders: dict[str, list] = {r: [] for r in RACES}
-    t0, no_face = time.time(), 0
+    t0, no_face, dup_file, dup_shoot = time.time(), 0, 0, 0
+    seen_files: set[str] = set()
+    seen_images: list = []
     for race, items in wanted.items():
         for src, gender in items:
+            if len(embs[race]) >= args.per_group:
+                break
             b = fetch_image(src)
             if b is None:
                 continue
             img = cv2.imdecode(np.frombuffer(b, np.uint8), cv2.IMREAD_COLOR)
             if img is None:
                 continue
+            # DEDUPLICATION, and it is not optional.
+            # Two confounds, both of which inflated earlier versions of this
+            # measurement and neither of which involves the face model, so
+            # filtering on them is not circular:
+            #   1. the same FILE arriving twice -- HuggingFace's cached-assets
+            #      URLs rotate between API calls, so one image can be fetched
+            #      under two names. Caught by SHA-256.
+            #   2. the same SHOOT appearing twice -- FairFace's validation split
+            #      contains repeated individuals (verified by eye: the same
+            #      woman at one event, the same child in the same hat). Caught
+            #      by whole-image pHash, which is a property of the pixels, not
+            #      of ArcFace.
+            # Filtering on face similarity instead would be circular: dropping
+            # high-scoring pairs trivially lowers the false accept rate.
+            digest = hashlib.sha256(b).hexdigest()
+            if digest in seen_files:
+                dup_file += 1
+                continue
+            ih = imagehash.phash(Image.open(io.BytesIO(b)).convert("RGB"))
+            if any((ih - prev) <= IMAGE_DUP_MAX for prev in seen_images):
+                dup_shoot += 1
+                continue
+
             faces = engine.detect(img)
             if not faces:
                 no_face += 1
                 continue
+            seen_files.add(digest)
+            seen_images.append(ih)
             embs[race].append(max(faces, key=lambda f: f.det_score).embedding)
             genders[race].append(gender)
         print(f"    {race:18s} {len(embs[race]):3d} embedded")
@@ -265,6 +314,15 @@ def main() -> int:
         "schema": "hhgoa2026.task3.demographic_far.v1",
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "dataset": "FairFace 1.25 validation (labels supplied by the dataset)",
+        "PUBLISHABLE": False,
+        "why_not_publishable": (
+            "FairFace repeats individuals and labels those repeats "
+            "inconsistently across their images. Image-level dedup cannot catch "
+            "a repeat photographed at a different event, and face-level dedup "
+            "would be circular. Four attempts, each defeated by a different "
+            "confound -- see the script docstring. Use "
+            "scripts/demo_negative_control.py for a trustworthy false-accept "
+            "figure on known identities."),
         "measures": ("cross-group false accept rate only. False rejects need "
                      "identity-paired data (RFW/BUPT), which is access-gated. "
                      "WITHIN-group FAR is not reported: FairFace repeats "
