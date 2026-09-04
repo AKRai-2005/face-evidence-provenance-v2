@@ -5,7 +5,6 @@ never a traceback and never a silent substitution.
 """
 import base64
 import json
-import pathlib
 
 import pytest
 import requests

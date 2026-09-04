@@ -7,7 +7,7 @@ import pytest
 from app.evidence.canonicalizer import (CanonicalizationError, canonical_bytes,
                                         canonicalize, domain_of, nfc,
                                         normalise_url, rfc3339, to_basis_points)
-from app.evidence.hasher import evidence_hash, sha256_bytes
+from app.evidence.hasher import evidence_hash
 
 
 # --- determinism ---------------------------------------------------------

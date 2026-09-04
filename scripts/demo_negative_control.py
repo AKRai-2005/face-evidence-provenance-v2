@@ -19,8 +19,6 @@ import argparse
 import pathlib
 import sys
 
-import numpy as np
-
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
@@ -120,7 +118,7 @@ def main() -> int:
         gmax = max(r[2] for r in rows if r[2] is not None)
         print(f"  genuine score range    : {gmin:+.4f} to {gmax:+.4f}")
         print()
-        print(f"  Separation: every genuine score exceeds every impostor score by")
+        print("  Separation: every genuine score exceeds every impostor score by")
         print(f"  at least {gmin - worst:+.4f}. The threshold sits in that gap.")
 
     print()

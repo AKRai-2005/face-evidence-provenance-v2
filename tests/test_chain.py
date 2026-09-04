@@ -1,7 +1,7 @@
 """EvidenceRegistry behaviour, against an in-process EVM."""
 import pytest
 
-from app.blockchain.registry import AlreadyRecorded, Registry
+from app.blockchain.registry import AlreadyRecorded
 
 H1 = "11" * 32
 H2 = "22" * 32

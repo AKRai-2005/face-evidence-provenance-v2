@@ -158,7 +158,7 @@ def main() -> int:
 
     if margin > 0:
         lo, hi = i.max(), g.min()
-        print(f"  Every genuine pair outscores every impostor pair. Any threshold")
+        print("  Every genuine pair outscores every impostor pair. Any threshold")
         print(f"  in ({lo:.4f}, {hi:.4f}] separates them perfectly on this data;")
         print(f"  the calibrated {t:.4f} sits "
               f"{'INSIDE' if lo < t <= hi else 'OUTSIDE'} that window.")

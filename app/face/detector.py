@@ -8,7 +8,6 @@ loaded ONNX graph at runtime -- see FaceEngine.model_id().
 from __future__ import annotations
 
 import dataclasses
-import io
 import logging
 import pathlib
 

@@ -25,7 +25,7 @@ from rich.table import Table
 
 from .config import ConfigError, get_settings
 from .evidence.bundle import EvidenceInputs, build_bundle, build_evidence, write_artifacts
-from .evidence.canonicalizer import domain_of, normalise_url
+from .evidence.canonicalizer import domain_of
 from .evidence.hasher import evidence_hash
 from .face.detector import (FaceEngine, FaceTooBlurry, FaceTooSmall,
                             NoFaceDetected, augmented_views)

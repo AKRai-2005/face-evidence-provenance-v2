@@ -193,7 +193,7 @@ def main() -> int:
 
     ev_domain = evidence.get("source_domain", "")
     if domain and ev_domain and domain != ev_domain:
-        print(f"\n  TAMPER DETECTED -- domain mismatch")
+        print("\n  TAMPER DETECTED -- domain mismatch")
         print(f"  chain says {domain!r}, bundle says {ev_domain!r}.\n")
         return EXIT_TAMPER
 

@@ -48,7 +48,20 @@ class Settings(BaseSettings):
     max_candidates: int = 12
     fetch_timeout_s: float = 8.0
     max_download_bytes: int = 10 * 1024 * 1024
-    min_face_px: int = 40           # see face/detector.py: below this, embeddings are noise
+    # Quality gates. Measured across 74 faces from real candidate images, only
+    # ONE of these actually fires, and it is worth saying so rather than
+    # implying all three are finely tuned:
+    #   min_det_score  rejected 0/74 (observed 0.680-0.896; InsightFace already
+    #                  filters below ~0.5 internally, so this is a thin margin
+    #                  on top of that)
+    #   min_face_px    rejected 0/74 (observed min 64) -- but it guards the INPUT
+    #                  path, where a 47px face was seen embedding to noise
+    #   min_sharpness  rejected 2/74 -- the load-bearing one. Detection score
+    #                  does not catch blur: the A1 fixture's out-of-focus faces
+    #                  score 0.74-0.80 at 86px and would clear both gates above.
+    # The two inert gates are kept as cheap insurance against pathological input,
+    # not because they were observed to matter.
+    min_face_px: int = 40
     min_det_score: float = 0.55
 
     @field_validator("deployer_private_key")

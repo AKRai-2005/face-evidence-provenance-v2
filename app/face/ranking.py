@@ -19,7 +19,7 @@ import dataclasses
 
 import numpy as np
 
-from .detector import DetectedFace, FaceEngine, phash_distance
+from .detector import DetectedFace, FaceEngine
 from .encoder import cosine
 from .matcher import Thresholds, Verdict, classify
 
@@ -157,7 +157,12 @@ def score_candidate(
 
 
 def rank(scored: list[ScoredCandidate]) -> list[ScoredCandidate]:
-    """Strongest evidence first: verdict tier, then cosine within the tier."""
+    """Strongest evidence first: verdict tier, then score strength, then cosine.
+
+    Strength sits between the two because a distinct photograph carrying a weak
+    score is weaker evidence than a distinct photograph carrying a typical one,
+    but still stronger than any republication.
+    """
     return sorted(scored,
                   key=lambda s: (s.tier, 0 if s.strength == "strong" else 1,
                                  -s.similarity))
@@ -168,6 +173,11 @@ def select_best(scored: list[ScoredCandidate]) -> ScoredCandidate | None:
 
     'No candidate above threshold' is a valid, reportable outcome. It is never
     resolved by lowering the threshold.
+
+    An UNCERTAIN candidate IS returned rather than suppressed. Reporting a
+    borderline result labelled uncertain is more honest than reporting nothing
+    and implying the web was searched and came back empty; the panel and the
+    evidence object both carry the verdict, so nothing is overstated.
     """
     ranked = rank(scored)
     for s in ranked:

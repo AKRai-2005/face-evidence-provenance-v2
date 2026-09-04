@@ -1,8 +1,6 @@
 """The redaction filter is a security control, so it gets real tests."""
 import logging
 
-import pytest
-
 from app.logging_setup import RedactSecrets
 
 SECRET = "sk_live_" + "a" * 40

@@ -59,7 +59,7 @@ def main(argv: list[str] | None = None) -> int:
     con.print(f"  file    : {args.image}  ({w}x{h}, {len(raw)/1024:.0f} KB)")
     con.print(f"  sha256  : {hashlib.sha256(raw).hexdigest()}")
     con.print(f"  model   : {engine.model_id()}")
-    con.print(f"  metric  : cosine_l2normed")
+    con.print("  metric  : cosine_l2normed")
 
     t = Table(show_header=True, header_style="bold")
     for c in ("idx", "bbox", "det", "px", "sharpness", "face pHash", ""):
