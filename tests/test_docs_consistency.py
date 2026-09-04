@@ -109,3 +109,60 @@ def test_every_calibration_artifact_is_classified():
     assert on_disk == set(RETRACTED) | set(LIVE), (
         f"unclassified calibration artifacts: {on_disk - set(RETRACTED) - set(LIVE)}"
     )
+
+
+# --- the shooting script is read aloud on camera ----------------------------
+# Errors here are spoken as fact and cannot be edited afterwards. Three were
+# found by hand in one pass: a false-accept rate quoted as 7.8e-4 when the
+# calibration says 6.8e-4, a frozen run described as matching forbes.com when
+# it matched manofmany.com, and a tamper demo whose replacement string appeared
+# in no committed bundle -- PowerShell's -replace fails silently, so that demo
+# would have printed VERIFIED on camera in the middle of proving tampering.
+SCRIPT = ROOT / "SHOOTING_SCRIPT.md"
+
+
+def _script() -> str:
+    return SCRIPT.read_text(encoding="utf-8")
+
+
+def test_tamper_demo_string_occurs_in_the_bundle_it_targets():
+    """The demo copies sample_run_2 and replaces a substring. If that substring
+    is absent the edit silently does nothing and the verifier reports VERIFIED,
+    which is the opposite of what the scene claims to show."""
+    s = _script()
+    assert "Copy-Item -Recurse sample_run_2 tampered" in s, "tamper demo no longer targets sample_run_2"
+    assert "'businessinsider','bus1nessinsider'" in s, "replacement pair changed"
+    bundle = (ROOT / "sample_run_2" / "bundle.json").read_text(encoding="utf-8-sig")
+    assert "businessinsider" in bundle, (
+        "the tamper demo replaces 'businessinsider', which no longer appears in "
+        "sample_run_2/bundle.json -- the demo would silently do nothing"
+    )
+
+
+def test_script_quotes_the_real_far():
+    """calibration/results.json is the only source for this number."""
+    far = _read_json(ROOT / "calibration" / "results.json")["far"]
+    assert f"{far:.1e}".startswith("6.8"), "calibration changed; update the script's spoken FAR"
+    assert "6.8 times ten-to-the-minus-four" in _script()
+    assert "7.8 times ten-to-the-minus-four" not in _script()
+
+
+@pytest.mark.parametrize("sample", SAMPLE_RUNS, ids=lambda p: p.name)
+def test_script_names_the_domain_each_frozen_run_actually_matched(sample):
+    domain = _read_json(sample / "evidence.json")["source_domain"]
+    assert domain in _script(), (
+        f"{sample.name} matched {domain}, which the shooting script never mentions"
+    )
+
+
+def test_script_quotes_the_second_runs_real_evidence_hash():
+    h = _read_json(ROOT / "sample_run_2" / "bundle.json")["evidence_sha256"]
+    assert h in _script(), "the tamper scene prints an expected 'claimed' hash; it is stale"
+
+
+def test_script_contains_no_control_characters():
+    """A backslash-escape slip once wrote a literal backspace into a path in
+    this file, turning sample_run\bundle.json into sample_runundle.json."""
+    s = _script()
+    bad = [c for c in s if ord(c) < 32 and c not in "\n\r\t"]
+    assert not bad, f"control characters in the script: {[hex(ord(c)) for c in bad[:5]]}"

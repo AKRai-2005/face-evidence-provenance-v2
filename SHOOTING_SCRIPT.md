@@ -4,6 +4,11 @@
 this repository. Do not round them up, and do not say anything the code did not
 compute.
 
+Scene 2b is roughly 15 seconds. It is written as a *substitute* for the ranking
+narration inside Scene 2, not an addition — if the live run shows the inversion
+clearly, keep Scene 2 and skip 2b; if it does not, cut Scene 2 short and run 2b
+instead. Doing both fits only if you are running under 100 s elsewhere.
+
 Record on **Sept 6**, not Sept 7.
 
 ---
@@ -42,7 +47,13 @@ type .consent
 # 4. tests green
 .venv\Scripts\python.exe -m pytest -q
 
-# 5. CAPTURE A FALLBACK RUN NOW, so a network failure costs a retake, not the shoot
+# 5. both frozen runs verify -- these are your fallbacks, prove them NOW
+.venv\Scripts\python.exe verify.py --bundle sample_run\bundle.json
+.venv\Scripts\python.exe verify.py --bundle sample_run_2\bundle.json
+#    both must print VERIFIED. They read the live chain, so this also confirms
+#    the RPC is up before you start recording.
+
+# 6. CAPTURE A FALLBACK RUN NOW, so a network failure costs a retake, not the shoot
 .venv\Scripts\python.exe -m app.main --image data/input.jpg --yes
 #    note the run_id it prints -- that is your --replay safety net
 ```
@@ -127,12 +138,63 @@ anything can be doubted.*
 
 **Read the numbers off the screen, not off this page.** Lens returns a different
 candidate set from one day to the next — the frozen `sample_run/` matched
-forbes.com, an earlier run matched siliconangle.com. The *structure* is stable
-(republications ~0.97 at distance <= 12, distinct photographs lower at >= 26);
-the individual outlets are not.
+manofmany.com and `sample_run_2/` matched businessinsider.com. The *structure*
+is stable (republications cluster at face-pHash distance <= 14, distinct
+photographs at >= 18, against a calibrated cutoff of 15); the individual outlets
+are not.
+
+**If the live ranking does not show a clean inversion, do not improvise.** Say
+"here it is unambiguously, in a run I committed" and cut to Scene 2b. A live run
+can come back with no republication in it at all, and then the most important
+claim in the video has nothing on screen behind it.
 
 *This is the single most important 20 seconds in the video. If anything gets cut,
 it is not this.*
+
+---
+
+## Scene 2b — the ranking inversion, guaranteed · *insurance, and the better shot*
+
+**Use this whenever the live ranking is ambiguous — and consider using it even
+when it isn't.** A live run shows whatever Lens returned that minute. This run
+is committed, so it shows the same thing every time, and it shows it more
+clearly than any live run has.
+
+```powershell
+Get-Content sample_run_2\run.log | Select-String "VERIFY" | ForEach-Object { ($_ -split "INFO\s+")[1] }
+```
+
+**On screen:** eleven scored candidates, including the two the pipeline
+demoted. The `-split` strips the log timestamp — without it the verdict column
+wraps onto a second line at 100 columns and the table stops being readable.
+
+**Say:**
+
+> "Here is the same thing in a run I committed, so you can check it yourself.
+> Lens returned twelve candidates; eleven could be fetched and scored — one host
+> served the wrong content type and was skipped, and the log says so.
+>
+> The *highest* score in the whole run is 0.9915 — Wikimedia Commons. That is
+> the photograph my input was cropped from, republished. Its face-region hash
+> distance is 2: it is the same picture.
+>
+> The pipeline demotes it, and reports a Business Insider photograph at 0.8761
+> with a hash distance of 22 instead — a genuinely different photograph of the
+> same person. A system that ranked by similarity would have handed you the
+> weakest evidence with the biggest number, and called it the best match."
+
+**Then, if you have the seconds, verify it:**
+
+```powershell
+.venv\Scripts\python.exe verify.py --bundle sample_run_2\bundle.json
+```
+
+> "And that run is notarised too — different subject, different transaction."
+
+*Why this earns its place: the ranking inversion is the one design decision a
+judge is most likely to doubt, and this is the only place in the video where
+both verdict tiers appear side by side, from one input, in an artifact they can
+re-run after the video ends.*
 
 ---
 
@@ -144,7 +206,7 @@ it is not this.*
 
 > "Different SHA-256. Perceptual hash distance well above the same-photo cutoff
 > of 15. The cosine is far above a threshold of 0.2149, which was calibrated at a
-> false-accept rate of 7.8 times ten-to-the-minus-four on sixty-five thousand
+> false-accept rate of 6.8 times ten-to-the-minus-four on sixty-six thousand
 > LFW pairs — not a number we picked.
 >
 > The evidence is canonicalised, SHA-256'd, and that hash goes to Base Sepolia."
@@ -190,22 +252,28 @@ command that silently failed. 43 packages, none of them ours, is unambiguous.*
 faster and more obviously honest. These are PowerShell, and every one was run
 before being written here.
 
+**Use the frozen run, not your live one.** The matched domain in a live run is
+whatever Lens returned that day, so a hard-coded replacement string may match
+nothing — `-replace` then fails *silently*, the bundle stays valid, and the
+verifier prints VERIFIED on camera in the middle of your tamper demo.
+`sample_run_2` always contains `businessinsider`.
+
 ```powershell
-Copy-Item -Recurse runs\<run_id> tampered
+Copy-Item -Recurse sample_run_2 tampered
 Select-String tampered\bundle.json -Pattern source_url | Select-Object -First 1
 ```
 
-Then change exactly one character — `siliconangle` → `sil**1**conangle`:
+Then change exactly one character — `businessinsider` → `bus**1**nessinsider`:
 
 ```powershell
-(Get-Content tampered\bundle.json -Raw) -replace 'siliconangle','sil1conangle' | Set-Content tampered\bundle.json -Encoding utf8
+(Get-Content tampered\bundle.json -Raw) -replace 'businessinsider','bus1nessinsider' | Set-Content tampered\bundle.json -Encoding utf8
 .\.venv\Scripts\python.exe verify.py --bundle tampered\bundle.json
 ```
 
 **Expect:**
 
 ```
-claimed   : c5ae5ff8...
+claimed   : 0c2529df728dc7705bf3bf36034749b0d1a5651e1b18953bea69d1a8c10d8745
 recomputed: <completely different>
 TAMPER DETECTED -- evidence modified
 ```
@@ -299,8 +367,9 @@ entirely from images the pipeline downloaded. 0 false accepts, 0 false rejects,
 separation 0.4131. Any threshold in (0.1185, 0.5316] separates perfectly; the
 calibrated 0.2149 sits inside that window.
 
-**"How confident is 0.83?"**
-It is a median over six augmented views, range 0.810-0.842. When that range
+**"How confident is that number?"**
+It is a median over six augmented views, not a point estimate. The two committed
+runs report 0.9623 [0.9445-0.9679] and 0.8761 [0.8598-0.8767]. When that range
 straddles the threshold the verdict is UNCERTAIN rather than a call. Reporting
 the un-augmented number was quietly optimistic — it sits at the top of its own
 range — which is why the median is reported instead.
@@ -335,8 +404,12 @@ of absence. See ETHICS.md.
 
 - [ ] Every number spoken matches what is on screen
 - [ ] The words "identity confirmed" and any invented percentage do **not** appear
-- [ ] Tamper demo is in the cut
+- [ ] Tamper demo is in the cut, and it used `sample_run_2` (a live run's domain
+      may not contain the string the command replaces, and `-replace` fails
+      silently — you would show VERIFIED during your tamper demo)
 - [ ] Duplicate-refusal demo is in the cut
+- [ ] The ranking inversion is on screen somewhere — Scene 2 or Scene 2b. If it
+      is in neither, the strongest claim in the project went unshown
 - [ ] BaseScan tab clearly shows **verified** source
 - [ ] If replay was used, the banner is visible and it is said out loud
 - [ ] Under 2:10
