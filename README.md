@@ -95,6 +95,24 @@ two independent candidate sets captured on different days. It needs no network,
 no API quota and no gas, so it can be demonstrated even with every external
 service down.
 
+### Who does it fail for?
+
+An aggregate error rate can hide its own shape, so it is broken down per person
+(`scripts/validate_per_identity.py`, on LFW where the directory *is* the label):
+
+```
+overall FRR                        0.0244
+identities with ZERO false rejects 422/450  (93.8%)
+per-identity FRR  median 0.0000   p90 0.0000   max 0.6000
+144 false rejects fall on just 28 of 450 identities
+```
+
+**The error concentrates.** For 93.8% of identities the false-reject rate is
+zero; for a few it exceeds 0.5. "2.4% FRR" is true and also misleading, and the
+tail is what would matter to whoever is in it. See [ETHICS.md](ETHICS.md) —
+including why an attempt to turn this into a *demographic* claim was abandoned
+rather than published on untrustworthy labels.
+
 ### Three outcomes, not two
 
 Measured on real Google Lens results during the risk spike, the *highest*-scoring

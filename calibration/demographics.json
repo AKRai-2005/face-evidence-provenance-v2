@@ -1,0 +1,80 @@
+{
+  "schema": "hhgoa2026.task3.demographics.v1",
+  "generated_at": "2026-09-04T10:29:33Z",
+  "threshold_cosine": 0.2149,
+  "note": "Per-subject and gender grouping only. Race/ethnicity is NOT inferred from faces; the subject set was chosen to be more varied than the original pair, but this is not a NIST-style audit on a labelled benchmark.",
+  "n_subjects": 6,
+  "subjects": {
+    "Angela Merkel": {
+      "gender": "f",
+      "found": 16,
+      "kept": 4,
+      "multi_face": 1,
+      "no_face": 6,
+      "quality_gated": 3
+    },
+    "Fumio Kishida": {
+      "gender": "m",
+      "found": 16,
+      "kept": 5,
+      "multi_face": 7,
+      "no_face": 2,
+      "quality_gated": 1
+    },
+    "Justin Trudeau": {
+      "gender": "m",
+      "found": 16,
+      "kept": 3,
+      "multi_face": 2,
+      "no_face": 8,
+      "quality_gated": 1
+    },
+    "Michelle Obama": {
+      "gender": "f",
+      "found": 15,
+      "kept": 5,
+      "multi_face": 2,
+      "no_face": 4,
+      "quality_gated": 3
+    },
+    "Nirmala Sitharaman": {
+      "gender": "f",
+      "found": 16,
+      "kept": 3,
+      "multi_face": 8,
+      "no_face": 0,
+      "quality_gated": 5
+    },
+    "Satya Nadella": {
+      "gender": "m",
+      "found": 16,
+      "kept": 12,
+      "multi_face": 4,
+      "no_face": 0,
+      "quality_gated": 0
+    }
+  },
+  "n_genuine_pairs": 98,
+  "n_impostor_pairs": 398,
+  "genuine_min": -0.1281,
+  "genuine_median": 0.6261,
+  "impostor_max": 0.1785,
+  "impostor_median": 0.0019,
+  "separation": -0.3066,
+  "false_rejects": 31,
+  "frr": 0.31633,
+  "false_accepts": 0,
+  "far": 0.0,
+  "per_subject_genuine_min": {
+    "Angela Merkel": -0.084,
+    "Fumio Kishida": 0.3853,
+    "Justin Trudeau": -0.0104,
+    "Michelle Obama": -0.0541,
+    "Nirmala Sitharaman": -0.0586,
+    "Satya Nadella": -0.1281
+  },
+  "by_gender_frr": {
+    "f": 0.89474,
+    "m": 0.17722
+  }
+}

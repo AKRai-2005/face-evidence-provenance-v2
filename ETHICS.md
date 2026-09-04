@@ -118,6 +118,36 @@ from the person in the photograph, and it should not be mistaken for it.
 
 ## 6. Stated limitations
 
+**Error is not evenly distributed across people — measured.** An aggregate
+false-reject rate of 2.4% is compatible with two very different worlds: everyone
+failing occasionally, or almost nobody failing while a few fail constantly.
+`scripts/validate_per_identity.py` measures which:
+
+```
+overall FRR                        0.0244
+identities with ZERO false rejects 422/450  (93.8%)
+per-identity FRR  median 0.0000   p90 0.0000   max 0.6000
+144 false rejects fall on just 28 of 450 identities
+```
+
+For most people the system never falsely rejects. For a handful it fails more
+than half the time (worst: 0.60). Anyone in that tail experiences a system that
+essentially does not work for them, and the headline number conceals it
+completely. If this were ever deployed, that tail — not the average — is what
+would matter to the person affected.
+
+**We could not turn this into a demographic claim, and did not fake one.** A
+diverse subject set was built from Wikimedia Commons and abandoned after two
+attempts, because the identity labels could not be trusted: free-text search
+returns files that merely *mention* a name (one such file, a photograph of a
+different person entirely, produced all four of one subject's worst genuine
+pairs at -0.128 against himself), and categories are full of event photographs
+containing other attendees — several subjects came back with a *median*
+self-similarity near zero, which is only possible if the set is mostly other
+people. Publishing a fairness number computed on contaminated labels would have
+been worse than publishing none. The per-identity result above uses LFW, whose
+directory structure *is* the identity label.
+
 **Demographic bias.** Face-recognition error rates are not uniform across
 demographic groups. NIST's FRVT evaluations have repeatedly found higher false
 match rates for some groups than others, varying by algorithm. The threshold in
@@ -125,7 +155,9 @@ match rates for some groups than others, varying by algorithm. The threshold in
 which is well known to be predominantly male and predominantly light-skinned.
 A threshold calibrated on that distribution should not be assumed to deliver the
 same false-accept rate for everyone, and this tool does not attempt per-group
-calibration. This is the most consequential limitation in the project.
+calibration. The per-identity measurement above was made on LFW too, so it
+inherits that skew and cannot stand in for a demographic audit. This remains the
+most consequential limitation in the project.
 
 **Search recall is skewed toward the already-famous.** The pipeline can only
 find what a search engine has already indexed. For a well-photographed public

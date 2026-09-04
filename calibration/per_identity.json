@@ -1,0 +1,108 @@
+{
+  "schema": "hhgoa2026.task3.per_identity.v1",
+  "generated_at": "2026-09-04T10:31:05Z",
+  "dataset": "LFW funneled (directory = identity; labels reliable)",
+  "threshold_cosine": 0.2149,
+  "n_identities": 450,
+  "n_genuine_pairs": 5907,
+  "overall_frr": 0.02438,
+  "identities_with_zero_false_rejects": 422,
+  "fraction_identities_clean": 0.9378,
+  "per_identity_frr_median": 0.0,
+  "per_identity_frr_p90": 0.0,
+  "per_identity_frr_max": 0.6,
+  "worst_identities": [
+    {
+      "identity": "Recep_Tayyip_Erdogan",
+      "pairs": 15,
+      "frr": 0.6,
+      "median_genuine": 0.0717
+    },
+    {
+      "identity": "Hans_Blix",
+      "pairs": 15,
+      "frr": 0.6,
+      "median_genuine": 0.1338
+    },
+    {
+      "identity": "Silvan_Shalom",
+      "pairs": 15,
+      "frr": 0.5333,
+      "median_genuine": -0.0363
+    },
+    {
+      "identity": "Xanana_Gusmao",
+      "pairs": 10,
+      "frr": 0.4,
+      "median_genuine": 0.5661
+    },
+    {
+      "identity": "Russell_Simmons",
+      "pairs": 10,
+      "frr": 0.4,
+      "median_genuine": 0.8071
+    },
+    {
+      "identity": "Mark_Hurlbert",
+      "pairs": 10,
+      "frr": 0.4,
+      "median_genuine": 0.7103
+    },
+    {
+      "identity": "Madonna",
+      "pairs": 10,
+      "frr": 0.4,
+      "median_genuine": 0.5404
+    },
+    {
+      "identity": "Erika_Harold",
+      "pairs": 10,
+      "frr": 0.4,
+      "median_genuine": 0.6946
+    },
+    {
+      "identity": "Eduard_Shevardnadze",
+      "pairs": 10,
+      "frr": 0.4,
+      "median_genuine": 0.7597
+    },
+    {
+      "identity": "Carrie-Anne_Moss",
+      "pairs": 10,
+      "frr": 0.4,
+      "median_genuine": 0.6213
+    },
+    {
+      "identity": "Tung_Chee-hwa",
+      "pairs": 15,
+      "frr": 0.3333,
+      "median_genuine": 0.6756
+    },
+    {
+      "identity": "Thaksin_Shinawatra",
+      "pairs": 15,
+      "frr": 0.3333,
+      "median_genuine": 0.6797
+    },
+    {
+      "identity": "Taha_Yassin_Ramadan",
+      "pairs": 15,
+      "frr": 0.3333,
+      "median_genuine": 0.6273
+    },
+    {
+      "identity": "Sylvester_Stallone",
+      "pairs": 15,
+      "frr": 0.3333,
+      "median_genuine": 0.442
+    },
+    {
+      "identity": "Steve_Lavin",
+      "pairs": 15,
+      "frr": 0.3333,
+      "median_genuine": 0.6732
+    }
+  ],
+  "caveat": "LFW is predominantly male and light-skinned. A per-identity spread measured on it does NOT support a demographic claim. No race or ethnicity is inferred from any face.",
+  "rejected_approach": "A Wikimedia-sourced diverse subject set was built and abandoned: neither free-text search nor categories yield trustworthy identity labels, and several subjects returned a median self-similarity near zero. See this script's docstring."
+}
