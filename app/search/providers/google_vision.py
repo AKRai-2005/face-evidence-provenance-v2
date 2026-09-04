@@ -10,20 +10,25 @@ WHAT IT RETURNS, AND HOW IT DIFFERS FROM LENS
   pagesWithMatchingImages   pages hosting a full or partial match -- gives BOTH
                             a page URL and an image URL, which is what the
                             evidence object needs
-  visuallySimilarImages     image URLs only, no page. Used as a supplement, with
-                            the image URL standing in as the source URL, because
-                            that is honestly where the image lives.
+  visuallySimilarImages     image URLs only, no page. The image URL stands in
+                            as the source, because that is honestly where the
+                            image lives.
 
-Web Detection is tuned for "where does this image appear", so it leans toward
-near-duplicates more than Lens does. That is fine here and arguably useful: this
-pipeline explicitly separates republications from distinct photographs, and a
-provider biased toward republications simply fills the SAME_PHOTO tier. It is a
-redundancy path, not a replacement for Lens.
+The two buckets are NOT interchangeable, and _extract() interleaves them for a
+measured reason: pages are near-duplicates (they are where this image already
+appears), while visually-similar images are different photographs. Emitting
+pages first starved the second bucket entirely at a cap of 12.
+
+Web Detection is still tuned for "where does this image appear", so it remains
+weaker than Lens for distinct-photograph evidence. It is a redundancy path, not
+a replacement.
 """
 from __future__ import annotations
 
 import base64
+import dataclasses
 import hashlib
+import itertools
 import pathlib
 
 import requests
@@ -130,10 +135,31 @@ class GoogleVisionWebDetection(SearchProvider):
 
     @staticmethod
     def _extract(web: dict) -> list[Candidate]:
-        """Pages first -- they carry both a page URL and an image URL."""
-        out: list[Candidate] = []
-        pos = 0
+        """Interleave the two buckets, because they answer different questions.
 
+        Measured on a real response, they are not interchangeable:
+
+            pagesWithMatchingImages   cosine med 0.978, face-pHash 12-14
+                                      -> 0 of 7 were a distinct photograph
+            visuallySimilarImages     cosine med 0.414, face-pHash 30-32
+                                      -> 4 of 4 were a distinct photograph
+
+        Pages are where this image ALREADY APPEARS, so they are republications
+        almost by definition. Visually-similar images are different photographs,
+        though many are different PEOPLE and will fall below the threshold.
+
+        Emitting all pages first -- as this did -- meant that with 62 page URLs
+        against 20 visually-similar ones and a cap of 12, the visually-similar
+        bucket was truncated away entirely. The Vision path could therefore
+        never surface a distinct photograph at all, only republications, which
+        is exactly the weak evidence this project exists to distinguish.
+
+        Interleaving guarantees both kinds are seen within the cap and lets the
+        face matching decide. A visually-similar candidate that turns out to be
+        a different person simply falls below the threshold and costs one
+        download.
+        """
+        pages: list[Candidate] = []
         for page in (web.get("pagesWithMatchingImages") or []):
             page_url = str(page.get("url") or "")
             title = str(page.get("pageTitle") or "")
@@ -143,22 +169,27 @@ class GoogleVisionWebDetection(SearchProvider):
                 u = str(im.get("url") or "")
                 if not u:
                     continue
-                pos += 1
-                out.append(Candidate(
-                    position=pos, title=title, page_url=page_url, image_url=u,
+                pages.append(Candidate(
+                    position=0, title=title, page_url=page_url, image_url=u,
                     source=_host(page_url) or _host(u),
                     provider=GoogleVisionWebDetection.name))
 
-        # Supplementary: image URLs with no known hosting page. The image URL
-        # stands in as the source, because that is where the image actually is.
+        similar: list[Candidate] = []
         for im in (web.get("visuallySimilarImages") or []):
             u = str(im.get("url") or "")
             if not u:
                 continue
-            pos += 1
-            out.append(Candidate(
-                position=pos, title="", page_url=u, image_url=u,
+            # No hosting page is known for these, so the image URL stands in as
+            # the source -- honestly where the image lives.
+            similar.append(Candidate(
+                position=0, title="", page_url=u, image_url=u,
                 source=_host(u), provider=GoogleVisionWebDetection.name))
+
+        out: list[Candidate] = []
+        for a, b in itertools.zip_longest(pages, similar):
+            for cand in (a, b):
+                if cand is not None:
+                    out.append(dataclasses.replace(cand, position=len(out) + 1))
         return out
 
 

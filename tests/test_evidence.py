@@ -233,3 +233,53 @@ def test_verifier_still_reads_a_bomless_bundle(tmp_path):
     p.write_text(json.dumps(bundle), encoding="utf-8")
     assert not p.read_bytes().startswith(b"\xef\xbb\xbf")
     assert v.load_bundle(p)["evidence"] == {"a": 1}
+
+
+# --- per-record salt derivation -----------------------------------------
+def test_record_salts_differ_per_run():
+    """The whole point: two runs must not share a salt."""
+    from app.face.encoder import derive_record_salt
+    m = "ab" * 32
+    assert derive_record_salt(m, "run-A") != derive_record_salt(m, "run-B")
+
+
+def test_record_salt_is_deterministic():
+    """It must be re-derivable later, or a record can never be opened."""
+    from app.face.encoder import derive_record_salt
+    m = "ab" * 32
+    assert derive_record_salt(m, "run-A") == derive_record_salt(m, "run-A")
+
+
+def test_record_salt_does_not_reveal_the_master():
+    from app.face.encoder import derive_record_salt
+    m = "ab" * 32
+    s = derive_record_salt(m, "run-A")
+    assert m not in s and len(s) == 64
+
+
+def test_opening_one_record_does_not_open_another():
+    """Damage containment. Knowing run-A's salt must not let an attacker
+    reproduce run-B's commitment for the same subject."""
+    import numpy as np
+
+    from app.face.encoder import derive_record_salt, subject_commitment
+
+    m = "ab" * 32
+    rng = np.random.default_rng(0)
+    emb = rng.normal(size=512)
+    emb /= np.linalg.norm(emb)
+
+    salt_a = derive_record_salt(m, "run-A")
+    c_a = subject_commitment(emb, salt_a)
+    c_b = subject_commitment(emb, derive_record_salt(m, "run-B"))
+
+    assert c_a != c_b, "same subject in two runs must not share a commitment"
+    # An attacker holding salt_a and the subject can reproduce c_a and nothing else.
+    assert subject_commitment(emb, salt_a) == c_a
+    assert subject_commitment(emb, salt_a) != c_b
+
+
+def test_short_master_salt_is_rejected():
+    from app.face.encoder import derive_record_salt
+    with pytest.raises(ValueError):
+        derive_record_salt("abcd", "run-A")

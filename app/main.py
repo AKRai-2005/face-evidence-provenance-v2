@@ -29,7 +29,7 @@ from .evidence.canonicalizer import domain_of
 from .evidence.hasher import evidence_hash
 from .face.detector import (FaceEngine, FaceTooBlurry, FaceTooSmall,
                             NoFaceDetected, augmented_views)
-from .face.encoder import subject_commitment
+from .face.encoder import derive_record_salt, subject_commitment
 from .face.matcher import CalibrationMissing, Thresholds, Verdict
 from .face.ranking import rank, score_candidate, score_spread
 from .logging_setup import setup_logging, stage
@@ -473,7 +473,9 @@ def main(argv: list[str] | None = None) -> int:
 
             client = ChainClient(cfg.base_sepolia_rpc, cfg.deployer_private_key)
             reg = Registry(client, cfg.evidence_registry_address)
-            commitment = subject_commitment(face.embedding, cfg.subject_commitment_salt)
+            commitment = subject_commitment(face.embedding,
+                                    derive_record_salt(
+                                        cfg.subject_commitment_salt, run_id))
             csay("recording on Base Sepolia (chainId %d) ...", client.chain_id)
             res = reg.record_evidence(ev_hash, commitment, ev["source_domain"])
             rec = reg.wait_for_record(ev_hash)

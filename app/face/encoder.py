@@ -6,6 +6,7 @@ reaches the blockchain is a salted commitment, which is one-way.
 from __future__ import annotations
 
 import hashlib
+import hmac
 
 import numpy as np
 
@@ -26,6 +27,33 @@ def quantize_embedding(emb: np.ndarray) -> bytes:
     return q.astype(np.int8).tobytes()
 
 
+def derive_record_salt(master_salt_hex: str, run_id: str) -> str:
+    """Per-record salt = HMAC-SHA256(master_salt, run_id), hex.
+
+    The point is DAMAGE CONTAINMENT when a commitment is opened.
+
+    With a single deployment-wide salt, proving that one record concerns a given
+    subject means revealing that salt -- which immediately makes EVERY other
+    record we have ever written brute-forceable against a face gallery. The act
+    of substantiating one claim would compromise all the others, which makes the
+    capability effectively unusable.
+
+    Deriving each record's salt from the master via HMAC means a record can be
+    opened by revealing only ITS salt. The master stays secret, and no other
+    record is weakened. HMAC (not plain concatenation) because it is the
+    construction designed for keyed derivation and is not vulnerable to
+    length-extension.
+
+    Compromise of the master is still total -- that is inherent to any scheme
+    where we can re-derive -- but it is now one failure instead of a routine
+    consequence of normal use.
+    """
+    if len(master_salt_hex) < 32:
+        raise ValueError("master commitment salt too short (need >= 32 hex chars)")
+    return hmac.new(bytes.fromhex(master_salt_hex),
+                    run_id.encode("utf-8"), hashlib.sha256).hexdigest()
+
+
 def subject_commitment(emb: np.ndarray, salt_hex: str) -> str:
     """SHA-256(salt || quantized_embedding), hex.
 
@@ -33,6 +61,10 @@ def subject_commitment(emb: np.ndarray, salt_hex: str) -> str:
     world-readable. Publishing a face template there could never be undone. The
     commitment still lets us later PROVE a record concerns a given subject, by
     revealing the salt and re-deriving -- without broadcasting biometrics.
+
+    `salt_hex` should be a PER-RECORD salt from derive_record_salt(), not the
+    master. Passing the master still works and is what older runs did, but it
+    couples every record's exposure together -- see derive_record_salt().
 
     The salt is what makes this safe. Without it, an unsalted hash of a
     quantised embedding is brute-forceable against a face gallery.

@@ -303,3 +303,40 @@ def test_vision_sends_the_image_inline_not_a_url(tmp_path, monkeypatch):
     img = seen["requests"][0]["image"]
     assert "content" in img and "source" not in img
     assert base64.b64decode(img["content"]) == b"\xff\xd8\xffdata"
+
+
+def test_vision_interleaves_both_buckets_so_neither_is_starved(tmp_path, monkeypatch):
+    """Pages are republications, visually-similar are distinct photographs.
+    Emitting all pages first starved the second bucket at a cap of 12, so the
+    Vision path could never surface a distinct photograph at all."""
+    body = _vision_body(
+        pagesWithMatchingImages=[
+            {"url": f"https://p{i}.example/a", "pageTitle": f"t{i}",
+             "partialMatchingImages": [{"url": f"https://cdn.example/p{i}.jpg"}]}
+            for i in range(20)
+        ],
+        visuallySimilarImages=[{"url": f"https://s{i}.example/s.jpg"} for i in range(6)],
+    )
+    monkeypatch.setattr(requests, "post", lambda *a, **k: _Resp(200, body))
+    res = GoogleVisionWebDetection("k").search(b"x", raw_dir=tmp_path, max_candidates=8)
+    kinds = ["similar" if c.page_url == c.image_url else "page" for c in res.candidates]
+    assert "similar" in kinds, "visually-similar bucket must survive the cap"
+    assert kinds.count("similar") >= 3, kinds
+
+
+def test_vision_handles_one_bucket_being_empty(tmp_path, monkeypatch):
+    body = _vision_body(visuallySimilarImages=[{"url": "https://s.example/a.jpg"}])
+    monkeypatch.setattr(requests, "post", lambda *a, **k: _Resp(200, body))
+    res = GoogleVisionWebDetection("k").search(b"x", raw_dir=tmp_path, max_candidates=8)
+    assert len(res.candidates) == 1
+
+
+def test_vision_positions_are_sequential_after_interleaving(tmp_path, monkeypatch):
+    body = _vision_body(
+        pagesWithMatchingImages=[{"url": "https://p.example/a", "pageTitle": "t",
+                                  "partialMatchingImages": [{"url": "https://c.example/1.jpg"}]}],
+        visuallySimilarImages=[{"url": "https://s.example/2.jpg"}],
+    )
+    monkeypatch.setattr(requests, "post", lambda *a, **k: _Resp(200, body))
+    res = GoogleVisionWebDetection("k").search(b"x", raw_dir=tmp_path, max_candidates=8)
+    assert [c.position for c in res.candidates] == [1, 2]
