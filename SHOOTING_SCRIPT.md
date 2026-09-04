@@ -280,7 +280,7 @@ TAMPER DETECTED -- evidence modified
 
 **Say:**
 
-> "One character. An `o` becomes a zero in the source URL. The recomputed hash
+> "One character. The `i` in businessinsider becomes a one. The recomputed hash
 > no longer matches what is on chain, and the verifier rejects it."
 
 *Do this demo. It is the most convincing eight seconds in the video and most
