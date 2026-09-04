@@ -163,10 +163,20 @@ def distinct_artifact_panel(con, *, input_sha, input_dims, best, thresholds,
         f"   (same-photo cutoff {thresholds.same_photo_phash})",
         "",
         f"  verdict: {verdict.value}",
+        (f"  evidence strength: WEAK -- {best.similarity:.4f} clears the "
+         f"threshold but sits below the\n"
+         f"                     25th percentile of genuine scores "
+         f"({thresholds.strong_floor:.4f}).\n"
+         f"                     Treat this as a lead, not a finding."
+         if best.strength == "weak" else
+         f"  evidence strength: strong -- at or above the genuine-score p25 "
+         f"({thresholds.strong_floor:.4f})"),
     ]
     colour = {"DISTINCT_PHOTO": "green", "SAME_PHOTO": "yellow",
               "EXACT_DUPLICATE": "red", "UNCERTAIN": "magenta",
               "NO_MATCH": "red"}[verdict.name]
+    if best.strength == "weak":
+        colour = "yellow"
     con.print(Panel("\n".join(lines), title="[bold]DISTINCT-ARTIFACT PROOF[/]",
                     border_style=colour, expand=False))
 
@@ -396,10 +406,12 @@ def main(argv: list[str] | None = None) -> int:
              "NO_MATCH": ("dim", "below threshold")}
     for s in ranked[:12]:
         style, label = LABEL[s.verdict.name]
-        t.add_row(str(s.position), s.source[:20], f"{s.similarity:+.4f}",
+        cell = f"[{style}]{label}[/]"
+        if s.strength == "weak" and s.verdict is not Verdict.NO_MATCH:
+            cell += " [yellow]· WEAK[/]"
+        t.add_row(str(s.position), s.source[:18], f"{s.similarity:+.4f}",
                   f"{s.similarity_lo:.3f}-{s.similarity_hi:.3f}",
-                  str(s.phash_distance),
-                  f"[{style}]{label}[/]")
+                  str(s.phash_distance), cell)
     con.print(t)
 
     best = ranked[0] if ranked and ranked[0].verdict is not Verdict.NO_MATCH else None
@@ -430,6 +442,7 @@ def main(argv: list[str] | None = None) -> int:
         face_similarity_lo=best.similarity_lo,
         face_similarity_hi=best.similarity_hi,
         tta_views=len(input_embeddings),
+        evidence_strength=best.strength,
         threshold=thresholds.similarity,
         faces_in_candidate=best.faces_in_candidate,
         matched_face_index=best.matched_face_index,

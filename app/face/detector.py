@@ -19,6 +19,10 @@ from PIL import Image
 
 MODEL_NAME = "buffalo_l"
 
+# Retry padding when the first detection pass finds nothing. 0.30 sits well
+# inside the range measured to work (10% upward) with headroom for tighter crops.
+PAD_RETRY_FRACTION = 0.30
+
 
 class NoFaceDetected(RuntimeError):
     pass
@@ -132,17 +136,25 @@ class FaceEngine:
         """Stable identifier written into the evidence bundle."""
         return f"insightface_{MODEL_NAME}_arcface_{self._rec_file}"
 
-    def detect(self, img_bgr: np.ndarray) -> list[DetectedFace]:
-        """All faces, ordered by detection confidence (highest first)."""
+    def _detect_on(self, img_bgr: np.ndarray, dx: int = 0, dy: int = 0
+                   ) -> list[DetectedFace]:
+        """Detect on `img_bgr`, reporting bboxes shifted back by (dx, dy).
+
+        The shift exists so a padded retry still reports coordinates in the
+        ORIGINAL image's frame -- matched_face_bbox goes into the evidence
+        object, and a bbox expressed in a temporary padded frame would be wrong.
+        """
         out = []
         for i, f in enumerate(sorted(self._app.get(img_bgr), key=lambda x: -x.det_score)):
             x1, y1, x2, y2 = [int(v) for v in f.bbox]
+            # pHash and sharpness are measured on the image actually detected on,
+            # where the face pixels are identical; only the coordinates shift.
             ph = face_region_phash(img_bgr, (x1, y1, x2, y2))
             sharp = face_sharpness(img_bgr, (x1, y1, x2, y2))
             out.append(
                 DetectedFace(
                     index=i,
-                    bbox=(x1, y1, x2, y2),
+                    bbox=(x1 - dx, y1 - dy, x2 - dx, y2 - dy),
                     det_score=float(f.det_score),
                     embedding=np.asarray(f.normed_embedding, dtype=np.float32),
                     face_px=min(x2 - x1, y2 - y1),
@@ -151,6 +163,32 @@ class FaceEngine:
                 )
             )
         return out
+
+    def detect(self, img_bgr: np.ndarray, *, allow_pad_retry: bool = True
+               ) -> list[DetectedFace]:
+        """All faces, ordered by detection confidence (highest first).
+
+        Falls back to a padded retry when nothing is found. RetinaFace misses
+        faces that fill too much of the frame -- measured on a 1024x1024
+        head-and-shoulders portrait, detection returns NOTHING at 0% padding and
+        succeeds at det_score 0.82-0.89 from 10% padding upward. That failure
+        mode matters more than it sounds: a cropped headshot or profile picture
+        is the most natural thing a user would feed this tool, and without the
+        retry it is rejected outright as "no face detected".
+
+        BORDER_REPLICATE is used rather than a solid colour so the padding does
+        not introduce a hard edge the detector could latch onto.
+        """
+        faces = self._detect_on(img_bgr)
+        if faces or not allow_pad_retry:
+            return faces
+
+        h, w = img_bgr.shape[:2]
+        px, py = int(w * PAD_RETRY_FRACTION), int(h * PAD_RETRY_FRACTION)
+        if px < 1 or py < 1:
+            return faces
+        padded = cv2.copyMakeBorder(img_bgr, py, py, px, px, cv2.BORDER_REPLICATE)
+        return self._detect_on(padded, dx=px, dy=py)
 
     def detect_primary(
         self, img_bgr: np.ndarray, *, min_face_px: int, min_det_score: float,

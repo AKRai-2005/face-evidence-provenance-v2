@@ -25,21 +25,22 @@ similarity on ArcFace embeddings against a calibrated threshold).
 DISTINCT-ARTIFACT PROOF
   input image   sha256: 1f6c56c41df11f00006220fb8776d6cf70a4a15d92487ff687dbd12d6864783a
                         460x306, local
-  matched image sha256: 39acef1d441f80b4bec8ee77c507075c9b05dbce5f9ce0545b81ed5f687c1bb1
-                        320x480, from forbes.com
+  matched image sha256: 1fc3fc3cf06a5ce1c1970db031133464c54972d3a3b7fef22aae35070b999c9b
+                        1200x900, from manofmany.com
 
   identical files: NO          <- reverse-image-hash matching is ruled out
-  face cosine similarity: 0.8346   [0.8099 - 0.8421] over 6 augmented views
+  face cosine similarity: 0.9623   [0.9445 - 0.9679] over 6 augmented views
   calibrated threshold:   0.2149  (TAR 0.976 @ FAR 7.83e-04, see calibration/)
-  face-region pHash distance: 34   (same-photo cutoff 15)
+  face-region pHash distance: 28   (same-photo cutoff 15)
 
-  verdict: DISTINCT-PHOTOGRAPH SAME-SUBJECT CANDIDATE (strong evidence)
+  verdict: DISTINCT-PHOTOGRAPH SAME-SUBJECT CANDIDATE
+  evidence strength: strong -- at or above the genuine-score p25 (0.6066)
 ```
 
 This is the run frozen in [`sample_run/`](sample_run/README.md), reproducible by
 anyone with `web3` alone. Evidence hash
-`c5ae5ff891162c418fcef8f227e74faeb7cd229559d1ffd634f88a63e153b712`, notarised at
-[`0xc866adad…`](https://sepolia.basescan.org/tx/0xc866adadf35a8b8150c99ef56c355ffa2b8744dcb10b2ccc0dd7b6d87db3c460).
+`df7a4de56c024069923024643e81efe11bdbd772bb9d0a805485a9fb1df42a87`, notarised at
+[`0xa9611ac7…`](https://sepolia.basescan.org/tx/0xa9611ac746a6137ba6cdb0cb932c13ca33c5bc58b0950af29a27b5ebc4142e0a).
 
 **The similarity is an interval, not a point.** The input is a crop *we chose*,
 so the honest question is how much the score depends on that choice. The pipeline
@@ -94,6 +95,41 @@ threshold sits inside that gap rather than near either distribution. This held o
 two independent candidate sets captured on different days. It needs no network,
 no API quota and no gas, so it can be demonstrated even with every external
 service down.
+
+### The failure that changed the design
+
+The pipeline was fed a **GAN-generated face of a person who does not exist**. It
+returned a match on producthunt.com at cosine **0.4866** and reported it as
+*"strong evidence"*. A confident false positive on a nonexistent person — the
+exact failure this project claims to guard against.
+
+Two things were wrong, and both are fixed:
+
+**The match was real, in a sense.** producthunt.com uses AI-generated avatars for
+reviewer placeholders, so this was one synthetic face matching another. Faces
+from the same generator share a latent distribution and score far higher against
+each other (0.4866) than real strangers do (measured elsewhere here at
+0.06–0.13). The threshold was calibrated on *real* faces; synthetic input is out
+of distribution and breaks that assumption.
+
+**Clearing the threshold was being sold as strength.** 0.4866 clears 0.2149, but
+it sits in the **bottom 5%** of genuine scores. So the pipeline now reports a
+second, independent number:
+
+```
+threshold      0.2149   "is this the same person at all?"       (ROC at FAR 6.8e-04)
+strong floor   0.6066   "is this score TYPICAL of a real match?" (genuine p25)
+```
+
+Anything above the threshold but below the floor is labelled **WEAK — treat as a
+lead, not a finding**. Re-run on the same synthetic input, every candidate is now
+marked WEAK; the real demo match at 0.9623 is unaffected and still reads strong.
+
+The verdict tier and the score strength are deliberately **independent claims**.
+The tier answers "could file matching have produced this?"; the strength answers
+"is this score typical of a genuine match?". An earlier version baked
+"(strong evidence)" into the tier label and contradicted itself on screen the
+moment the two disagreed.
 
 ### Who does it fail for?
 

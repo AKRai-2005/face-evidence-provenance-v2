@@ -46,6 +46,7 @@ class ScoredCandidate:
     similarity: float          # median over test-time augmentations
     similarity_lo: float
     similarity_hi: float
+    strength: str                  # "weak" when below the genuine p25 floor
     verdict: Verdict
     phash_distance: int | None
     faces_in_candidate: int
@@ -67,6 +68,7 @@ class ScoredCandidate:
             "sha256": self.sha256,
             "face_phash": self.face_phash,
             "similarity": round(self.similarity, 4),
+            "strength": self.strength,
             "similarity_lo": round(self.similarity_lo, 4),
             "similarity_hi": round(self.similarity_hi, 4),
             "verdict": self.verdict.name,
@@ -144,6 +146,7 @@ def score_candidate(
         similarity=med,
         similarity_lo=lo,
         similarity_hi=hi,
+        strength=thresholds.strength_of(med),
         verdict=verdict,
         phash_distance=dist,
         faces_in_candidate=len(faces),
@@ -155,7 +158,9 @@ def score_candidate(
 
 def rank(scored: list[ScoredCandidate]) -> list[ScoredCandidate]:
     """Strongest evidence first: verdict tier, then cosine within the tier."""
-    return sorted(scored, key=lambda s: (s.tier, -s.similarity))
+    return sorted(scored,
+                  key=lambda s: (s.tier, 0 if s.strength == "strong" else 1,
+                                 -s.similarity))
 
 
 def select_best(scored: list[ScoredCandidate]) -> ScoredCandidate | None:

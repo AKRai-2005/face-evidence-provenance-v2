@@ -198,6 +198,16 @@ def main() -> int:
     scores = np.array([cosine(emb[a], emb[b]) for a, b in pos]
                       + [cosine(emb[a], emb[b]) for a, b in neg])
 
+    # Percentiles of the GENUINE distribution. The threshold answers "is this
+    # the same person at all"; these answer "is this a TYPICAL same-person
+    # score". Both are needed: a synthetic face once scored 0.4866 against a
+    # different synthetic face -- comfortably over the threshold, yet in the
+    # bottom 5% of genuine scores -- and was reported as strong evidence. The
+    # p25 floor is what stops a barely-plausible score being sold as a
+    # confident one.
+    gen = np.array([cosine(emb[a], emb[b]) for a, b in pos])
+    strong_floor = float(np.percentile(gen, 25))
+
     fpr, tpr, thr = roc_curve(y, scores)
     k = int(np.argmin(np.abs(fpr - args.far)))
     threshold, far_at, tar_at = float(thr[k]), float(fpr[k]), float(tpr[k])
@@ -275,6 +285,10 @@ def main() -> int:
         "tar": round(tar_at, 4),
         "auc": round(auc, 5),
         "same_photo_phash_max": int(phash_max),
+        "strong_floor_cosine": round(strong_floor, 4),
+        "genuine_p05": round(float(np.percentile(gen, 5)), 4),
+        "genuine_p25": round(strong_floor, 4),
+        "genuine_median": round(float(np.median(gen)), 4),
         "phash_same_photo_median": float(np.median(sp)) if len(sp) else None,
         "phash_same_photo_p95": float(np.percentile(sp, 95)) if len(sp) else None,
         "phash_diff_photo_median": float(np.median(dp)) if len(dp) else None,

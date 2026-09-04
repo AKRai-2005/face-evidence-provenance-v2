@@ -8,8 +8,8 @@ import pytest
 from app.face.matcher import Thresholds, Verdict, classify
 from app.face.ranking import ScoredCandidate, rank, score_spread, select_best
 
-TH = Thresholds(similarity=0.30, far=1e-3, tar=0.99, pairs=1000,
-                same_photo_phash=20, source="test")
+TH = Thresholds(similarity=0.30, strong_floor=0.60, far=1e-3, tar=0.99,
+                pairs=1000, same_photo_phash=20, source="test")
 
 INPUT_SHA = "aa" * 32
 INPUT_PH = "a5a152873b5c2e67"
@@ -22,13 +22,14 @@ def _classify(sim, cand_sha=None, cand_ph="ffffffffffffffff"):
                     thresholds=TH)
 
 
-def _cand(pos, sim, verdict, dist, lo=None, hi=None):
+def _cand(pos, sim, verdict, dist, lo=None, hi=None, strength="strong"):
     return ScoredCandidate(
         position=pos, page_url=f"https://e{pos}.example/p", image_url="",
         source=f"src{pos}", sha256=f"{pos:02x}" * 32,
         face_phash="0" * 16, similarity=sim,
         similarity_lo=sim if lo is None else lo,
         similarity_hi=sim if hi is None else hi,
+        strength=strength,
         verdict=verdict, phash_distance=dist, faces_in_candidate=1,
         matched_face_index=0, matched_face_bbox=(0, 0, 10, 10),
         image_size=(100, 100))

@@ -166,6 +166,16 @@ indexed images it will usually return nothing useful. That asymmetry is a
 property of the underlying index, not of the face matching. It also means a
 null result is weak evidence of absence.
 
+**A confident false positive was produced, and it is worth stating plainly.**
+Fed a GAN-generated face of a person who does not exist, the pipeline matched it
+to an AI-generated avatar on a product-review site at cosine 0.4866 and called it
+strong evidence. Faces from the same generator resemble each other far more than
+real strangers do, and the threshold was calibrated on real faces. The tool now
+reports a second number — the 25th percentile of genuine scores (0.6066) — and
+labels anything below it WEAK regardless of the verdict tier. That does not make
+the system immune to lookalikes, twins, or out-of-distribution input; it makes it
+stop overstating a marginal score.
+
 **Similarity above threshold is evidence, not proof of identity.** A cosine of
 0.74 against a threshold of X means the embeddings are closer than X% of
 impostor pairs were during calibration. It does not establish identity. Twins,

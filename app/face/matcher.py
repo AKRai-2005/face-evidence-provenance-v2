@@ -20,18 +20,27 @@ class CalibrationMissing(RuntimeError):
 
 
 class Verdict(str, enum.Enum):
-    """Ordered weakest -> strongest."""
+    """What KIND of match this is, ordered weakest -> strongest.
+
+    Deliberately says nothing about how strong the SCORE is. The tier answers
+    "could this have been produced by file matching?"; Thresholds.strength_of()
+    answers "is this score typical of a genuine match?". They are independent --
+    a distinct photograph can still carry a weak score -- and an earlier version
+    that baked "(strong evidence)" into this label contradicted itself on screen
+    the moment the two disagreed.
+    """
 
     NO_MATCH = "NO MATCH ABOVE THRESHOLD"
     UNCERTAIN = "UNCERTAIN -- confidence interval straddles the threshold"
-    EXACT_DUPLICATE = "EXACT-DUPLICATE MATCH (weak evidence)"
-    SAME_PHOTO = "SAME-PHOTOGRAPH REPUBLICATION (moderate evidence)"
-    DISTINCT_PHOTO = "DISTINCT-PHOTOGRAPH SAME-SUBJECT CANDIDATE (strong evidence)"
+    EXACT_DUPLICATE = "EXACT-DUPLICATE MATCH -- file identity only"
+    SAME_PHOTO = "SAME-PHOTOGRAPH REPUBLICATION"
+    DISTINCT_PHOTO = "DISTINCT-PHOTOGRAPH SAME-SUBJECT CANDIDATE"
 
 
 @dataclasses.dataclass(frozen=True)
 class Thresholds:
     similarity: float          # cosine, from ROC at a stated FAR
+    strong_floor: float        # 25th percentile of genuine scores; below = weak
     far: float
     tar: float
     pairs: int
@@ -51,6 +60,8 @@ class Thresholds:
         try:
             return cls(
                 similarity=float(d["threshold_cosine"]),
+                strong_floor=float(d.get("strong_floor_cosine",
+                                         d["threshold_cosine"])),
                 far=float(d["far"]),
                 tar=float(d["tar"]),
                 pairs=int(d["n_pairs"]),
@@ -59,6 +70,18 @@ class Thresholds:
             )
         except KeyError as e:
             raise CalibrationMissing(f"{path} is missing required key {e}") from None
+
+    def strength_of(self, score: float) -> str:
+        """'strong' only for scores typical of genuine matches.
+
+        Clearing the threshold means "not obviously a stranger". It does NOT
+        mean the score is typical of a real match. A synthetic face once scored
+        0.4866 against a DIFFERENT synthetic face -- over the threshold, but in
+        the bottom 5% of genuine scores -- and the pipeline reported it as
+        strong evidence. Anything below the 25th percentile of genuine scores
+        is now labelled weak, because that is what it is.
+        """
+        return "strong" if score >= self.strong_floor else "weak"
 
     def describe(self) -> str:
         return (
