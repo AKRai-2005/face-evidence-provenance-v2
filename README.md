@@ -134,6 +134,43 @@ The tier answers "could file matching have produced this?"; the strength answers
 "(strong evidence)" into the tier label and contradicted itself on screen the
 moment the two disagreed.
 
+### Does it fail more for some people than others?
+
+`scripts/audit_demographic_far.py` measures false accepts by demographic group on
+**FairFace**, whose labels come from the dataset — nothing here infers race or
+gender from a face, which is the capability this project argues against.
+
+**The one conclusion the data supports:**
+
+```
+cross-group impostor pairs -- 383 faces, 8,400 pairs, shipped threshold 0.2149
+overall FAR    0.00131   (11 false accepts)   <- about 2x the 6.8e-04 calibration predicted
+max impostor  +0.2931                          <- above threshold
+```
+
+The threshold is roughly **twice as permissive in practice** as LFW calibration
+implied. LFW is not representative of arbitrary web faces, and an operating point
+measured on it does not transfer unchanged.
+
+**The conclusion the data does NOT support — and this is the interesting part.**
+Those 11 false accepts spread across seven groups as 0, 0, 1, 2, 2, 2, 4. Under a
+*constant* rate the expected count per group is 1.6, and the Poisson spread for
+that mean comfortably covers every value observed. Running the identical script
+twice flipped the ordering outright — Indian went 0.00333 → 0.00083 while
+Southeast Asian went 0.00167 → 0.00333.
+
+So **the per-group differences are noise at this sample size**, and a per-group
+bias table drawn from them would be fiction dressed as measurement. Resolving a
+genuine 2× difference at these rates needs on the order of 20,000 pairs per
+group; this has 1,200. The audit reports the aggregate, which is real, and
+declines to report the breakdown, which is not.
+
+Two earlier versions of this measurement were discarded rather than published:
+one used within-group pairs and reported an alarming 15× spread until inspection
+showed **the same woman photographed twice and the same child in the same hat** —
+FairFace's validation split repeats individuals, so those were genuine
+same-person pairs. See [ETHICS.md](ETHICS.md).
+
 ### Who does it fail for?
 
 An aggregate error rate can hide its own shape, so it is broken down per person

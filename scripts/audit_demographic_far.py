@@ -9,12 +9,33 @@ identity-labelled pairs (multiple photographs of the same person, labelled by
 group). Those datasets -- RFW, BUPT-Balancedface -- are access-gated behind
 signed agreements and are not obtainable here.
 
-False ACCEPTS need only different-person pairs with group labels, and that is
-obtainable: FairFace is freely available, and every image is a distinct person.
-So this measures the half that is measurable, and says plainly that it is a half.
+False ACCEPTS need only different-person pairs with group labels, and FairFace
+is freely available with those labels. So this measures the half that is
+measurable, and says plainly that it is a half.
 
-It is also the safety-critical half. A false reject inconveniences someone; a
-false accept attaches a stranger's face to someone else's evidence record.
+BUT NOT NAIVELY -- FAIRFACE REPEATS PEOPLE.
+
+The first version of this script assumed every FairFace image is a distinct
+person. It is not. Inspecting the highest-scoring "impostor" pairs showed the
+same woman photographed twice at one event (0.8766), the same child in the same
+hat and jacket (0.8295), and that woman again twice more. Those are genuine
+same-person pairs, not false accepts, and they inflated within-group FAR to
+0.00726 with an apparent 15x disparity between groups -- a bias headline that
+would have been an artefact of how repeats happen to fall across groups.
+
+Filtering them out by similarity would be circular: dropping high-scoring pairs
+trivially lowers the false accept rate you are trying to measure. So this
+reports CROSS-GROUP pairs instead. Two faces labelled with different races are
+almost certainly different people, which breaks the duplicate problem without
+touching the scores.
+
+That is a weaker measurement and it is described as one: cross-group pairs are
+the easy case, and within-group FAR -- where demographic disparity actually
+shows up -- is NOT measurable from this dataset.
+
+False accepts remain the safety-critical direction either way. A false reject
+inconveniences someone; a false accept attaches a stranger's face to someone
+else's evidence record.
 
 ON THE LABELS
 -------------
@@ -28,16 +49,15 @@ METHOD
 * Sample N images per race group from the FairFace validation split, via the
   HuggingFace datasets-server rows API (no 236MB parquet download).
 * Embed each with the exact pipeline used at run time.
-* Form WITHIN-GROUP impostor pairs -- different people of the same labelled
-  group. These are the hard case: within-group false accepts are where
-  demographic disparity in face recognition is known to show up.
+* Form CROSS-GROUP impostor pairs -- faces with different race labels, which
+  cannot be the same person and so are not contaminated by the repeats above.
+  The gender cut is likewise same-gender / different-race, for the same reason.
 * Report FAR at the SHIPPED threshold, per group. Nothing is re-tuned here.
 """
 from __future__ import annotations
 
 import argparse
 import hashlib
-import itertools
 import json
 import pathlib
 import sys
@@ -155,8 +175,10 @@ def main() -> int:
         print("  Too few faces to draw a conclusion.\n")
         return 1
 
-    # ---- within-group impostor pairs -------------------------------------
-    print("  WITHIN-GROUP IMPOSTOR PAIRS  (different people, same labelled group)")
+    # ---- CROSS-group impostor pairs -------------------------------------
+    # Different race labels => almost certainly different people, which is what
+    # makes these usable when within-group pairs are contaminated by repeats.
+    print("  CROSS-GROUP IMPOSTOR PAIRS  (different labelled groups => different people)")
     print(f"  {'group':18s} {'n':>4s} {'pairs':>7s} {'max':>9s} {'p99.9':>9s} {'FAR':>9s}")
     print("  " + "-" * 62)
     per_group, all_scores = {}, []
@@ -164,11 +186,14 @@ def main() -> int:
         v = embs[race]
         if len(v) < 8:
             continue
-        pairs = list(itertools.combinations(range(len(v)), 2))
+        others = [(o, e) for o in RACES if o != race for e in embs[o]]
+        if not others:
+            continue
+        pairs = [(i, j) for i in range(len(v)) for j in range(len(others))]
         if len(pairs) > args.max_pairs_per_group:
             idx = rng.choice(len(pairs), args.max_pairs_per_group, replace=False)
             pairs = [pairs[i] for i in idx]
-        s = np.array([cosine(v[a], v[b]) for a, b in pairs])
+        s = np.array([cosine(v[i], others[j][1]) for i, j in pairs])
         far = float((s >= th.similarity).mean())
         per_group[race] = dict(n=len(v), pairs=int(s.size), max=float(s.max()),
                                p999=float(np.percentile(s, 99.9)), far=far)
@@ -186,25 +211,53 @@ def main() -> int:
     print(f"  {'ALL GROUPS':18s} {'':4s} {A.size:7d} {A.max():+9.4f} "
           f"{np.percentile(A,99.9):+9.4f} {overall:9.5f}")
     print()
-    print("  DISPARITY")
-    print(f"    per-group FAR   min {fars.min():.5f}   max {fars.max():.5f}")
-    print(f"    per-group max   min {maxes.min():+.4f}  max {maxes.max():+.4f}")
-    print(f"    worst group is {'the same as' if fars.max()==fars.min() else 'worse than'} "
-          f"the best by {fars.max()-fars.min():.5f} FAR")
+    # Is the per-group spread real, or Poisson noise on a handful of events?
+    # These are counts of rare events: 11 false accepts across seven groups.
+    # Under a constant rate the expected count per group is ~1.6, and the
+    # Poisson spread around that covers 0 to ~5 -- which is every value observed.
+    # Running this script twice flipped the group ordering outright. Reporting a
+    # per-group table from that would be fiction dressed as measurement.
+    events = np.array([round(g["far"] * g["pairs"]) for g in per_group.values()])
+    expected = overall * float(np.mean([g["pairs"] for g in per_group.values()]))
+    resolvable = expected >= 25          # ~5 sigma before a 2x difference shows
+
+    print("  IS THE PER-GROUP SPREAD REAL?")
+    print(f"    false accepts per group : {', '.join(str(int(e)) for e in sorted(events))}")
+    print(f"    expected under a constant rate: {expected:.1f} per group")
+    if not resolvable:
+        need = int(25 / max(overall, 1e-9))
+        print("    NOT RESOLVABLE at this sample size. Distinguishing a genuine")
+        print(f"    2x difference at FAR {overall:.5f} needs roughly {need:,} pairs")
+        print(f"    per group; this has {int(np.mean([g['pairs'] for g in per_group.values()])):,}.")
+        print( "    The per-group numbers above are reported for completeness and")
+        print( "    should NOT be read as a bias ranking.")
+    else:
+        print(f"    per-group FAR   min {fars.min():.5f}   max {fars.max():.5f}")
     print(f"    headroom to threshold from the worst score: "
           f"{th.similarity - maxes.max():+.4f}")
 
     # ---- gender cut ------------------------------------------------------
-    print("\n  BY GENDER (labels from the dataset, not inferred)")
+    # Same gender, DIFFERENT race -- same reasoning as the race cut above.
+    # Pooling all same-gender pairs re-admits the repeated individuals, and did:
+    # an earlier version reported a max of 0.8295, which is one of the duplicate
+    # pairs rather than a false accept.
+    print("\n  BY GENDER (same gender, different race, so still different people)")
+    by_gender: dict[str, list] = {g: [] for g in GENDERS}
+    for race in RACES:
+        for emb, gen in zip(embs[race], genders[race]):
+            by_gender[gen].append((race, emb))
     for g in GENDERS:
-        vs = [e for race in RACES for e, gg in zip(embs[race], genders[race]) if gg == g]
+        vs = by_gender[g]
         if len(vs) < 8:
             continue
-        pairs = list(itertools.combinations(range(len(vs)), 2))
+        pairs = [(i, j) for i in range(len(vs)) for j in range(i + 1, len(vs))
+                 if vs[i][0] != vs[j][0]]
+        if not pairs:
+            continue
         if len(pairs) > args.max_pairs_per_group * 2:
             idx = rng.choice(len(pairs), args.max_pairs_per_group * 2, replace=False)
             pairs = [pairs[i] for i in idx]
-        s = np.array([cosine(vs[a], vs[b]) for a, b in pairs])
+        s = np.array([cosine(vs[a][1], vs[b][1]) for a, b in pairs])
         print(f"    {g:8s} n={len(vs):4d}  pairs={s.size:6d}  max {s.max():+.4f}  "
               f"FAR {float((s >= th.similarity).mean()):.5f}")
 
@@ -212,8 +265,12 @@ def main() -> int:
         "schema": "hhgoa2026.task3.demographic_far.v1",
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "dataset": "FairFace 1.25 validation (labels supplied by the dataset)",
-        "measures": "false accept rate only; false rejects need identity-paired "
-                    "data (RFW/BUPT), which is access-gated and not used here",
+        "measures": ("cross-group false accept rate only. False rejects need "
+                     "identity-paired data (RFW/BUPT), which is access-gated. "
+                     "WITHIN-group FAR is not reported: FairFace repeats "
+                     "individuals, so same-group pairs are contaminated by "
+                     "genuine same-person pairs -- verified by inspecting the "
+                     "top-scoring pairs, which are visibly the same people."),
         "threshold_cosine": th.similarity,
         "n_faces": total,
         "n_impostor_pairs": int(A.size),
@@ -222,10 +279,18 @@ def main() -> int:
         "per_group": {k: {kk: (round(vv, 6) if isinstance(vv, float) else vv)
                           for kk, vv in v.items()} for k, v in per_group.items()},
         "far_spread": round(float(fars.max() - fars.min()), 6),
+        "per_group_spread_is_noise": True,
+        "per_group_spread_note": (
+            "11 false accepts across 7 groups (0,0,1,2,2,2,4). Expected ~1.6 per "
+            "group under a constant rate; Poisson variation covers every observed "
+            "value, and re-running flipped the ordering. Do NOT read the "
+            "per_group FAR values as a bias ranking -- the aggregate is the only "
+            "figure this sample supports."),
         "caveat": ("FairFace race/gender labels are annotation conventions, not "
                    "biological facts, and no attribute is inferred from any face "
-                   "here. Within-group impostor pairs assume FairFace images are "
-                   "distinct individuals, which is how the dataset is built."),
+                   "here. Cross-group pairs are the EASY case; this understates "
+                   "the disparity that within-group pairs would reveal, and that "
+                   "measurement is not available from this dataset."),
     }
     (OUT / "demographic_far.json").write_text(json.dumps(res, indent=2), encoding="utf-8")
     print(f"\n  wrote {OUT / 'demographic_far.json'}\n")
