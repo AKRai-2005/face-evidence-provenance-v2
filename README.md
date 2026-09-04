@@ -53,20 +53,23 @@ verdict is `UNCERTAIN` rather than a coin-flip presented as settled.
 The ranked table from that run — note what is *not* selected:
 
 ```
- #  source                cosine   range (TTA)   pHashD  verdict
-11  Forbes               +0.8346  0.810-0.842      34    DISTINCT PHOTO  <- selected
- 8  Technology Magazine  +0.8345  0.813-0.841      28    DISTINCT PHOTO
- 9  AI Magazine          +0.7634  0.751-0.770      36    DISTINCT PHOTO
- 7  Fortune              +0.7605  0.750-0.772      28    DISTINCT PHOTO
- 5  Wikipedia            +0.7599  0.743-0.764      34    DISTINCT PHOTO
- 6  LinkedIn             +0.7412  0.732-0.752      30    DISTINCT PHOTO
- 1  Axios                +0.9761  0.958-0.986      12    same photo
- 2  eBay                 +0.9684  0.952-0.975      12    same photo
+ #  source               cosine   range (TTA)   pHashD  verdict          strength
+ 7  Man of Many         +0.9623  0.944-0.968      28    DISTINCT PHOTO   strong   <- selected
+11  SiliconANGLE        +0.8429  0.824-0.850      28    DISTINCT PHOTO   strong
+12  The Seattle Times   +0.8072  0.787-0.812      24    DISTINCT PHOTO   strong
+ 3  Forbes              +0.8060  0.781-0.813      34    DISTINCT PHOTO   strong
+ 9  CNBC                +0.7629  0.751-0.777      34    DISTINCT PHOTO   strong
+ 4  Wikipedia           +0.7599  0.743-0.764      34    DISTINCT PHOTO   strong
+ 1  Windows Central     +0.9808  0.961-0.988       6    same photo       strong
+10  Reddit              +0.9798  0.962-0.985       4    same photo       strong
+ 2  Axios               +0.9761  0.958-0.986      12    same photo       strong
 ```
 
-The two **highest-scoring** candidates are the same press photograph republished,
-and are correctly demoted. A pipeline that ranked by cosine would have reported
-Axios at 0.9761 and called a republished file "strong evidence".
+The three **highest raw scores** in that run -- Windows Central 0.9808, Reddit
+0.9798, Axios 0.9761 -- are all the same press photograph republished, and are
+correctly demoted below a 0.9623 that is a genuinely different photograph. A
+pipeline ranking by cosine alone would have led with a republished file and
+called it strong evidence.
 
 > **Live results vary, and that is not a defect.** Google Lens returns a
 > different candidate set from one day to the next — an earlier run of this exact
@@ -348,7 +351,7 @@ central claim can be checked with nothing installed but `web3`:
 ```bash
 # 1. reproduce the notarised hash with the standard library alone
 python -c "import hashlib,sys;print(hashlib.sha256(open(sys.argv[1],'rb').read()).hexdigest())" sample_run/canonical.json
-#    -> 9fe3f99176aeb9c2523d1b6363d6ea20788e7a87188dfd616bf821de11d43da6
+#    -> df7a4de56c024069923024643e81efe11bdbd772bb9d0a805485a9fb1df42a87
 
 # 2. check it against the chain
 pip install web3
