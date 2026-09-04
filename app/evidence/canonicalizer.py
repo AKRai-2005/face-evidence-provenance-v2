@@ -120,7 +120,17 @@ def _clean(value, *, path: str = "$"):
         for k in sorted(value):
             if not isinstance(k, str):
                 raise CanonicalizationError(f"non-string key at {path}: {k!r}")
-            out[nfc(k)] = _clean(value[k], path=f"{path}.{k}")
+            nk = nfc(k)
+            if nk in out:
+                # Two distinct keys can normalise to the same string, and a
+                # plain assignment would silently drop one -- producing the
+                # same digest for objects that differ. Refuse, as with floats.
+                raise CanonicalizationError(
+                    f"NFC key collision at {path}: {k!r} normalises to {nk!r}, "
+                    "which another key in the same object already occupies. "
+                    "One value would be silently discarded."
+                )
+            out[nk] = _clean(value[k], path=f"{path}.{k}")
         return out
     raise CanonicalizationError(f"unsupported type at {path}: {type(value).__name__}")
 

@@ -360,6 +360,18 @@ break, so the rules are strict:
 The canonicalizer **rejects** a float rather than coercing it, and names the JSON
 path where it found one.
 
+It refuses one further case for the same reason. Two distinct keys can share a
+single NFC form — `"café"` and `"café"` are different Python strings
+that normalise to the same text. Writing both into the normalised object keeps
+whichever came last and drops the other **silently**, so an object with two keys
+and an object with one would notarise to the *same* digest. A canonicalizer that
+rejects a float but quietly discards a field is not rigorous, it is
+inconsistent; the collision raises instead, naming the offending key.
+
+Nothing in the evidence schema can trigger it — every field name is fixed ASCII
+— but the canonicalizer is the primitive the whole registry rests on, and its
+contract is that the digest pins the content.
+
 ### Reproduce the hash yourself
 
 `canonical.json` holds the exact bytes that were hashed, so this needs nothing

@@ -72,7 +72,13 @@ def _clean(value, path="$"):
         for k in sorted(value):
             if not isinstance(k, str):
                 raise ValueError(f"non-string key at {path}: {k!r}")
-            out[unicodedata.normalize("NFC", k)] = _clean(value[k], f"{path}.{k}")
+            nk = unicodedata.normalize("NFC", k)
+            if nk in out:
+                raise ValueError(
+                    f"NFC key collision at {path}: {k!r} normalises onto an "
+                    "existing key; one value would be silently discarded"
+                )
+            out[nk] = _clean(value[k], f"{path}.{k}")
         return out
     raise ValueError(f"unsupported type at {path}: {type(value).__name__}")
 
