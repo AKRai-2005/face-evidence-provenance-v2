@@ -494,6 +494,29 @@ Checked 2026-09-01, each confirmed with a real call.
 | PimEyes | no API; ToS prohibits automation | **not touched** |
 | Yandex | best raw recall, aggressive anti-automation | not used |
 
+### Why only one provider actually works
+
+The single-provider dependency is a researched conclusion, not an unexplored gap.
+**There is no free, web-scale, reverse-image API besides the one we use.** The
+category mostly does not exist; what looks like an alternative is usually solving
+a different problem:
+
+| candidate | why it does not substitute |
+|---|---|
+| Qdrant · Marqo · CLIP+pgvector | Self-hosted vector search **over your own images**. Web-scale search would require crawling the web first. Different problem. |
+| Google Cloud Vision *Product Search* | Searches **your** product catalogue, not the public web. |
+| TinEye API | From $200/month, **no free plan** — and near-duplicate only, so it cannot find a *different photograph* of the same person, which is this project's entire point. |
+| Bing Visual Search | Retired Aug 2025; no new keys issuable. |
+| Yandex | No commercial API, and face search there is a documented legal grey area. |
+
+**One genuine candidate exists: Google Cloud Vision `WEB_DETECTION`.** It is truly
+web-scale, returns `visuallySimilarImages` and `pagesWithMatchingImages`, and its
+free tier is **1,000 units/month — four times SerpApi's 250**. It is not wired up
+here because it requires a Google Cloud billing account (a card, even though
+nothing is charged within quota), and shipping an *untested* provider would be a
+worse failure than documenting a real one — see the fabricated-provider
+anti-pattern this project is built against. It is the obvious next integration.
+
 ### Provider reliability (measured, not assumed)
 
 Bright Data's SERP zone serves plain Google reliably. Its **reverse-image** paths
