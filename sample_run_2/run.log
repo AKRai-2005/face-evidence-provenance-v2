@@ -1,0 +1,35 @@
+[RUN] 2026-09-04 22:09:55,691 INFO    run 20260904T163955Z_c56949
+[FACE] 2026-09-04 22:09:57,960 INFO    input 339x478 sha256=36e29b2709387226
+[FACE] 2026-09-04 22:09:57,961 INFO    detected 1 face(s); using idx 0 det=0.8920 131px sharpness=1037
+[FACE] 2026-09-04 22:09:57,961 INFO    model insightface_buffalo_l_arcface_w600k_r50, 512-d embedding, metric cosine_l2normed
+[FACE] 2026-09-04 22:09:59,430 INFO    test-time augmentation: 6 views (hflip, crop4, crop8, scale085, scale125); self-consistency min 0.9640
+[SEARCH] 2026-09-04 22:09:59,430 INFO    querying serpapi_google_lens ...
+[SEARCH] 2026-09-04 22:10:00,378 INFO    uploaded query image (34860 bytes), image_id acquired
+[SEARCH] 2026-09-04 22:10:07,652 INFO    serpapi_google_lens returned 12 candidates (59 visual matches returned)
+[FETCH] 2026-09-04 22:10:08,919 INFO    candidate 1 OK image/jpeg 44KB sha=49c3d7c10405
+[FETCH] 2026-09-04 22:10:09,627 INFO    candidate 2 OK image/jpeg 515KB sha=8e2e4fc7f6a1
+[FETCH] 2026-09-04 22:10:12,495 INFO    candidate 3 OK image/jpeg 77KB sha=b074b55bc049
+[FETCH] 2026-09-04 22:10:13,537 INFO    candidate 4 SKIPPED (content-type image/jpg) Shutterstock
+[FETCH] 2026-09-04 22:10:15,674 INFO    candidate 5 OK image/jpeg 415KB sha=16b6404f95ce
+[FETCH] 2026-09-04 22:10:16,159 INFO    candidate 6 OK image/jpeg 49KB sha=49a1e39cb528
+[FETCH] 2026-09-04 22:10:17,520 INFO    candidate 7 OK image/jpeg 593KB sha=9677d81206b2
+[FETCH] 2026-09-04 22:10:18,915 INFO    candidate 8 OK image/jpeg 11KB sha=cee21915e432
+[FETCH] 2026-09-04 22:10:20,586 INFO    candidate 9 OK image/jpeg 172KB sha=f601480904bf
+[FETCH] 2026-09-04 22:10:21,755 INFO    candidate 10 OK image/jpeg 121KB sha=a6e7d5c52fb8
+[FETCH] 2026-09-04 22:10:22,909 INFO    candidate 11 OK image/png 287KB sha=853211fa71a3
+[FETCH] 2026-09-04 22:10:23,914 INFO    candidate 12 OK image/jpeg 365KB sha=d85c020823d2
+[FETCH] 2026-09-04 22:10:23,914 INFO    downloaded 11/12 candidates
+[VERIFY] 2026-09-04 22:10:24,216 INFO    candidate 1 Wikimedia Commons      cos=+0.9915 [0.9640-0.9933] pHashD=2 SAME_PHOTO
+[VERIFY] 2026-09-04 22:10:24,537 INFO    candidate 2 Wikipedia              cos=+0.8205 [0.8140-0.8293] pHashD=18 DISTINCT_PHOTO
+[VERIFY] 2026-09-04 22:10:24,819 INFO    candidate 3 CNBC                   cos=+0.8640 [0.8547-0.8685] pHashD=24 DISTINCT_PHOTO
+[VERIFY] 2026-09-04 22:10:25,163 INFO    candidate 5 Reuters                cos=+0.7321 [0.7270-0.7398] pHashD=26 DISTINCT_PHOTO
+[VERIFY] 2026-09-04 22:10:25,457 INFO    candidate 6 Vocal Media            cos=+0.7738 [0.7705-0.7819] pHashD=18 DISTINCT_PHOTO
+[VERIFY] 2026-09-04 22:10:25,766 INFO    candidate 7 Fortune                cos=+0.6975 [0.6926-0.7146] pHashD=26 DISTINCT_PHOTO
+[VERIFY] 2026-09-04 22:10:26,031 INFO    candidate 8 NY Post                cos=+0.7505 [0.7349-0.7594] pHashD=14 SAME_PHOTO
+[VERIFY] 2026-09-04 22:10:26,341 INFO    candidate 9 India Today            cos=+0.7552 [0.7470-0.7582] pHashD=30 DISTINCT_PHOTO
+[VERIFY] 2026-09-04 22:10:27,006 INFO    candidate 10 The Guardian           cos=+0.7044 [0.6982-0.7214] pHashD=26 DISTINCT_PHOTO
+[VERIFY] 2026-09-04 22:10:27,315 INFO    candidate 11 Business Insider       cos=+0.8761 [0.8598-0.8767] pHashD=22 DISTINCT_PHOTO
+[VERIFY] 2026-09-04 22:10:27,627 INFO    candidate 12 The New York Times     cos=+0.7188 [0.7143-0.7286] pHashD=20 DISTINCT_PHOTO
+[EVIDENCE] 2026-09-04 22:10:27,640 INFO    evidence sha256 = 0c2529df728dc7705bf3bf36034749b0d1a5651e1b18953bea69d1a8c10d8745
+[CHAIN] 2026-09-04 22:10:29,339 INFO    recording on Base Sepolia (chainId 84532) ...
+[CHAIN] 2026-09-04 22:10:39,257 INFO    block 46385876 gas 93699 cost 0.000001405485 ETH

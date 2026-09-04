@@ -405,6 +405,26 @@ It also ships the untouched provider responses, including the separate
 `type=exact_matches` query, so the search can be confirmed to have happened
 rather than taken on trust.
 
+### A second run, on a different subject
+
+[`sample_run_2/`](sample_run_2/README.md) is a second complete run — Sundar
+Pichai, matched against businessinsider.com, notarised in transaction
+[`0xe3b94010…`](https://sepolia.basescan.org/tx/0xe3b94010676d6881429d40139fd667f11de4ba987d565da200d16c52602ca754).
+It answers "does this work on more than one person?" from committed artifacts
+rather than from a validation table.
+
+It is also the clearer demonstration of the **ranking inversion**. Twelve
+candidates were examined; the highest-scoring was Wikimedia Commons at
+**0.9915** — the source photograph the input was derived from, republished. It
+was demoted to the bottom tier on a face-pHash distance of 2, and a Business
+Insider photograph at **0.8761** with distance 22 was reported instead. Both
+verdict tiers appear inside a single run, and the run's own scored log for all
+twelve candidates is committed so the table can be checked rather than believed.
+
+```bash
+python verify.py --bundle sample_run_2/bundle.json     # -> VERIFIED
+```
+
 ---
 
 ## Independent verification

@@ -18,35 +18,66 @@ import pathlib
 import pytest
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SAMPLE = ROOT / "sample_run"
+
+# Every committed run a reviewer is invited to check. Adding a third means
+# adding it here; its walkthrough is then held to the same standard.
+SAMPLE_RUNS = [ROOT / "sample_run", ROOT / "sample_run_2"]
 
 
 def _read_json(p: pathlib.Path):
     return json.loads(p.read_text(encoding="utf-8-sig"))
 
 
-# --- the sample run a judge is told to check --------------------------------
-def test_shipped_canonical_json_hashes_to_the_bundles_claim():
+# --- the sample runs a judge is told to check -------------------------------
+@pytest.mark.parametrize("sample", SAMPLE_RUNS, ids=lambda p: p.name)
+def test_shipped_canonical_json_hashes_to_the_bundles_claim(sample):
     """The bundle's claimed digest must match the bytes actually shipped."""
-    raw = (SAMPLE / "canonical.json").read_bytes()
-    assert hashlib.sha256(raw).hexdigest() == _read_json(SAMPLE / "bundle.json")["evidence_sha256"]
+    raw = (sample / "canonical.json").read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == _read_json(sample / "bundle.json")["evidence_sha256"]
 
 
-def test_readme_documents_the_hash_the_shipped_file_actually_produces():
-    """The README prints an expected digest next to a copy-pasteable command.
-    If the sample run is ever refreshed without updating that line, a reviewer
-    following it sees a mismatch -- which looks exactly like tampering."""
-    actual = hashlib.sha256((SAMPLE / "canonical.json").read_bytes()).hexdigest()
-    readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert actual in readme, (
-        f"README does not mention the digest the shipped canonical.json produces "
+@pytest.mark.parametrize("sample", SAMPLE_RUNS, ids=lambda p: p.name)
+def test_walkthrough_documents_the_hash_the_shipped_file_produces(sample):
+    """Each run's README prints an expected digest beside a copy-pasteable
+    command. If a run is refreshed without updating that line, a reviewer
+    following it sees a mismatch -- which looks exactly like tampering. That
+    already happened once here."""
+    actual = hashlib.sha256((sample / "canonical.json").read_bytes()).hexdigest()
+    doc = (sample / "README.md").read_text(encoding="utf-8")
+    assert actual in doc, (
+        f"{sample.name}/README.md omits the digest its canonical.json produces "
         f"({actual}). The walkthrough would fail for a reviewer."
     )
 
 
-def test_shipped_canonical_json_has_no_line_endings_to_translate():
-    raw = (SAMPLE / "canonical.json").read_bytes()
+def test_top_level_readme_documents_the_run_it_walks_through():
+    actual = hashlib.sha256((ROOT / "sample_run" / "canonical.json").read_bytes()).hexdigest()
+    assert actual in (ROOT / "README.md").read_text(encoding="utf-8")
+
+
+@pytest.mark.parametrize("sample", SAMPLE_RUNS, ids=lambda p: p.name)
+def test_shipped_canonical_json_has_no_line_endings_to_translate(sample):
+    raw = (sample / "canonical.json").read_bytes()
     assert b"\n" not in raw and b"\r" not in raw
+
+
+@pytest.mark.parametrize("sample", SAMPLE_RUNS, ids=lambda p: p.name)
+def test_each_run_notarised_a_distinct_digest(sample):
+    """Two runs sharing an evidence hash would be one run committed twice, and
+    the second would prove nothing the first did not."""
+    mine = _read_json(sample / "bundle.json")["evidence_sha256"]
+    for other in (s for s in SAMPLE_RUNS if s != sample):
+        assert mine != _read_json(other / "bundle.json")["evidence_sha256"]
+
+
+@pytest.mark.parametrize("sample", SAMPLE_RUNS, ids=lambda p: p.name)
+def test_no_run_ships_the_live_api_key_or_a_private_key(sample):
+    """The raw provider responses are committed verbatim. Verbatim is the point
+    -- and also the risk."""
+    for f in sample.rglob("*.json"):
+        text = f.read_text(encoding="utf-8-sig", errors="replace")
+        assert "api_key=" not in text, f"{f} carries an api_key parameter"
+        assert "BEGIN PRIVATE KEY" not in text
 
 
 # --- withdrawn measurements must say so, in the file itself -----------------

@@ -1,0 +1,1055 @@
+{
+  "search_metadata": {
+    "id": "6a9af464421b0812e991f570",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/N43QnDud90k7vWu2nWWUuINvil2QcB0veggVxsjFGfo/6a9af464421b0812e991f570.json",
+    "markdown_endpoint": "https://serpapi.com/searches/N43QnDud90k7vWu2nWWUuINvil2QcB0veggVxsjFGfo/6a9af464421b0812e991f570.md",
+    "created_at": "2026-09-04 16:40:04 UTC",
+    "processed_at": "2026-09-04 16:40:04 UTC",
+    "raw_html_file": "https://serpapi.com/searches/N43QnDud90k7vWu2nWWUuINvil2QcB0veggVxsjFGfo/6a9af464421b0812e991f570.html",
+    "total_time_taken": 2.27
+  },
+  "search_parameters": {
+    "engine": "google_lens",
+    "image_id": "t7LmlXicu2lgmZialmxmmJJqkGicmpZqYZRsnJxokmqanGJoYZFqaKmXVZCaHm9obmFhamJgYGAMAJ3WDvY"
+  },
+  "ai_overview": {
+    "page_token": "k1m6qXiczVfZkqJIFP2B-Y3xqUsBl9KKMDouCaUgQuFG4YvBZgqIWIAivs2_zD9NxHzNJLiUVml19zxMTD7kxt3y5j0c-OPPpbvy__7tr0WSrOOnSiVN0zIOQ7x0ylYYVIw4W1mVebiMI2vxfbmKZ0FoO-3NqpTP4000NyynzTRKcbiJyIzsllPHLG_8VWljB_mTbeyukjYC9Q3hECGwhoBxVwC-IaShxqkAwDUnpIeXHQUgwEwke5hrpjBAgFh3ww7HxT4xFbl2Gykbaes04uUbE_IsoA7wrtgZeNORvVRG6l4a2WSuJzKHqemQqsuenkqjcSpr4mLqyW5fmwbKqMfCUEBmUAvBF_fIrcfTYJxMu5PEfPUbCsfTfU9cyhwkRL-quxTVH-k7aYQZ2fOTvqbv5L2Q6Xug9GCw4H2-95K1XHPV3xKbWz1oZdOstTHd415nsrEyOrCC1sYm8ymiF1bH31pdcTtFxLdW30vaNDOZOkXmvqQ9p8awmSnPIY-wuDE9z8BveztKNA3SUrZtV0tW3KZKjtuezoeGse5ORGU7r8vhy4McSRs1LBV3156ZRux45Gp3XlyZVUjn_17lyKIcl51V2YuVpq5IuDujygzFVMtKxQiIAPx3TUXAkx6G-QD5Td9qLAD6CWOkwIgp8C-2BMAnC6fWJwVG9tHBIcJ3AusfNAUQWCim3APzmnIkzmN-2PReHDiP4j2qoxxOi1OwubHbx7wTSdGHZ9tftLtJKvz1Tqv-xRP-jgbxc1UHap7KQROjkwK6VEfAoitd4eQkg27qACj84DInn8PrCVD3QeW_kCqaj4QmexTCPYrcDV-xMSlaqmJGZKArrrWwikkU57WMRi0q7Do1eWbz-1Y4WI45uT6fjXp12d-FrppWLJPILUPDduzZYkZ9L9Y0Q9epVvWx-a0AkRWfURRfosheR7VQQbb3hstSmaVPEELnO2av40dkzd5M-uIoyt54FrzvqmfL-Dnv-VMKDxdA8IRBhyKPF7l87uYFdHmjzVz2MtsnD_neLQgdnZ5HEsUYDnUQnkvvsrBV8q7_rFgIfX7FoKtwybHe4aVeSecJ_IACJLDD8wE-GsLAC4RLhCJK_rXIPZfLXIFFOK3OB-CJgHBxBOF4pkPrv_sgEmzxvMPzOWcNigjUIkZ00DzpCsKVU3QbsOT2IOZ_6R3x3tgfAaiI6ISVD6V_CZnO5MGMerCo8S6vyHriN3aJOxkK2yqktyESBuYvMI31vwLRgYf0Iw8h6N8DEfoJEBEeUr_koWJ-4qEDiMj30W0Q9fFtHurf4KEPtY_5wQWIrniI_cRDvwgi_BWIzkxzE0S9WyDy74DoxEOXIHKveQjBDR46g-jf8BD7L3mowJRzGK5JaePh--Q0Wj3OM2cRr1nzdbysMmxH5caapogd-CE5zYPkKTDs5beZaz-xjJhk9rcZ2QifHLv0VgqWUdimjEdwgtVe4hesr9kPZosVdXYozz3zhYFGoy5NYnpn9nf7IJC21KNlLjlOHUt8q5EK3W2PbSC3E1koWkjiFl46QVeur5E2VIzePuN7zFjJBpy3U2m5yifjnjvYDk05Yh4Hj7t1XxhgJlLmO-QYD1lvlA5oFAa1lyKyuC3SWM9crO5FtRREFvlVgBoGWQUNgwVIJx-IGMZGSMYU1E6DfCGwpdgyZk68bVPNVotuGnOnxTSNR7pWCnCSrdsNphSvojb9D7w4tWw",
+    "serpapi_link": "https://serpapi.com/search.json?engine=google_ai_overview&page_token=k1m6qXiczVfZkqJIFP2B-Y3xqUsBl9KKMDouCaUgQuFG4YvBZgqIWIAivs2_zD9NxHzNJLiUVml19zxMTD7kxt3y5j0c-OPPpbvy__7tr0WSrOOnSiVN0zIOQ7x0ylYYVIw4W1mVebiMI2vxfbmKZ0FoO-3NqpTP4000NyynzTRKcbiJyIzsllPHLG_8VWljB_mTbeyukjYC9Q3hECGwhoBxVwC-IaShxqkAwDUnpIeXHQUgwEwke5hrpjBAgFh3ww7HxT4xFbl2Gykbaes04uUbE_IsoA7wrtgZeNORvVRG6l4a2WSuJzKHqemQqsuenkqjcSpr4mLqyW5fmwbKqMfCUEBmUAvBF_fIrcfTYJxMu5PEfPUbCsfTfU9cyhwkRL-quxTVH-k7aYQZ2fOTvqbv5L2Q6Xug9GCw4H2-95K1XHPV3xKbWz1oZdOstTHd415nsrEyOrCC1sYm8ymiF1bH31pdcTtFxLdW30vaNDOZOkXmvqQ9p8awmSnPIY-wuDE9z8BveztKNA3SUrZtV0tW3KZKjtuezoeGse5ORGU7r8vhy4McSRs1LBV3156ZRux45Gp3XlyZVUjn_17lyKIcl51V2YuVpq5IuDujygzFVMtKxQiIAPx3TUXAkx6G-QD5Td9qLAD6CWOkwIgp8C-2BMAnC6fWJwVG9tHBIcJ3AusfNAUQWCim3APzmnIkzmN-2PReHDiP4j2qoxxOi1OwubHbx7wTSdGHZ9tftLtJKvz1Tqv-xRP-jgbxc1UHap7KQROjkwK6VEfAoitd4eQkg27qACj84DInn8PrCVD3QeW_kCqaj4QmexTCPYrcDV-xMSlaqmJGZKArrrWwikkU57WMRi0q7Do1eWbz-1Y4WI45uT6fjXp12d-FrppWLJPILUPDduzZYkZ9L9Y0Q9epVvWx-a0AkRWfURRfosheR7VQQbb3hstSmaVPEELnO2av40dkzd5M-uIoyt54FrzvqmfL-Dnv-VMKDxdA8IRBhyKPF7l87uYFdHmjzVz2MtsnD_neLQgdnZ5HEsUYDnUQnkvvsrBV8q7_rFgIfX7FoKtwybHe4aVeSecJ_IACJLDD8wE-GsLAC4RLhCJK_rXIPZfLXIFFOK3OB-CJgHBxBOF4pkPrv_sgEmzxvMPzOWcNigjUIkZ00DzpCsKVU3QbsOT2IOZ_6R3x3tgfAaiI6ISVD6V_CZnO5MGMerCo8S6vyHriN3aJOxkK2yqktyESBuYvMI31vwLRgYf0Iw8h6N8DEfoJEBEeUr_koWJ-4qEDiMj30W0Q9fFtHurf4KEPtY_5wQWIrniI_cRDvwgi_BWIzkxzE0S9WyDy74DoxEOXIHKveQjBDR46g-jf8BD7L3mowJRzGK5JaePh--Q0Wj3OM2cRr1nzdbysMmxH5caapogd-CE5zYPkKTDs5beZaz-xjJhk9rcZ2QifHLv0VgqWUdimjEdwgtVe4hesr9kPZosVdXYozz3zhYFGoy5NYnpn9nf7IJC21KNlLjlOHUt8q5EK3W2PbSC3E1koWkjiFl46QVeur5E2VIzePuN7zFjJBpy3U2m5yifjnjvYDk05Yh4Hj7t1XxhgJlLmO-QYD1lvlA5oFAa1lyKyuC3SWM9crO5FtRREFvlVgBoGWQUNgwVIJx-IGMZGSMYU1E6DfCGwpdgyZk68bVPNVotuGnOnxTSNR7pWCnCSrdsNphSvojb9D7w4tWw"
+  },
+  "visual_matches": [
+    {
+      "position": 1,
+      "title": "File:Mateusz Morawiecki spotkał się z CEO Google Sundar ...",
+      "link": "https://commons.wikimedia.org/wiki/File:Mateusz_Morawiecki_spotkał_się_z_CEO_Google_Sundar_Pichai_w_KPRM_(2022.03.29)_01_(cropped).jpg",
+      "source": "Wikimedia Commons",
+      "source_icon": "https://serpapi.com/searches/6a9af464421b0812e991f570/images/Ecpo7rFMaQzouVASngCdE2RbspPbvPMHZW1yhBECz50.png",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTN5mb1EtFegQydjDj1mtRN9nAFQTTBbMz4Ni_FJ9jUKnJtYrz7",
+      "thumbnail_width": 267,
+      "thumbnail_height": 189,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Mateusz_Morawiecki_spotkał_się_z_CEO_Google_Sundar_Pichai_w_KPRM_(2022.03.29)_01_(cropped).jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+      "image_width": 515,
+      "image_height": 364
+    },
+    {
+      "position": 2,
+      "title": "Sundar Pichai - Wikipedia",
+      "link": "https://en.wikipedia.org/wiki/Sundar_Pichai",
+      "source": "Wikipedia",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB8klEQVRYhe2X0Y3DIAyG7Q7hFTxBZsgMGYAdGIEVWCKT5J0ZWMK-h5MREEiv1VW5h0PiIXXAn-3fVoPQLRHR_rffXI_HA-vn8vBpxzMQvMN5DfG4w3G98K7obd2egX8AEBFdlkURUQGgbETUbdtURFRElJkbOxFpjFFFREMISkSN3WwxxtNZACh3gznIOSsRFZCcc3Fu2zlXLjiOo7GllBQAlJk1pXQ6u21bcVzfDfVLIYTiYN_30yU55wLonGts-75PzxkAEZ0Cg96BpXJZluFF3ntFREXE5jJm1nVdh2cMPIRwssHIwbMsWKm89yV6RDyVpb5zFP0QwGgRcRpRnwVmbgTbbyI6lWwKYPUyByNB1Vmwd0fv1dqY2YcAKaUCMIvMSoWI0-hEvlt8lskpgIjouq7Fwah2dalmAMdxKCJOO-MSwIQFAEVso9oi4lRgzrlpNz0FsPTNHBig7b7FLEM2Ed8CMAGNHDCzOufKhCOixm7j-er-pwB9mvvoU0plBANAA0lEw8HzMkCMsaTZ0mnR94I1SAMc6eJlgHo8M_Owr2s9hBB0XdfL1nwJQKSdfLPZYIK1zpkNnrcA6p6fTb1asFeD5y0Ake-evpqMpo1ng-dtgJyzeu8vhZVS-pHy63373_L_L6O_8XFar0-D9J_nX3uIuuF08s_DAAAAAElFTkSuQmCC.png",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRxA16AlzT9RM-NLhESY7T8mU2ZU3ueASM53LIern8YCQ9GRE1p",
+      "thumbnail_width": 275,
+      "thumbnail_height": 183,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Sundar_Pichai_-_2023_(cropped).jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
+      "image_width": 1439,
+      "image_height": 959
+    },
+    {
+      "position": 3,
+      "title": "How Google and Amazon bankrolled a 'grassroots' activist ...",
+      "link": "https://www.cnbc.com/2022/03/30/how-google-and-amazon-bankrolled-a-grassroots-activist-group-of-small-business-owners-to-lobby-against-big-tech-oversight.html",
+      "source": "CNBC",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAh1BMVEUAHloAGlcAHFnt7_M3T37k5-3Y3eYAVcBPZI0AXtUAef9fcpgySnoAVcXe4uq8xNQnQHMhOm8APZUAQp0FIVxvgKIRLWUfRoYAWMZDWYULJ2FrfJ93h6f7-_zv8fSAj62Wo7sAPJmyu82JlrIiOm5IXYi_x9agq8F_jaxjdpoZM2ksRHZWapLP4cgDAAAA3UlEQVQ4je2Q3XaDIBCEZWGVBgKagq2_sWCTRn3_5-uaxPT0BXKVueLMfmd3mCR56alipAQOWZa9w_qGqwXbGJzwXpTy4223-8yVUlUNrvKNdnfAtdwYvBhLxN53adof68gNGnHbwQQfplEJ7IjYe9SFtUsfp1yV9wstnxmwAgPt-PJdCNxHHMmCB6CvgP9GO_l-iCd7XoEtJJ045zNNPZMYIoqp5T98GHU7biEbREwvpmEgjU3R8EAMWeLx0VkteV0VdE7PWsqqBKfVUvwVRe3ALRPA2lTyv6iXnqJfot0OSJEgSCoAAAAASUVORK5CYII.png",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC-sFF6mYR4FaEhUCEXBliKUSJ7I4R2cFtc_UmXm9FA9Z1VPyt",
+      "thumbnail_width": 168,
+      "thumbnail_height": 300,
+      "image": "https://image.cnbcfm.com/api/v1/image/107038307-1648671515107-sun.jpg?v=1675874614&w=1600&h=900",
+      "image_width": 900,
+      "image_height": 1600
+    },
+    {
+      "position": 4,
+      "title": "Ceo Alphabet Google Sundar Pichai Joint Editorial Stock Photo",
+      "link": "https://www.shutterstock.com/editorial/image-editorial/ceo-alphabet-google-sundar-pichai-joint-press-12872943ae",
+      "source": "Shutterstock",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAZlBMVEX3ZUD____3ZD_3Yj33aUX6qJP8wLH5iWz3aET92tH_9_X7u6r6ooz8w7T3bEn6oIn-6-b5jXL6ln37taP4c1H939j5hWj6m4P4fF34cE75kXb7s6H90cb8yLv4gWP7qpb-8u_91csbJj-EAAABBklEQVQ4jZWSyXKEMAxEkbzAeMMMBhOWwPz_Twa7OEpJ5R24qAt1y900_wFFhRd8DU6pvg3cvHtb770eB_4Xf6wQYVXbpgbJSdodCub4RtrCOL0qk6IFjQyyEiTnIeVz_MUDtq_Hw0KuwDSB2bWfAA5yh8gAo0RMB1wztUQ4AFfuNGtN5hSDgXjmNnWCS2mrxXjkQCswuD2aIrL0Ie42dKntbQSzUiZxPvtQTPYAJ5lCgXGlU3caRQrmCJd1bosQ6efEd6ynhqunYza4bMfnc9iWmZcYjZQd27lOeV3xmVHkx8O0MrfG5fT77l1i5rX1z4cxMaiCY1M0i7Na2z6xAhR4w9WB4QeShgxAJ3gvdwAAAABJRU5ErkJggg.png",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT63eLUSaXG61RWfw2As-MiL9HnaEtXbmuqCQVW3nwg1wr2rV3j",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://www.shutterstock.com/editorial/image-editorial/M4T9I35aOaDcIe29NDgxMTQ=/ceo-alphabet-google-sundar-pichai-joint-press-550nw-12872943ae.jpg",
+      "image_width": 367,
+      "image_height": 550
+    },
+    {
+      "position": 5,
+      "title": "Google CEO acknowledges importance of being default search ...",
+      "link": "https://www.reuters.com/legal/google-ceo-sundar-pichai-testify-us-antitrust-trial-2023-10-30/",
+      "source": "Reuters",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAAB8AAAAgCAMAAADdXFNzAAAAMFBMVEVHcEzWQADVQADWQADWQADWQADWQADWQADVQADWQADWQADWQADWQADWQADWQADWQAB9OIA5AAAAD3RSTlMAMQVhIxd1uQ2lSc2N4_TJiz7UAAABMklEQVQokW1T2QLDIAjDu578_9-Oo63O6kPnDGAIEeBvNWz0DRa-y2X6ICIHofnAF2IEqFglKH3zuyQZ2VGoLwv2X-5qEQoVeVkUzHu1Srh7_vjhdjwTXvZDRym-et7aKp0uKwRKyhLzlI1WLpdAw007Ogi0F74ecdBPYkkAovSvK-X7BOku07Vg2jSxAbFPBfxOlnSYDZC61wr18SYmicKxwpCFQUkGxqLjXp8b6Ep_h-Q2JhiaNFvrH3ctalp4To64lopfs4Cd3eDtJjszehe48QRJZRW2vvo9UqvNqAFhQfODwuYJXnSnceuojYXrSXQ0492blsw0tES-oPSDbQ6GbvMNHPG8vJHOhHJ6Rxz02rm8PCoaoWWHldNIsjy9wUHxNNIw2LgSBCfFb6pqxpn-A6mRC0oo2BsaAAAAAElFTkSuQmCC.png",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWYyM-8A9CqfAzlltd6XcmYiOHKtPO6XTaDI_565mKIt8EF4b3",
+      "thumbnail_width": 251,
+      "thumbnail_height": 201,
+      "image": "https://www.reuters.com/resizer/v2/6EJHJPKGF5OJ5FUICSP7YGA2OI.jpg?auth=b9781eb2b883b6e80df199dd54dccedbf36db0d3a7dcc88fb74018e3c8c40e60&height=2400&width=1920&quality=80&smart=true",
+      "image_width": 2400,
+      "image_height": 1920
+    },
+    {
+      "position": 6,
+      "title": "THE PROTOGANIST OF HIS LIFE | Motivation",
+      "link": "https://vocal.media/motivation/the-protoganist-of-his-life",
+      "source": "Vocal Media",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACeElEQVRYhc2Xv2tTURTHP5EMwTFDl3v_gFIkUxApjiVIcHRwsFsowbGTg3QoDk4dOpQgHR06ONmSIWQSCQ7iUDp0cDxTkCAOIiX0ObzzXm9ubnw_mlC_cAm5757z_b57zj3v3EoURRXuENW8C621NaANbAFNoA5MHT8_gG_AEDgTkas8fitZO2CtrQO7wHNgAPSBkYhMAus2VWQLOAEO_HWFBFhrXwB7wBHwTkR-Z75SbHcf2AG6wBsReV9IgLW2CvSANaAjIuM8xAE_a8AxMAa6IjL118wJUPIPwKWIvCpDHBDyFlgHnvki7gXW95ZJDqC-LolDOYsoiirJMMZsG2NO3bllDmPMqTFm251Ld0CzeA_oLOvNA-gAr5ULmA3BLnBUNuHyQH33lAvQJNQicwE08h61stAjeg5siMhVsgNtYLCIXE9GUaKgjXIMgKdwE4It4goXcvQEOCwqADhU2xD6ypkKaAKjBYtrOhJBDxYxWms3Ftl5GClnKqCeVbMdfNSc8clrwFkeB8pVdwXMlcg8sNY2rLWNMrYJZ-Hk8tDW3_OyDpIduK2QMqi6AiZudVo1lGuSqgC-EjcToST6BHwvwXMAyIJnm8qZChgSx3NOgGase0KmwHXA6TVOMovIxT_EtZUzDUEfaGmZzEIz1O_p3MMsY-VoKWcsQET-EPdwO1kOROSX83esI3n2M8teOU6U86Yj0sT4Ajxe1RdRW7TPwKOk8KWfY53YJ-7hVoVjYN-tujMtmXavY-3hlgr1OfY75FBP2AXWlynCaUq7_rP_ry33HNz2YvKSOObFLiaes7u7mnkEWZfTCXF5HQL95JxnIbeAVeEvMAtvyqTUvogAAAAASUVORK5CYII.png",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSgAoDq0nKPpBq4jfDXJfHzw_eeturL-piL_61IMqfEVJvQIEgV",
+      "thumbnail_width": 225,
+      "thumbnail_height": 225,
+      "image": "https://res.cloudinary.com/jerrick/image/upload/d_642250b563292b35f27461a7.png,f_jpg,fl_progressive,q_auto,w_1024/65e59277f563d0001dcf107b.jpg",
+      "image_width": 1024,
+      "image_height": 1024
+    },
+    {
+      "position": 7,
+      "title": "Google's Sundar Pichai says the job of CEO is one of the ...",
+      "link": "https://fortune.com/2025/11/19/google-ceo-sundar-pichai-says-ai-can-do-his-job/",
+      "source": "Fortune",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAeFBMVEXu-PYBAADy_Prx-vnu-Pbm1dXu-Pbu-Pbu-Pbu-PbO1tT_vwrMz9DM8tMO0yAi3TQYLfzt6di4vbzo8fqssa5mBQfwlJX0AAjm8-mx7Lnt-vv24rNtYdmZoKAXJAOGkInR_9kntzQAkg8AgwEWZB0NEj4AAJEAD6yiEj-JAAAACnRSTlPd____tv__9NLUfPIHRQAAAKRJREFUOI2t090SgiAQBWAWGrIgRcsETLP_93_DqOkGld2LPNcfCzvMYSuGJmMbiWbNskWB955_IhLAtm1bHUJKMQt8qZQ6vQCg4rNAfIExjxTwP2CeqQlb6EHvQxJbBACguYwyBYICf0-om-bIMRAEAaDGwbnromeMQT9EfzkF1x2xRU6Ae0GACwUK_Ap9o0COA2mdc1YiQAoxOr9Ms8jyUvV_A9vyGuFxgrf1AAAAAElFTkSuQmCC.png",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv1Nkmrh9AtQj2kS15SaJXNgts06oE7QS8K01rC9WzNxuRzCUu",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://fortune.com/img-assets/wp-content/uploads/2025/11/GettyImages-2233040016-e1763573861101.jpg",
+      "image_width": 1921,
+      "image_height": 2880
+    },
+    {
+      "position": 8,
+      "title": "Google inks Pentagon deal for classified AI work despite ...",
+      "link": "https://nypost.com/2026/04/28/business/google-inks-pentagon-deal-for-classified-ai-work-despite-uproar-from-employees-warning-of-irreparable-damage/",
+      "source": "NY Post",
+      "source_icon": "https://serpapi.com/searches/6a9af464421b0812e991f570/images/EF8TF2YG8P9GXJ0AIp7imuZdFlyONMUi8JAWyOvJRQc.png",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSWg8y6aRH1CisExr8Nxq6zpaIxGAVVH9MM7doMeBGfMSFhlyEm",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://nypost.com/wp-content/uploads/sites/2/2026/04/2026-wednesday-alphabet-unveiled-several-125320061_a761fd.jpg?quality=80&strip=all&w=306&h=204&crop=1",
+      "image_width": 204,
+      "image_height": 306
+    },
+    {
+      "position": 9,
+      "title": "Google CEO Sundar Pichai hints at more layoffs in new letter ...",
+      "link": "https://www.indiatoday.in/technology/news/story/google-ceo-sundar-pichai-hints-at-more-layoffs-in-new-letter-to-employees-2490346-2024-01-18",
+      "source": "India Today",
+      "source_icon": "https://serpapi.com/searches/6a9af464421b0812e991f570/images/VPMpw1zgTmfKI7oxOoVAX2GKb-HrKze3DLrDjGxatgI.png",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMCeuCiyKK_KgRUJcR15O9rnmgvBs38vx4CsoO4GvuridnQhIu",
+      "thumbnail_width": 259,
+      "thumbnail_height": 194,
+      "image": "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202401/pichaijpeg-34-231412-3x4.jpeg?VersionId=o3wAZNdxQofmYyD0Jh3oThTQ_TjerslV",
+      "image_width": 1600,
+      "image_height": 1200
+    },
+    {
+      "position": 10,
+      "title": "Google CEO Sundar Pichai refuses to rule out censored ...",
+      "link": "https://www.theguardian.com/technology/2018/dec/11/google-ceo-sundar-pichai-congress",
+      "source": "The Guardian",
+      "source_icon": "https://serpapi.com/searches/6a9af464421b0812e991f570/images/n1eGKSTJKMHQcGbFbB7Dob6p2wRwRwhWkZYa1APqk28.png",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQWvUaBWfGiSp36BtsLG7aeRdj3qqsqW9qrfg00Y6HLEZfq65Sy",
+      "thumbnail_width": 225,
+      "thumbnail_height": 225,
+      "image": "https://i.guim.co.uk/img/media/3b30b82cc8289d187cc75b1f43863d9a60f724e3/0_241_4444_2667/master/4444.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=3286ebf7de40126a0bacd81b5b5d49f6",
+      "image_width": 1200,
+      "image_height": 1200
+    },
+    {
+      "position": 11,
+      "title": "Insider Today: Google's Big Shakeup - Business Insider",
+      "link": "https://www.businessinsider.com/insider-today-sunday-google-executive-shakeup-ceo-sundar-pichai",
+      "source": "Business Insider",
+      "source_icon": "https://serpapi.com/images/i/iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAMFBMVEUAJf____8AGv8AIv8AA_-9wf8AD_-ytf9xd_9MWP-UmP_m6P-ip_8rPv_y9P98hv8PI8ujAAAAiUlEQVQ4jeWSyQ7DIAxEHS-AWZr__9vgwKFFdbi3c7EtP6ExGoD_EpnehnWNQ8w4J1r2x9BLNECQ3sXwFeg6Az8DB7pAzdFKcgHge-UDZ8rmk589lOZ7GIcm_4qaqxV1gcZsJqILaNPSi-w-Km-AsjlTkG5APgCgNKTIBKjWLYmYecD54JqHn9cF4xoEc0Ed_D8AAAAASUVORK5CYII.png",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ1-TBOeQLCra8N15AZj6EvTeLhfRkTkFhHCSRM4f26i4ZFL276",
+      "thumbnail_width": 194,
+      "thumbnail_height": 259,
+      "image": "https://i.insider.com/664609d720abc1efe8fa5d0f?width=700",
+      "image_width": 525,
+      "image_height": 700
+    },
+    {
+      "position": 12,
+      "title": "Sundar Pichai, Google's C.E.O., Testifies on Capitol Hill ...",
+      "link": "https://www.nytimes.com/2018/12/11/business/sundar-pichai-google-house-hearing.html",
+      "source": "The New York Times",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcRszyNSCYR04WGtSoefBwhwwe0NZDJ2NRax9ELrHGpQtwbG2FlJEx0ypzELo9V6Wpi6bcLEWpUcrMTLpkhIptbuYuWkKpaRsx-z4E6t7l8zAoUPsCc",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSV_fT5g-VoU2tjirtNMZjj9ozIX8dA-R_Th8E5zmBknB583otq",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://static01.nyt.com/images/2018/12/12/business/12googlebriefs03/merlin_148006122_8657320d-86e3-430c-a499-4b38bd9e67cc-superJumbo.jpg",
+      "image_width": 1365,
+      "image_height": 2048
+    },
+    {
+      "position": 13,
+      "title": "Google CEO defends paying Apple and others to make Google ...",
+      "link": "https://www.seattletimes.com/business/google-ceo-defends-paying-apple-and-others-to-make-google-the-default-search-engine-on-devices/",
+      "source": "The Seattle Times",
+      "source_icon": "https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcTg6n4JvY6gItzwoPMtqr3uhYrj2OBQz_uFWr1eRxXHNGAqGjhlQA8WADejGqaYf6E4c4ANVIGkCVxdlWpZEksCc67BIhwFsaR1MIRmnrPj7P0ESW5ccmhaPg",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnkdVAsN2FdcjPJZ9DugGGq67qF_5fZ3sbfRDSbXXVtR-DUxmr",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://images.seattletimes.com/wp-content/uploads/2023/10/urnpublicidap.org6f6755230dfda8e57d23903ac9dc79abGoogle_Antitrust_Showdown_49756.jpg?d=780x520",
+      "image_width": 520,
+      "image_height": 780
+    },
+    {
+      "position": 14,
+      "title": "Google is making a change to its earnings report next ...",
+      "link": "https://finance.yahoo.com/news/google-making-change-earnings-report-214816069.html",
+      "source": "Yahoo Finance",
+      "source_icon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcT6Ep90Oy6sxHWPGPZwWgqOZgLTSzEt6cdhYunw9sGG6ReZ4nCEdIYvklJV5FmsiF5KJQGslKSjJwMxwFWH9UBC63hgMxkQCvRokpusAkI7reMyBrMKtg",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMk27wZLVMTNWqEDZfom--UB2JRDw2y0kS6bOrDuoAVC--9TTr",
+      "thumbnail_width": 194,
+      "thumbnail_height": 259,
+      "image": "https://s.yimg.com/ny/api/res/1.2/8rRPItgHh9UK6n57yxQPWA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQ4MA--/https://media.zenfs.com/en/business_insider_articles_888/ea63aac8d4a7d7ec576bbf9de8f60aea",
+      "image_width": 480,
+      "image_height": 640
+    },
+    {
+      "position": 15,
+      "title": "Google CEO Sundar Pichai shares vision for the future of AI ...",
+      "link": "https://www.youtube.com/watch?v=cTmvzonrOAc",
+      "source": "YouTube",
+      "source_icon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcQHQslzHLLyLc_qne5jxn7JocidlmUPyegZ8ojX3WVlorFk8BxW9a3vJWjDzN99UHVTqSaNBj_-6XykhxuVQfF3Ye7xScSWSuc2QHXi0a12CkVwBmo",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFog_i6p0GAYfiGmbEs7yTW2OsIP6-cpu44PdJ2KLcm0rnXov",
+      "thumbnail_width": 168,
+      "thumbnail_height": 300,
+      "image": "https://i.ytimg.com/vi/cTmvzonrOAc/maxresdefault.jpg",
+      "image_width": 720,
+      "image_height": 1280
+    },
+    {
+      "position": 16,
+      "title": "Google CEO Sundar Pichai has called on America technology ...",
+      "link": "https://www.instagram.com/reel/DXJRP6rz60a/",
+      "source": "Instagram",
+      "source_icon": "https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn:ANd9GcSpoKX-MM8KwYvjLm-JRx4G0Kwl8RLkE48NjkNQo2Gq3SC32GSp-nb0Bv1Gwdg0bIZuT7qIQcsQnlAbeKhfDsUARVp1OzzHay_AKGuFGTR9Of3S2pacaw",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFlzNxxMsjq3x2p9CcM1-RD4Z5vRaHQhj_Zy3yXMLbmn7sqkiF",
+      "thumbnail_width": 300,
+      "thumbnail_height": 168,
+      "image": "https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3969450148073424444",
+      "image_width": 1920,
+      "image_height": 1080
+    },
+    {
+      "position": 17,
+      "title": "Google CEO Defends Deals Making Google The Default Search Engine",
+      "link": "https://www.forbes.com/sites/tylerroush/2023/10/30/google-ceo-defends-deals-making-google-the-default-search-engine/",
+      "source": "Forbes",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcStsFTtOA-Gr2Cf1TGnVGGF1nqm10KGRhJS83fDnH-ZzYd8xji1iIzt-qzdIYjwIsySiHufTYXd2stTOLcrolb1witi-Zl1RkryuwGqDVGnyiorvQ",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLuu-2aBSQ7LGIz3ov6JWa3P0OVvV6Ug0z0xUyrj80NhG5Ngib",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://imageio.forbes.com/specials-images/imageserve/65400ad2e767eaaf25a45357/Sundar-Pichai/960x0.jpg?height=473&width=711&fit=bounds",
+      "image_width": 473,
+      "image_height": 710
+    },
+    {
+      "position": 18,
+      "title": "Google CEO says he hopes to make company 20% more ...",
+      "link": "https://www.cnbc.com/2022/09/07/google-ceo-says-he-hopes-to-make-company-20percent-more-efficient-hints-at-potential-cuts.html",
+      "source": "CNBC",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcTOk4fg1-gt0by7268I7F8olu8Ty7H4wfzAcpmkmsbO7kEOZ2lnAZhGDeOx31xmwF9I9RSkDoPJm-2XgzE9FXuyckufv_ccRTVwvyf2o7fNDqg",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMnPWEvW2djjC9GxB2lbeMcV2a5k2cdW2SnoqCXBzocrQHOtn1",
+      "thumbnail_width": 225,
+      "thumbnail_height": 225,
+      "image": "https://image.cnbcfm.com/api/v1/image/107038314-1648568951175-sun.jpg?v=1675711612&w=1200&h=1200",
+      "image_width": 1200,
+      "image_height": 1200
+    },
+    {
+      "position": 19,
+      "title": "Congress Blew Its Hearing With Google CEO Sundar Pichai | WIRED",
+      "link": "https://www.wired.com/story/congress-sundar-pichai-google-ceo-hearing/",
+      "source": "WIRED",
+      "source_icon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcThlD2e1C2_v--cgb8ALlm86tHfzrbkhTDvq9HqJqt0GoealFINHn1O1SnJiZeCJz_iJdliO5UpQz_2yc4oIqE_wZwQYOWkpR7S4fJyBLlWCG9w",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTafhPP0tp1MnMJUTEFKJA-5IRqFrgalSrKjDJj3pY3o2hHBJN4",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://media.wired.com/photos/5c0fdeb30842530d9427d396/3:2/w_2560,c_limit/Business-Pichai_hearing-1071792818-w.jpg",
+      "image_width": 1000,
+      "image_height": 1500
+    },
+    {
+      "position": 20,
+      "title": "Sundar Pichai",
+      "link": "https://www.forbes.com/profile/sundar-pichai/",
+      "source": "Forbes",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcStsFTtOA-Gr2Cf1TGnVGGF1nqm10KGRhJS83fDnH-ZzYd8xji1iIzt-qzdIYjwIsySiHufTYXd2stTOLcrolb1witi-Zl1RkryuwGqDVGnyiorvQ",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8nbfQ0vAzKUplDieRqVoji8OOBSzdLkh3r1LZjXsDQK-n_Tqu",
+      "thumbnail_width": 225,
+      "thumbnail_height": 225,
+      "image": "https://imageio.forbes.com/specials-images/imageserve/67e5cbc9823431a56b4ad600/0x0.jpg?format=jpg&crop=1072,1072,x1828,y0,safe&height=416&width=416&fit=bounds",
+      "image_width": 416,
+      "image_height": 416
+    },
+    {
+      "position": 21,
+      "title": "What Google CEO Sundar Pichai Couldn't Explain to ...",
+      "link": "https://www.theatlantic.com/technology/archive/2018/12/what-sundar-pichai-couldnt-explain-to-congress/577903/",
+      "source": "The Atlantic",
+      "source_icon": "https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcRC8qz9tOu4cg_YHRYT8TVeJiNcTtZ8mAcVuxQ9pNYbfoeBJmDnKzntUrrIg7nZn4M-k4QDk0O602fmJG_s43Fo5sYL7eUbzjci7m5tYtB7eMoOigWztmqD",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRg2kqw7iZFwDc2yWzHEofMU9BzDoSd0m6ojoR0igs_azRb3gGE",
+      "thumbnail_width": 194,
+      "thumbnail_height": 259,
+      "image": "https://cdn.theatlantic.com/thumbor/7DBwn9ORe56CJm_vDowr5UNCvdI=/122x0:2077x1466/1200x900/media/img/mt/2018/12/RTX6I4AP/original.jpg",
+      "image_width": 900,
+      "image_height": 1200
+    },
+    {
+      "position": 22,
+      "title": "Fayil:Sundar Pichai (2023) cropped 2.jpg - Wikipedia",
+      "link": "https://ha.wikipedia.org/wiki/Fayil:Sundar_Pichai_(2023)_cropped_2.jpg",
+      "source": "Babban shafi - Wikipedia",
+      "source_icon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcRnfTwHKHTZARKRdQtHOmqXabJcSO8XNWZhrqic6aYrvZ_bnZ_pLDPEUkh5pWwv3JwO9gdDq7eWHrsEwIzDyaiD-6ZFdL3LcRHomIMRUDId-BDYJpNo",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRuzcihQvZ24o93XOlkXe9lUyuu3x-vPmM4fgoeTOdkOF_VzenE",
+      "thumbnail_width": 258,
+      "thumbnail_height": 195,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sundar_Pichai_(2023)_cropped_2.jpg/250px-Sundar_Pichai_(2023)_cropped_2.jpg?utm_source=ha.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "image_width": 330,
+      "image_height": 250
+    },
+    {
+      "position": 23,
+      "title": "Google CEO returns to court to testify in antitrust trial ...",
+      "link": "https://apnews.com/article/google-ceo-sundar-pichai-trial-epic-games-b623b9abc9eed0472ef8cf31d10d724e",
+      "source": "AP News",
+      "source_icon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcTY8EoHY65MndRkiEt4iSfPDplnPtEdi45Lv3jfS271ulnRZlYgLNv6FN8byaNIRopf2rv0LN2tltb5MEmTM--0BeaVxNKRo-miYsj0eQlr",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRMhhl0wcR-EGR9d0mzZ27S69lXc-YC7YpPjR0GFzFl1FT-wZhe",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://dims.apnews.com/dims4/default/41c3457/2147483647/strip/true/crop/5819x3877+0+1/resize/980x653!/quality/90/?url=https://assets.apnews.com/ef/25/9fee6831848046ed4879e3b724b5/155d5253d13d471e958f6bc99c4aa55f",
+      "image_width": 653,
+      "image_height": 980
+    },
+    {
+      "position": 24,
+      "title": "Google hopes to reach Gemini deal with Apple this year | Reuters",
+      "link": "https://www.reuters.com/sustainability/boards-policy-regulation/google-ceo-sundar-pichai-take-stand-search-antitrust-trial-2025-04-30/",
+      "source": "Reuters",
+      "source_icon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcTNHh6oiaXzUIwxZSM0gUOrc7N7g2N8RKkqbWOzXvOso5vcZ8DTO8KL450TYRQU_6wWHhohpQncTnHivZOyNKNUZXHsNglCx-gji29ZNZahhZ4HRxc",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQKfeZkJJ0yO1V4yIYBpLNpV4FByPs7YADzW3Ux3u3UKb0CrJcB",
+      "thumbnail_width": 225,
+      "thumbnail_height": 225,
+      "image": "https://www.reuters.com/resizer/v2/KRIAFRRG7NJYHGXNRL37OXHLJY.jpg?auth=a1a2fa2ba93ef0d8ae1dfb5a03bc665af72c0951e7c72cb21480468e96425b57&height=1920&width=1920&quality=80&smart=true",
+      "image_width": 1920,
+      "image_height": 1920
+    },
+    {
+      "position": 25,
+      "title": "Google's C.E.O. Takes Another Turn on the Antitrust Witness ...",
+      "link": "https://www.nytimes.com/2023/11/14/technology/sundar-pichai-google-antitrust-testimony.html",
+      "source": "ny times",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcRszyNSCYR04WGtSoefBwhwwe0NZDJ2NRax9ELrHGpQtwbG2FlJEx0ypzELo9V6Wpi6bcLEWpUcrMTLpkhIptbuYuWkKpaRsx-z4E6t7l8zAoUPsCc",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTKI6qrTFEhkNguQ2t9sRLKmqsJ1EwpO8KHeIGvAxJ_0QYx3hJy",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://static01.nyt.com/images/2023/11/15/multimedia/14SUB-JPgoogle-pichai-print-mjkh/14google-pichai2-mjkh-articleLarge.jpg?quality=75&auto=webp&disable=upscale",
+      "image_width": 400,
+      "image_height": 600
+    },
+    {
+      "position": 26,
+      "title": "Google CEO pelted with bias claims, spared scrutiny over ...",
+      "link": "https://www.nbcnews.com/tech/tech-news/google-ceo-pelted-bias-claims-spared-scrutiny-over-data-privacy-n946811",
+      "source": "NBC News",
+      "source_icon": "https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn:ANd9GcTyWp3RniHyHhmsHqTc5zb-2kjWkrLCZsS4XIQDq4LyYjZZFgl28s2SLJv0sjnlurLyd_DkqQ68o0jFa67Yi2vGiBvh9RuoNzUth5Y_SALQ4ivHWHM",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRRCedQNC2sHMCuPdf3Hf9WAJIl3h8xytRXihiTLVW1G69jDCWH",
+      "thumbnail_width": 190,
+      "thumbnail_height": 266,
+      "image": "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-560w,f_auto,q_auto:best/newscms/2018_50/2679856/181211-sundar-pichai-se-627p.jpg",
+      "image_width": 400,
+      "image_height": 560
+    },
+    {
+      "position": 27,
+      "title": "Google Fintech Operation Center Gift City",
+      "link": "https://www.instagram.com/popular/google-fintech-operation-center-gift-city/",
+      "source": "Instagram",
+      "source_icon": "https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn:ANd9GcSpoKX-MM8KwYvjLm-JRx4G0Kwl8RLkE48NjkNQo2Gq3SC32GSp-nb0Bv1Gwdg0bIZuT7qIQcsQnlAbeKhfDsUARVp1OzzHay_AKGuFGTR9Of3S2pacaw",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRnzQUYYyn8dmDbCG8AUj9oaZkGHace1x-mQNVSIqQu-hBhtaqI",
+      "thumbnail_width": 170,
+      "thumbnail_height": 296,
+      "image": "https://lookaside.fbsbx.com/lookaside/crawler/instagram/Ct3YkCPvy-q/0/image.jpg",
+      "image_width": 368,
+      "image_height": 640
+    },
+    {
+      "position": 28,
+      "title": "Google gives CEO new pay deal worth up to $692 million : r ...",
+      "link": "https://www.reddit.com/r/google/comments/1rnn52e/google_gives_ceo_new_pay_deal_worth_up_to_692/",
+      "source": "Reddit",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcRFeJS-IhfJCysoVmCqJ1d-1lzbIHTsbcy4DrBsZJpxQ31zznhym7THnNEKCEnngpvdl4aupEFtEblIPBEMJY7_biy055d40m6TYfVg7CpFOrWOXw",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQCIJWtHaM4bGSa5p3bLnvlEBxidyW-ZqxZ7_LJVX0cJ6XKkKX7",
+      "thumbnail_width": 168,
+      "thumbnail_height": 300,
+      "image": "https://external-preview.redd.it/google-gives-ceo-new-pay-deal-worth-up-to-692-million-v0-zzfNi0POQQyICXVL-AtHthDMWNqMGN0Zxo3Ez1cSdBc.jpeg?width=640&crop=smart&auto=webp&s=a749e80e21011c28a1ac1ea96e81e956d15642e6",
+      "image_width": 360,
+      "image_height": 640
+    },
+    {
+      "position": 29,
+      "title": "Pichai sundararajan hi-res stock photography and images - Alamy",
+      "link": "https://www.alamy.com/stock-photo/pichai-sundararajan.html",
+      "source": "Alamy",
+      "source_icon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcSm7wq70Hz3SK1HCSxaDgXV8WEvqkVDLs8QagGRHzDNQzte7GllDK5epmtyEggjDpE9n783LQ736ZYlVeXWB4tYQcqjX9z3ODEFZCCGUvXx8ua2",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRFC3UumUnMAVybG5Z22CpvBdXFNAbLd4et-h8I0mIeIk2KPAZa",
+      "thumbnail_width": 192,
+      "thumbnail_height": 262,
+      "image": "https://c8.alamy.com/comp/2KD6APP/ceo-of-alphabet-and-google-sundar-pichai-meets-polish-prime-minister-at-the-chancellery-in-warsaw-poland-on-march-29-2022-photo-by-mateusz-wlodarczyknurphoto-2KD6APP.jpg",
+      "image_width": 956,
+      "image_height": 1300
+    },
+    {
+      "position": 30,
+      "title": "Google CEO Sundar Pichai: AI Will Help Peace and Prosperity",
+      "link": "https://www.entrepreneur.com/business-news/google-ceo-sundar-pichai-ai-will-help-peace-and-prosperity/480236",
+      "source": "Entrepreneur",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcSXvJpXCnDl4MOyTXQPGh7lUg_ul6NE4HdfywcnerGGN4Zdm_IQD7NMgiI3y1B7u3xRHsYQWzTuhhkjPaLILKqynaUN4qQVYSW6YtwiE9Dm8VxNm2tPSHveVw",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7rpF6JKuP04WfGw5R0if4TvHSNynF1OMimBvQOaJZtPsOBnx2",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://www.entrepreneur.com/wp-content/uploads/sites/2/2024/09/1727115192-googleceocopy.jpg",
+      "image_width": 1333,
+      "image_height": 2000
+    },
+    {
+      "position": 31,
+      "title": "Google CEO Sundar Pichai Faces Lawmakers Skeptical Over ...",
+      "link": "https://www.wsj.com/articles/google-ceo-sundar-pichai-faces-lawmakers-skeptical-over-privacy-alleged-anti-conservative-bias-11544544684",
+      "source": "WSJ",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcSe2ErC0CeFfg_EEhtTTAO1ADeDgIr6x-7nOv1iZ5BcQrUtWt-r8plkprevrOH2ms7Vp9mqyJOJL78PzGIYDuMa5buaL9yzPXNxxZqRndadRQ",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhEHKQjKKtIfRlI8IUD6Qz8iWxYu-vxHc7YIwct1w4Fdf7QzSI",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://images.wsj.net/im-41903/?size=1.5",
+      "image_width": 853,
+      "image_height": 1280
+    },
+    {
+      "position": 32,
+      "title": "Google signs classified Pentagon AI deal but exits $100 ...",
+      "link": "https://www.tomshardware.com/software/security-software/google-signs-classified-pentagon-ai-deal-but-exits-100-million-drone-swarm-program",
+      "source": "Tom's Hardware",
+      "source_icon": "https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcQESN4dO9_EavCcjikwtRm280U3_ipR9J5FJcMiQuxID6kBlf_2VPCjqaB9oIePlH8scxzSGQoco_DJeCC8q1396HhgZdUAYY_kogOY331yt1HtCbZhNwwhqA",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTirE1U1oeHLSLwQezK1Zyvv23Vo49XoRSZ6tVhq0p0sSFgGiKD",
+      "thumbnail_width": 225,
+      "thumbnail_height": 225,
+      "image": "https://cdn.mos.cms.futurecdn.net/v2/t:0,l:437,cw:1125,ch:1125,q:80,w:1125/MRfwNgnioMsm8DKC7CuwSn.jpg",
+      "image_width": 1125,
+      "image_height": 1125
+    },
+    {
+      "position": 33,
+      "title": "Sundar Pichai Congratulates Elon Musk As xAI Rolls Out Grok ...",
+      "link": "https://www.latestly.com/socially/technology/sundar-pichai-congratulates-elon-musk-as-xai-rolls-out-grok-4-1-ai-chatbot-with-major-upgrades-and-significant-ai-performance-improvements-7208927.html",
+      "source": "LatestLY",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcQrwFP_NwS6xS35Tq-yr52EMcHaNmSlt0B7oNZEKFQuyOZedWWEc1Al5GaVZBIvx7vvdiRMLvbLlhMxrX_NZjXIK__Heaz9-IsXGZ80Y0_FJLpJRzFz",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ5C25-51D1Iy9hZFC451XzrIiPe-nOvgGcD4dYsNO8ntDx0j3W",
+      "thumbnail_width": 168,
+      "thumbnail_height": 300,
+      "image": "https://st1.latestly.com/wp-content/uploads/2025/07/Google-CEO-Sundar-Pichai-784x441.jpg",
+      "image_width": 441,
+      "image_height": 784
+    },
+    {
+      "position": 34,
+      "title": "Pentagon AI head 'confirms' Google deal with an ...",
+      "link": "https://timesofindia.indiatimes.com/technology/tech-news/pentagon-ai-head-confirms-google-deal-with-an-appreciation-note-says-saving-us-thousands-of-/articleshow/130600022.cms",
+      "source": "The Times of India",
+      "source_icon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcQGahxRW9Oc075lMrHzhtYmwFLaO-CZMJ16aIR6QABQBjrURgF1kzgixv8P1D_g-AGpqo-qfCqp4WFV8-cCam-9iz92wPK-i8aGInj83AiKehqzZgsxHSZf6aB-G6dehTI",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSL3hhc6kwIOvxL8HUxusOJuXucRrpUnRNbaY940ujWlnOwT9cp",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://static.toiimg.com/thumb/msid-130600016,imgsize-171860,width-400,resizemode-4/pentagon-ai-head-confirms-google-deal-with-an-appreciation-note.jpg",
+      "image_width": 267,
+      "image_height": 400
+    },
+    {
+      "position": 35,
+      "title": "Google CEO rejects conservative claims of bias",
+      "link": "https://www.usatoday.com/story/news/2018/12/11/google-ceo-tells-congress-there-no-current-plans-china-project/2272846002/",
+      "source": "USA Today",
+      "source_icon": "https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn:ANd9GcRkw90JTOBQFA6Ysfk8QBTt_ObUcEoOHvZd2vm0JFDBtH2ZqgEJ2xCTePKyo7RXVAwuFsAg-6vLfXa-mWTBzpAYASGFDOhiZBFzhWsTHJ8N9KZOBawL",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR_9GjR0MMuEufwntwB4y5dGRivcTgKpfQicQtD2AVe5LrDhhuv",
+      "thumbnail_width": 222,
+      "thumbnail_height": 227,
+      "image": "https://www.usatoday.com/gcdn/presto/2018/12/11/USAT/4746d18c-629c-4b79-94ac-01a0b7fe0801-XXX_Sundar_Pichai_Google_dec_454.JPG?crop=3786,3711,x1446,y0",
+      "image_width": 3711,
+      "image_height": 3786
+    },
+    {
+      "position": 36,
+      "title": "Google CEO Sundar Pichai defends search agreements in court",
+      "link": "https://www.axios.com/2023/10/30/sundar-pichai-google-ceo-search-agreements-antitrust-trial",
+      "source": "Axios",
+      "source_icon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcTufId4PaR1SZCwTQv6K7lqoQMeNO0hbjTu9VoMW647ZMX4wBaGcgMD9Pr2Z0ClkFP5LY-BzR87929gUDB-bTKxzaiuERPfvDUtrtzKxzpBQHPk",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSIJ8sBHGHwxwRG5tByxgZGvGJxP9dKdgL7ik7bTrVScpQ-0G-x",
+      "thumbnail_width": 168,
+      "thumbnail_height": 300,
+      "image": "https://images.axios.com/UJgnVdbp4PpwGS4kyxOEBGzsh5o=/0x0:3936x2214/1920x1080/2023/10/30/1698674513799.jpg",
+      "image_width": 1080,
+      "image_height": 1920
+    },
+    {
+      "position": 37,
+      "title": "Google boosts Pichai's pay package to $692 million over 3 years",
+      "link": "https://madhyamamonline.com/world/google-boosts-pichais-pay-package-to-692-million-over-3-years-1500897",
+      "source": "Madhyamam",
+      "source_icon": "https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcSqLTzOKQfX8OC5BjHsdLJKIY-rGePdOuDHGECvokL0baA3fv_bzK17NKoHDjXVbAXzoq15AWoOLPpLyvQ1o55jmmfUpvK00yftpsLodThH2MLgF69DZYq9",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ79dfkxP0S7nXf1J3rfQYbAvBRddRGDyqcAy3bDbIkfwrczOCn",
+      "thumbnail_width": 174,
+      "thumbnail_height": 290,
+      "image": "https://madhyamamonline.com/h-upload/2026/03/07/2808250-20260220025f.jpg",
+      "image_width": 270,
+      "image_height": 450
+    },
+    {
+      "position": 38,
+      "title": "In Google Founder's Shadow, CEO Pichai Discovered the Limits ...",
+      "link": "https://www.theinformation.com/articles/in-google-founders-shadow-ceo-pichai-discovered-the-limits-of-his-power",
+      "source": "TheInformation.com",
+      "source_icon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcRMm1gKAtdFB3dPXAAvun1tdMX8NiWqdbKts2-BWfEgCcSYo_aF7VCA7t39S-yuwP6Fzr6yisBU0BabjotUXswh-_aCGCIWB2cB3eRHJdk0oB2jwM-nj2tNHKGX",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRzZi7pMNCZlFgYd2T3eQADjp3x9188Cv1PMp18WXAbl_MT26PZ",
+      "thumbnail_width": 194,
+      "thumbnail_height": 259,
+      "image": "https://tii.imgix.net/production/articles/10357/dba89a32-bd40-4613-851d-77d8b0c690d8.png?fm=jpg&auto=compress&w=1200&ar=4:3&fit=crop",
+      "image_width": 900,
+      "image_height": 1200
+    },
+    {
+      "position": 39,
+      "title": "Sundar Pichai | Biography, Google, & Facts | Britannica Money",
+      "link": "https://www.britannica.com/money/Sundar-Pichai",
+      "source": "Britannica",
+      "source_icon": "https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn:ANd9GcR72IeSDhnlrve0uuQ7KQcV5DTpIh1qCx_mEewdC8uQ7UGT3UmTM3fGrrA2aV9mshwpPxZrfsI5JrCQjcw7NZv0Av3XVtpAJxlZfVvU-fxd6wWMsA0wLDc",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRkITUmcgzVI4eamkDdhFk3x7_XePIjrnQ1ZVxz9gGdxLPf24wB",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://cdn.britannica.com/42/193142-050-453FA8B0/Sundar-Pichai-Google.jpg",
+      "image_width": 1069,
+      "image_height": 1600
+    },
+    {
+      "position": 40,
+      "title": "Our Palestinian, Arab and Muslim Googlers…”CEO Sundar Pichai ...",
+      "link": "https://www.news18.com/tech/our-palestinian-arab-and-muslim-googlersceo-sundar-pichai-writes-new-email-over-israel-hamas-conflict-8622209.html",
+      "source": "News18",
+      "source_icon": "https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn:ANd9GcTUOggl4LumqOu3L5lviRlfqlOO1miZdSxkQi8q0nC1r6VFpNpGendVZT2Fb9_wpqtE05oy77DqjQqRJ79qdeQwMp8RsWqwRbIMbzzfQyHu-DmVNg",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSVEYNfyMo1q2jbo74g1U1a3yZbEIgxrN9PLpxoK3PLkkj187CY",
+      "thumbnail_width": 168,
+      "thumbnail_height": 300,
+      "image": "https://images.news18.com/ibnlive/uploads/2023/06/untitled-design-266-168755612616x9.png?impolicy=website&width=400&height=225",
+      "image_width": 225,
+      "image_height": 400
+    },
+    {
+      "position": 41,
+      "title": "500 Prezes Stock Pictures, Editorial Images and Stock Photos ...",
+      "link": "https://www.shutterstock.com/editorial/search/prezes",
+      "source": "Shutterstock",
+      "source_icon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcQwdI3sb1idjasgpEajuGBarrfMhFwWbJceP1HmKLp9LB8NKtpVfuUo17r2zkDPmlw6QrBqa5Pauk8AHMTKtOxo2mv157Swt5427ca_0tkvot_JzOuLv-zNkQ",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSt4KiXi0ox5KkPQ1G2wSEsHGekdyTg3mlUDxEj9JVDP603xgf9",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://www.shutterstock.com/editorial/image-editorial/M9T5I352OcD8If2dNDc0NjE=/ceo-alphabet-google-sundar-pichai-meets-polish-440nw-12872943k.jpg",
+      "image_width": 293,
+      "image_height": 440
+    },
+    {
+      "position": 42,
+      "title": "Over 100 Stanford Grads Disrupt Google CEO's Commencement ...",
+      "link": "https://sfist.com/2026/06/15/over-100-stanford-grads-disrupt-google-ceos-commencement-speech-over-contract-with-israel/",
+      "source": "SFist",
+      "source_icon": "https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcTR3tLx3c-HbsiCcIFM0e3WBYTk5BXpwopQr8a9tp0S2wd1Ragtw7dDBv7gfdbcU6yxiYuiU3ToOKBVTDVZeJX1Papv7tIuh-CPri9RF-g",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHtwriYxEvy7d924HDAIKa_ks2Y-z0fY53J4VSJuWW3r8sLnLQ",
+      "thumbnail_width": 176,
+      "thumbnail_height": 286,
+      "image": "https://img.sfist.com/2026/06/GettyImages-2267448678.jpg",
+      "image_width": 861,
+      "image_height": 1399
+    },
+    {
+      "position": 43,
+      "title": "Alphabet Investor Tells Google CEO Sundar Pichai To Cut ...",
+      "link": "https://news.abplive.com/business/alphabet-investor-tells-google-ceo-sundar-pichai-to-cut-costs-by-laying-off-staff-1563992",
+      "source": "ABP Live English - ABP News",
+      "source_icon": "https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcTm_qBN1tWZn5tsUsczc7h5v2NbVtPWfZVAW1srQfLRqb962kgcdFvXtISMCP-hyvbasFoBPwAWhRBPSGePvZjrsFvqiLPhGy1QsaPXc_Js93rn6C2B",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwGti1IoIMYFSxVz1fomPUfDsTGKi86u63pVfJiHjgM3bcM5J7",
+      "thumbnail_width": 194,
+      "thumbnail_height": 259,
+      "image": "https://feeds.abplive.com/onecms/images/uploaded-images/2022/11/17/a7dbc08f21a72f4f44057eb19ff51f341668692475762586_original.jpg?impolicy=abp_cdn&imwidth=640",
+      "image_width": 480,
+      "image_height": 640
+    },
+    {
+      "position": 44,
+      "title": "Sundar Pichai - IMDb",
+      "link": "https://www.imdb.com/name/nm6640826/",
+      "source": "IMDb",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcTFehdJYsJGaKRE9UV-IK0kaOc0dNWXVGr3XLPVFUGvc-sssumlm-DVVWDCahNCXEbCcS9XnW6yhTAYAjfCH8kiJvjjmg2R3XCq5d_cl1CJe0c",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRRIyDT1FVeWYplSxBoXteH9ZZ2C8vL9cNl3T547jZQEYBWAJ9E",
+      "thumbnail_width": 275,
+      "thumbnail_height": 183,
+      "image": "https://m.media-amazon.com/images/M/MV5BZTFkYzA1NjUtZGIyYy00MTM5LWJkNTAtNDhhYmQ5MzgzNGM3XkEyXkFqcGc@._V1_.jpg",
+      "image_width": 4646,
+      "image_height": 3098
+    },
+    {
+      "position": 45,
+      "title": "Students stage walkout during Stanford graduation speech by ...",
+      "link": "https://www.trtworld.com/article/e35486528231",
+      "source": "TRT World",
+      "source_icon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcTqK5s5OmIfV5o4w70YEoZmhMgzf6egpPzUVhX44jpaJJurcubTl0jK3xlhIwIeN6_frlbCuJ3R92jqakR5FaWSq09edRa4GqvkLEnlnlt0NcKfQvdP",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRtXA4JS1lOWQVGF3SzMh9oaXm_H6Gvsgc_7zAXFFBua1rps1HP",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://d2udx5iz3h7s4h.cloudfront.net/2026/6/15/675bfe4f6486dbb4bd352918/image/a3ab49534cec22927b92d1a1d68168974bda780804f644eab326ad15c8ef03cb.JPG?width=1440&format=webp&quality=80",
+      "image_width": 853,
+      "image_height": 1280
+    },
+    {
+      "position": 46,
+      "title": "Money isn't important! Take it from Google's multimillionaire ...",
+      "link": "https://www.theguardian.com/commentisfree/2022/sep/28/money-isnt-important-take-it-from-googles-multimillionaire-ceo",
+      "source": "The Guardian",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcTGkJ2lOYVSIOhi880D0uswecbqGuSjIlz5UWc4HY-z8YRos7LFIliOgiIFncvguseMArKN9O-bKIF7doOLOlRQmfTpk4mE18UQrIr1rnEq4WInhrI8oH7U",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQwoR_GjSyCxAlf2YSAgc-GPtRVxO9OE8jwyMMo6vbHOX3nnef-",
+      "thumbnail_width": 225,
+      "thumbnail_height": 225,
+      "image": "https://i.guim.co.uk/img/media/78a9f32bca6b658cfe7ad104f70e4b95d8bf0112/0_229_4087_2453/master/4087.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=e0034976329d6280b9d9f4899f62055f",
+      "image_width": 1200,
+      "image_height": 1200
+    },
+    {
+      "position": 47,
+      "title": "No 5 am alarms, no morning workout: Why Sundar Pichai with ...",
+      "link": "https://www.financialexpress.com/life/lifestyle-no-5-am-alarms-no-morning-workout-why-sundar-pichai-with-2mn-pay-avoids-typical-ceo-hustle-4186163/",
+      "source": "The Financial Express",
+      "source_icon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcQeCwbLBaBLOgr_Hd2ZquyVl2JALvWGmY0wiKxMvkvVxJj02IBCUZU4sQQHseS8N4CnW1wBxw4K3wM7w-xX0FlEWFuPBs_UmZJNExXFZ5OyS3-tfjbT26NH7fOL-ZA",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ3G8FhgqwN3VBCr1RjE-XvfOpTTsWcfonVIVB6GOXwmDNmuKOa",
+      "thumbnail_width": 168,
+      "thumbnail_height": 300,
+      "image": "https://images.financialexpressdigital.com/2026/03/sundar-pichai-morning-routine.jpg?w=1200",
+      "image_width": 675,
+      "image_height": 1200
+    },
+    {
+      "position": 48,
+      "title": "Sundar Pichai sends a stark memo to Google employees ...",
+      "link": "https://www.hindustantimes.com/world-news/us-news/sundar-pichai-sends-a-stark-memo-to-google-employees-ahead-of-us-result-day-101730809452622.html",
+      "source": "Hindustan Times",
+      "source_icon": "https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcTcAn52yffUMoKqRhiMs4xiJm37Wjq09UPuVG6NE6Q-iWWt7tScTXFvqlojdTsVVyfzdn4JBjGB77cwYin2pDbyMSis_4O7f7h9LVh4GuI-JqxlY5HdBtT4ZvJn",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTKwGQ2Tkbw7enHULcV5hIdg4-neGQM62Pyps2bhhANkPpdPBwL",
+      "thumbnail_width": 168,
+      "thumbnail_height": 300,
+      "image": "https://www.hindustantimes.com/ht-img/img/2024/11/05/1600x900/Sundar_Pichai_1730809537239_1730809537492.jpg",
+      "image_width": 900,
+      "image_height": 1600
+    },
+    {
+      "position": 49,
+      "title": "Google's TPU Chip Takes AI by Storm, Hit Nvidia Stock ...",
+      "link": "https://www.barrons.com/articles/google-tpu-nvidia-gpu-ai-chip-stocks-93dc908f",
+      "source": "Barron's",
+      "source_icon": "https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn:ANd9GcTzQEiQOqrbwzHq4WXMdO5nbF9x7WvQ_11HIM8JAWJiN9fizxIDeo_3xdt7HqkRw6sihXKhBLVzZ-nz9yutc1VbYyHIx8YLZJjPEL0Y3t1kTnT1z4c",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT2HzXAeKXOhkpOznpmN7W-YkxxprqyNjzzPnwTc8jMF7n6tNLJ",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://images.barrons.com/im-91238060?width=700&height=466",
+      "image_width": 466,
+      "image_height": 700
+    },
+    {
+      "position": 50,
+      "title": "Sundar Pichai had to explain to Congress why Googling 'idiot ...",
+      "link": "https://www.theverge.com/2018/12/11/18136114/trump-idiot-image-search-result-sundar-pichai-google-congress-testimony",
+      "source": "The Verge",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcQUvjXAGG2ILQkdobGNlrkN845RoDIT9G4L-sPBcsw7sdEAQIF2bqZftAiLLpBKccaBBAjaSpfW9ouqLNlezyTrUZXWckKVGEY4FwEpL2uaLSkcp1gZ",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSPqkz2U_CcCxfGhNstvpZSNLQF2SLNu2P-gV8Bi2_Z2bapvPs",
+      "thumbnail_width": 182,
+      "thumbnail_height": 276,
+      "image": "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/13618599/1080992848.jpg.jpg?quality=90&strip=all&crop=0,0.0072056492290002,100,99.985588701542&w=2400",
+      "image_width": 1584,
+      "image_height": 2400
+    },
+    {
+      "position": 51,
+      "title": "Sundar Pichai Is Among McKinsey Alumni. Here's Why It's a ...",
+      "link": "https://www.businessinsider.com/sundar-pichai-google-mckinsey-ceo-factory-james-gorman-jane-fraser-2024-4",
+      "source": "Business Insider",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcT6n_3L5SHiklrMAS8rsiYa4LRitgew7_qbygUOD-gOYqGWryggV58yIXOo_S-7lPu0Wj-fS8EtMzRKQfeMMWais53MGVXaqB4H5Kxqtrk-ER0AMHHj7igbD65GjQ",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR3QqnA-eCr5kegAsacKWQbaYSHIdh0fBvcvq1Wqbc42j1Xsfk2",
+      "thumbnail_width": 194,
+      "thumbnail_height": 259,
+      "image": "https://i.insider.com/662a5f8a0dfb1341e9ff015d?width=1200&format=jpeg",
+      "image_width": 900,
+      "image_height": 1200
+    },
+    {
+      "position": 52,
+      "title": "Glad it's over…” Google CEO Sundar Pichai after antitrust ...",
+      "link": "https://www.moneycontrol.com/technology/glad-it-s-over-google-ceo-sundar-pichai-after-antitrust-win-at-white-house-dinner-article-13524278.html",
+      "source": "Moneycontrol.com",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcQ7YhwgoHdRwvVlPFLGz47SaEm868JXUmA1wx7vwcLxlUCQLSTzrllYtQlqeNgRCdQy99bs_l1vx7lBnrC84g_jfd_kcCJGsWiKequcrnHdVBFLFx8So8T9sw",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRfHE-w7lsyy-OTpDeYYqP1lX7x256JZFjHW4w-PuZlgmgJ8ZU3",
+      "thumbnail_width": 168,
+      "thumbnail_height": 300,
+      "image": "https://images.moneycontrol.com/static-mcnews/2024/05/20240518041007_MixCollage-18-May-2024-09-37-AM-5657.jpg?impolicy=website&width=1600&height=900",
+      "image_width": 900,
+      "image_height": 1600
+    },
+    {
+      "position": 53,
+      "title": "Trump: Google CEO 'totally committed' to U.S., not Chinese ...",
+      "link": "https://www.politico.com/story/2019/03/27/trump-google-china-1240072",
+      "source": "Politico",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcRA18AQHOGu45j98otsoam90hfvzMO8EjTQQpoX-ucF3_OXdwm5M5gMWkbaYY9hg55quj2EjwkZAkbWMP_1zj6pQS-hSHj_Q6k4U_g-pjVTVXtr0O0o",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5V6NW42nux2s757nSlspviI5kSwzcZM5mEKuTQ_cuOwji41qY",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://www.politico.com/dims4/default/resize/1200/quality/90/format/jpg?url=https://static.politico.com/22/51/4a6c91b9423e9b4f4ffbc4b399a4/190327-sundar-gty-773.jpg",
+      "image_width": 773,
+      "image_height": 1160
+    },
+    {
+      "position": 54,
+      "title": "File:Sundar Pichai (2023) cropped.jpg - Wikimedia Commons",
+      "link": "https://commons.wikimedia.org/wiki/File:Sundar_Pichai_(2023)_cropped.jpg",
+      "source": "Wikimedia Commons",
+      "source_icon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcTKL4eFSPEnxVpZuK-uuPg1T7Fq0Mf9Q9EKykyFOXYTGf7RFB9yOJeojFa1u8ZIaifU0AK2_RSm9HKPereiDfVYhQzOQo3XEHUDiejM0E5WbEMQHPnGOstvQWU",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQFIiqhrSg10bImpYcLJA_EMylrwJiea8UfdVpC1kMwA83Swoh6",
+      "thumbnail_width": 263,
+      "thumbnail_height": 192,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Sundar_Pichai_(2023)_cropped.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+      "image_width": 1892,
+      "image_height": 1381
+    },
+    {
+      "position": 55,
+      "title": "Google CEO Sundar Pichai testifies before House Judiciary ...",
+      "link": "https://www.cbsnews.com/news/google-hearing-live-ceo-sundar-pichai-testifies-house-judiciary-committee-privacy-political-bias-live-updates-today-2018-11-12/",
+      "source": "CBS News",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcTqjfjXNa47u0GVeSLUcxH9UbW1HJczozD_rvED2vdlLRRQYCl8U6O_Q_SdDfFr_0r5opBqvFzDbQZNG_zePYZkrzgTGR5MsKQNTM6XqZvzMXMRV1U",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTBRVICl9WD38r3O6_S2pF7qof0fE1aZipdcPHmXf1WazkEO8hs",
+      "thumbnail_width": 183,
+      "thumbnail_height": 275,
+      "image": "https://assets3.cbsnewsstatic.com/hub/i/r/2018/12/11/e3fc3bfc-a39d-423c-9add-380a04d6b7fb/thumbnail/640x427g2/f78d57b845d5516c42016c4e1936c23c/gettyimages-1080946342.jpg",
+      "image_width": 427,
+      "image_height": 640
+    },
+    {
+      "position": 56,
+      "title": "Goldman Sachs, Ozy Media, YouTube Originals exec and '$40 ...",
+      "link": "https://timesofindia.indiatimes.com/technology/tech-news/goldman-sachs-ozy-media-youtube-originals-exec-and-40-million-fake-conference-call-scam-where-google-ceo-sundar-pichai-had-to-testify/articleshow/111121113.cms",
+      "source": "The Times of India",
+      "source_icon": "https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcQGahxRW9Oc075lMrHzhtYmwFLaO-CZMJ16aIR6QABQBjrURgF1kzgixv8P1D_g-AGpqo-qfCqp4WFV8-cCam-9iz92wPK-i8aGInj83AiKehqzZgsxHSZf6aB-G6dehTI",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRhP4P0uV-9lmBp7iOeHsK0LU6_qemdBAzdHaQcTgzSjeHPC9Mn",
+      "thumbnail_width": 168,
+      "thumbnail_height": 300,
+      "image": "https://static.toiimg.com/thumb/msid-111121110,width-1280,height-720,imgsize-38280,resizemode-6,overlay-toi_sw,pt-32,y_pad-40/photo.jpg",
+      "image_width": 720,
+      "image_height": 1280
+    },
+    {
+      "position": 57,
+      "title": "Google CEO Says He Leads 'Without Political Bias' In ...",
+      "link": "https://www.kosu.org/business/2018-12-11/google-ceo-says-he-leads-without-political-bias-in-congressional-testimony",
+      "source": "KOSU",
+      "source_icon": "https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn:ANd9GcQivdcOUB3NHz99Kf43WlvO-iIYybSYT6XtMt9E7c-OFOxMFI-p7cmUeGmQWX9xltdP6jKtYwhQ-aEDwlA11BX54bTK4j1LRqANpVTB76KTAq8",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQurq2lvL35EHDse_RoaltthPPhATFYAtGi8e_Xeks-V5CSrvm3",
+      "thumbnail_width": 194,
+      "thumbnail_height": 259,
+      "image": "https://media.npr.org/assets/img/2018/12/11/gettyimages-1071800584-5950afbc73550f1e5f3bbb6adde39c95b4dd4889.jpg",
+      "image_width": 2680,
+      "image_height": 3573
+    },
+    {
+      "position": 58,
+      "title": "Sundar Pichai backs Google's AI roadmap as Gemini delay ...",
+      "link": "https://www.storyboard18.com/digital/sundar-pichai-backs-googles-ai-roadmap-as-gemini-delay-raises-market-questions-105212.htm",
+      "source": "Storyboard18",
+      "source_icon": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcTP9vhtQttjC6kSDhgqRn5vD7zLR4L3fMT8JMtJoc3nUMjJSxzJWzkJg3jLObf7Wj-jtR_waMDFmXhF3SwBm7_YM2XFrWqpVIBrnEqasgZ7PKq0JW7F6hbW2A",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQgfLOLNu4S5K-wRWDvUTxJy7CE7Mj_BtV_KSznqq9dPCj9gG_b",
+      "thumbnail_width": 168,
+      "thumbnail_height": 300,
+      "image": "https://images.storyboard18.com/storyboard18/2026/07/yo-10-2026-07-0a9c56f55357e5e5127989ee48050b90-780x438.jpg",
+      "image_width": 438,
+      "image_height": 780
+    },
+    {
+      "position": 59,
+      "title": "Google is losing its Warren Buffett–style moat in A.I. arms race ...",
+      "link": "https://fortune.com/2023/05/05/google-engineer-says-no-moat-artificial-intelligence-warren-buffett/",
+      "source": "Fortune",
+      "source_icon": "https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn:ANd9GcSrBapLJqyCOjI1mKg2Dv-_PDCbVJG8zqTkiTAwx-yiiM_0XFckPPUxhvE43M6avkDo1YZ15rIMcQCalGg2hbHbO9WmjDGYOyUzzCU-eyNkow",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ8iYR_zNs7EhlPxm9SObL71eog53GuCMptpIVb0IvGWkkwFRRd",
+      "thumbnail_width": 159,
+      "thumbnail_height": 318,
+      "image": "https://fortune.com/img-assets/wp-content/uploads/2023/05/GettyImages-1242516017-e1683298069377.jpg?resize=1200,600",
+      "image_width": 600,
+      "image_height": 1200
+    }
+  ],
+  "related_content": [
+    {
+      "query": "Sundar Pichai",
+      "link": "https://www.google.com/search?sca_esv=089918afe928a714&lns_surface=26&q=Sundar+Pichai&kgmid=/m/09gds74&sa=X&ved=2ahUKEwjRm83drtWWAxXrL1kFHXjtMqcQ9_gLKAB6BQiOAhAB",
+      "thumbnail": "https://serpapi.com/searches/6a9af464421b0812e991f570/images/INfAKr-aEnU7YJHE-iwdGD8AJ5UtMYH4UBhqKrjOxNM.jpeg",
+      "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&google_domain=google.com&kgmid=%2Fm%2F09gds74&q=Sundar+Pichai"
+    }
+  ],
+  "organic_results": [
+    {
+      "position": 1,
+      "title": "Sundar Pichai",
+      "link": "https://en.wikipedia.org/wiki/Sundar_Pichai",
+      "redirect_link": "https://lens.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAESYwHrOzAVa4PoCrJETg73K45mmtIZyWgl3UdLeJ27BkmadogkI72wdeRCNXXtOHNFJ2C-So4eOCPvGJ3B9AQCfaf6FfoiJ7wdPYU58Aa1ns4uT7uo191bYTUb1VbSvpt0NMNojQ&ved=2ahUKEwjRm83drtWWAxXrL1kFHXjtMqcQFnoFCLoDEAE&uoh=1",
+      "displayed_link": "https://en.wikipedia.org › wiki › Sundar_Pichai",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6xJHh6m7aDozXptPlzu1xdc0ezqsaNlGYCQEkkaA7CaWrAOQy03z8&usqp=CAE&s",
+      "favicon": "https://serpapi.com/images/i/UklGRqIAAABXRUJQVlA4IJYAAACQBACdASocABwAPtEutFooIagoGAEAGglpAAPhag38OpTAa4LU1EDlND7sAAAA_vYBJn72wN5WCZhxbfpmwOpA1vfrecvWOCVICC3-_rM6qzQWc8D3etVbTfBEeNbqJu-10k1h5hVXEe_3vpL5NJSAtUHvrJ6e_LkA__pZx-xvTn7v-qaIRjl47m2LoP17C7tcoPGgAAA.webp",
+      "snippet": "Pichai Sundararajan (born June 10, 1972), better known as Sundar Pichai, is an Indian–American business executive who has been the CEO of Google since 2015 and ...",
+      "snippet_highlighted_words": [
+        "an Indian–American business executive"
+      ],
+      "about_this_result": {
+        "source": {
+          "description": "Pichai Sundararajan (born June 10, 1972), better known as Sundar Pichai, is an Indian–American business executive who has been the CEO of Google since 2015 and ...",
+          "source_info_link": "https://en.wikipedia.org/wiki/Sundar_Pichai",
+          "icon": "https://serpapi.com/images/i/UklGRqIAAABXRUJQVlA4IJYAAACQBACdASocABwAPtEutFooIagoGAEAGglpAAPhag38OpTAa4LU1EDlND7sAAAA_vYBJn72wN5WCZhxbfpmwOpA1vfrecvWOCVICC3-_rM6qzQWc8D3etVbTfBEeNbqJu-10k1h5hVXEe_3vpL5NJSAtUHvrJ6e_LkA__pZx-xvTn7v-qaIRjl47m2LoP17C7tcoPGgAAA.webp"
+        },
+        "languages": [
+          "en"
+        ],
+        "regions": [
+          "US"
+        ]
+      },
+      "about_page_link": "https://lens.google.com/search?q=About+https://lens.google.com/goto?url=CAESYwHrOzAVa4PoCrJETg73K45mmtIZyWgl3UdLeJ27BkmadogkI72wdeRCNXXtOHNFJ2C-So4eOCPvGJ3B9AQCfaf6FfoiJ7wdPYU58Aa1ns4uT7uo191bYTUb1VbSvpt0NMNojQ&tbm=ilp",
+      "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Flens.google.com%2Fgoto%3Furl%3DCAESYwHrOzAVa4PoCrJETg73K45mmtIZyWgl3UdLeJ27BkmadogkI72wdeRCNXXtOHNFJ2C-So4eOCPvGJ3B9AQCfaf6FfoiJ7wdPYU58Aa1ns4uT7uo191bYTUb1VbSvpt0NMNojQ",
+      "source": "Wikipedia",
+      "read_more_link": "https://www.google.com/goto?url=CAESwgEB6zswFRpV6HppW-a8ObDlwDe4VFbPTIDfbn2TaUJTA58XoDDZBbxOPzr-lJJrx8oJw7D9IK0BDgNih9-YhQvW4lrH6MMjc43d0d1km0zZ-oLP72ZJK8eGnwnEL9cwOPprM4b__pN8rGQ2SFs0yGE-wHJwKPWAb3R-PJn19EOyQvCA2NvgEAB_ZXoYW3BnGb3bpWEVu9tiLCwVlq7PjXg17zWkX8bW7iY0NRGRsqBhQqeJfU15EYXFeYq_5qVRPk6yQw"
+    },
+    {
+      "position": 2,
+      "title": "How Google and Amazon bankrolled a 'grassroots' activist ...",
+      "link": "https://www.cnbc.com/2022/03/30/how-google-and-amazon-bankrolled-a-grassroots-activist-group-of-small-business-owners-to-lobby-against-big-tech-oversight.html",
+      "redirect_link": "https://lens.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAES1wEB6zswFRPsNnDNcCXc6BtA0I2fqR_OtEe2hkTmUoEOZI3B-szmuG0GJ0gle4pydvIxqCnpsKnweMsP2vGHyzHT66bk5HOcbvGpeFDbiwa52XJb7MAeQ-e0Nqj0d7bBlpb4jeSyQ1KIk15YmYS9wW9KPurm8zl3qEXJrE0oINOCesBQbmUy2m72rg5UrPSMUTLvhN73pbvZxhS-OXAVY11c-GtD2QS8QDy2Jy3EGL3yQhpacDJtiHPyjezLoKvbk8qbW_28X5A4w6hWPWSOzzdo3AkCeRxpOg&ved=2ahUKEwjRm83drtWWAxXrL1kFHXjtMqcQFnoFCLgDEAE&uoh=1",
+      "displayed_link": "https://www.cnbc.com › 2022/03/30 › how-google-and...",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMx_dvJWkwGAoPnRyjA75PojoUn1s_8xIsRR5_XujajBRjPsGjhFaI&usqp=CAE&s",
+      "favicon": "https://serpapi.com/images/i/UklGRt4AAABXRUJQVlA4INIAAABQBQCdASocABwAPtE-tFooIigoFAEAGglmALEfJgFJz1yFfw0gnjBr5Q3mgy0MZ_eJR4AA_vKV42wfRkKtAncvfquCc4Z7WZ0KFe9ofe_l_BWkeGOLZFQO0PqxLfopGw8E6kF_uvOuEV7lNxYdaZGJIdmid0frHTrh3w5rb5QEDaQqaBL06iXutzz3EKsCX_sWyL_r_Wi0b1VDBcXiyO-MKSBvJ9-jlNRCXsI01a4RLCODjpdc-Lh7EA1c0M_HCn8MLh035J2rZgx6O210RnhgAAA.webp",
+      "date": "Mar 30, 2022",
+      "snippet": "The Connected Commerce Council, which pitches itself as a grassroots movement representing small business owners, is actually a well-financed ...",
+      "about_this_result": {
+        "source": {
+          "description": "The Connected Commerce Council, which pitches itself as a grassroots movement representing small business owners, is actually a well-financed ...",
+          "source_info_link": "https://www.cnbc.com/2022/03/30/how-google-and-amazon-bankrolled-a-grassroots-activist-group-of-small-business-owners-to-lobby-against-big-tech-oversight.html",
+          "icon": "https://serpapi.com/images/i/UklGRt4AAABXRUJQVlA4INIAAABQBQCdASocABwAPtE-tFooIigoFAEAGglmALEfJgFJz1yFfw0gnjBr5Q3mgy0MZ_eJR4AA_vKV42wfRkKtAncvfquCc4Z7WZ0KFe9ofe_l_BWkeGOLZFQO0PqxLfopGw8E6kF_uvOuEV7lNxYdaZGJIdmid0frHTrh3w5rb5QEDaQqaBL06iXutzz3EKsCX_sWyL_r_Wi0b1VDBcXiyO-MKSBvJ9-jlNRCXsI01a4RLCODjpdc-Lh7EA1c0M_HCn8MLh035J2rZgx6O210RnhgAAA.webp"
+        },
+        "languages": [
+          "en"
+        ],
+        "regions": [
+          "US"
+        ]
+      },
+      "about_page_link": "https://lens.google.com/search?q=About+https://lens.google.com/goto?url=CAES1wEB6zswFRPsNnDNcCXc6BtA0I2fqR_OtEe2hkTmUoEOZI3B-szmuG0GJ0gle4pydvIxqCnpsKnweMsP2vGHyzHT66bk5HOcbvGpeFDbiwa52XJb7MAeQ-e0Nqj0d7bBlpb4jeSyQ1KIk15YmYS9wW9KPurm8zl3qEXJrE0oINOCesBQbmUy2m72rg5UrPSMUTLvhN73pbvZxhS-OXAVY11c-GtD2QS8QDy2Jy3EGL3yQhpacDJtiHPyjezLoKvbk8qbW_28X5A4w6hWPWSOzzdo3AkCeRxpOg&tbm=ilp",
+      "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Flens.google.com%2Fgoto%3Furl%3DCAES1wEB6zswFRPsNnDNcCXc6BtA0I2fqR_OtEe2hkTmUoEOZI3B-szmuG0GJ0gle4pydvIxqCnpsKnweMsP2vGHyzHT66bk5HOcbvGpeFDbiwa52XJb7MAeQ-e0Nqj0d7bBlpb4jeSyQ1KIk15YmYS9wW9KPurm8zl3qEXJrE0oINOCesBQbmUy2m72rg5UrPSMUTLvhN73pbvZxhS-OXAVY11c-GtD2QS8QDy2Jy3EGL3yQhpacDJtiHPyjezLoKvbk8qbW_28X5A4w6hWPWSOzzdo3AkCeRxpOg",
+      "source": "CNBC"
+    },
+    {
+      "position": 3,
+      "title": "Sundar Pichai",
+      "link": "https://sq.wikipedia.org/wiki/Sundar_Pichai",
+      "redirect_link": "https://lens.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAESYwHrOzAV1JDSdOapesjOo4pR_Zpf63WwLj75bv1Zk9toeaUtRcqyntoeazVtgK8av_5RCQ1O1-mojOifyDhBXgKQ8YXDjTzfzgGn_GKAOkJoRjgCiG_V2I-x08vLTqTMFVCoDA&ved=2ahUKEwjRm83drtWWAxXrL1kFHXjtMqcQFnoFCLcDEAE&uoh=1",
+      "displayed_link": "https://sq.wikipedia.org › wiki › S...",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRdS4wj6_Ay2MIkTuVTY_l07U1T3SK84hNS6Dquh8pwHDRsE4_Z8Cb&usqp=CAE&s",
+      "favicon": "https://serpapi.com/images/i/UklGRqIAAABXRUJQVlA4IJYAAACQBACdASocABwAPtEutFooIagoGAEAGglpAAPhag38OpTAa4LU1EDlND7sAAAA_vYBJn72wN5WCZhxbfpmwOpA1vfrecvWOCVICC3-_rM6qzQWc8D3etVbTfBEeNbqJu-10k1h5hVXEe_3vpL5NJSAtUHvrJ6e_LkA__pZx-xvTn7v-qaIRjl47m2LoP17C7tcoPGgAAA.webp",
+      "snippet": "Pichai Sundararajan (lindur më 10 qershor 1972), i njohur edhe si Sundar Pichai (/'sʊndɑːr pɪtʃaɪ/ ), është një ekzekutiv biznesi indiano-amerikan, ...",
+      "snippet_highlighted_words": [
+        "Pichai Sundararajan"
+      ],
+      "about_this_result": {
+        "source": {
+          "description": "Pichai Sundararajan (lindur më 10 qershor 1972), i njohur edhe si Sundar Pichai (/'sʊndɑːr pɪtʃaɪ/ ), është një ekzekutiv biznesi indiano-amerikan, ...",
+          "source_info_link": "https://sq.wikipedia.org/wiki/Sundar_Pichai",
+          "icon": "https://serpapi.com/images/i/UklGRqIAAABXRUJQVlA4IJYAAACQBACdASocABwAPtEutFooIagoGAEAGglpAAPhag38OpTAa4LU1EDlND7sAAAA_vYBJn72wN5WCZhxbfpmwOpA1vfrecvWOCVICC3-_rM6qzQWc8D3etVbTfBEeNbqJu-10k1h5hVXEe_3vpL5NJSAtUHvrJ6e_LkA__pZx-xvTn7v-qaIRjl47m2LoP17C7tcoPGgAAA.webp"
+        },
+        "languages": [
+          "en"
+        ],
+        "regions": [
+          "US"
+        ]
+      },
+      "about_page_link": "https://lens.google.com/search?q=About+https://lens.google.com/goto?url=CAESYwHrOzAV1JDSdOapesjOo4pR_Zpf63WwLj75bv1Zk9toeaUtRcqyntoeazVtgK8av_5RCQ1O1-mojOifyDhBXgKQ8YXDjTzfzgGn_GKAOkJoRjgCiG_V2I-x08vLTqTMFVCoDA&tbm=ilp",
+      "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Flens.google.com%2Fgoto%3Furl%3DCAESYwHrOzAV1JDSdOapesjOo4pR_Zpf63WwLj75bv1Zk9toeaUtRcqyntoeazVtgK8av_5RCQ1O1-mojOifyDhBXgKQ8YXDjTzfzgGn_GKAOkJoRjgCiG_V2I-x08vLTqTMFVCoDA",
+      "source": "Wikipedia",
+      "read_more_link": "https://www.google.com/goto?url=CAESwwEB6zswFZ2AfA11EhQcxWWIsBBjhibLsSv9gQQkmBfiVcQUP6EYdneInfqPl8VdHiCCMoC-ky8OKoE4s_RH1zAIlOoCPGuAeUCxdaM7Mz0Rdy-KxR3NdO1zGk5e5G3yr39CVlpnonVQOuML0csdIc56TzmeRLm43vZnCa6F8XkeTLaZMVUnnm3sY1lDoUperJolRnU5cSIziOq5j_aRZpjNbpDL9KrMN393DxIMDp7MeClTSr8H_KqzzKUbasJk79MLl9g"
+    },
+    {
+      "position": 4,
+      "title": "File:Mateusz Morawiecki spotkał się z CEO Google ...",
+      "link": "https://commons.wikimedia.org/wiki/File:Mateusz_Morawiecki_spotka%C5%82_si%C4%99_z_CEO_Google_Sundar_Pichai_w_KPRM_(2022.03.29)_01_(cropped).jpg",
+      "redirect_link": "https://lens.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAESyQEB6zswFajsksfw-QN5yvHYz3907l0JQXxdS_tLbXNdA_Hz9hZEJH6bu6wFoZ_vvoDspBBjzxmbc-eFlzh4zQHgW8u8ylHUPX0ISpwEDPkQQaavKql6Mz4j47Tbyyt1vVcan3dg3LQ9Nd-EzyC638-1aCmaZrS224zIU3sweGI9q362dgRE18BgrYoASJHqilfA--FF0Gb3G5qmQ2B9zRXo8NJfXDN8kfdVY8ep9NHgnz119RU0bJaFO9VuTh7jeru6rQkILd5wLmI&ved=2ahUKEwjRm83drtWWAxXrL1kFHXjtMqcQFnoFCLkDEAE&uoh=1",
+      "displayed_link": "https://commons.wikimedia.org › wiki › File:Mateusz_...",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7wu3LxRNA8jcxhqNgD0EBh1dcTkypt6Jc1HjM-deDe8i1LTNj7ZvK&usqp=CAE&s",
+      "favicon": "https://serpapi.com/images/i/UklGRmgBAABXRUJQVlA4IFwBAAAQCACdASocABwAPtE-tFooIigoFAEAGglsALs5QIQBdgG80o0Doi80_0b7AG6gfqqllOO9tl1zDVy8ItTA4Kh0bgoPILB4MUgAAP79LFUdzyyEoqu9w160ZotMS6nS29w4R_3qsHpo5yFm-b_VfF06S6GObIIVgAz36ZLiUFTt_CdufYyBdZ39BMo1h-xCAebVe0MR0atRO_v1a7VDl2q7HQiMZyJfP9PV3mfvXP_iXEcKPF7zr-Dry37DrFa5IMbq2fkCf4-N_rlvREZIIffzdHyqx6C0O8Opsh5_svCm2q5HOrYRvAJuoYYMXtxv-U0WJD3p8mfTZ-h4XqjhMQ4h3s4I_OKFkanNjr7QOk5Ppc2GNmKisgifbGv_O393gLIv6P5SBK1-wNUD11ZDiKND9eYxFrZWuInvEn5MQA2tLkojwdrx34O-2hAGE_2EPtshZ7Hj0zW_x6-EAAA.webp",
+      "date": "Mar 29, 2022",
+      "snippet": "Prime Minister Mateusz Morawiecki and Sundar Pichai, CEO of Alphabet Inc. and its subsidiary Google, talked about the fight for the truth, the ...",
+      "snippet_highlighted_words": [
+        "Prime Minister Mateusz Morawiecki"
+      ],
+      "about_this_result": {
+        "source": {
+          "description": "Prime Minister Mateusz Morawiecki and Sundar Pichai, CEO of Alphabet Inc. and its subsidiary Google, talked about the fight for the truth, the ...",
+          "source_info_link": "https://commons.wikimedia.org/wiki/File:Mateusz_Morawiecki_spotka%C5%82_si%C4%99_z_CEO_Google_Sundar_Pichai_w_KPRM_(2022.03.29)_01_(cropped).jpg",
+          "icon": "https://serpapi.com/images/i/UklGRmgBAABXRUJQVlA4IFwBAAAQCACdASocABwAPtE-tFooIigoFAEAGglsALs5QIQBdgG80o0Doi80_0b7AG6gfqqllOO9tl1zDVy8ItTA4Kh0bgoPILB4MUgAAP79LFUdzyyEoqu9w160ZotMS6nS29w4R_3qsHpo5yFm-b_VfF06S6GObIIVgAz36ZLiUFTt_CdufYyBdZ39BMo1h-xCAebVe0MR0atRO_v1a7VDl2q7HQiMZyJfP9PV3mfvXP_iXEcKPF7zr-Dry37DrFa5IMbq2fkCf4-N_rlvREZIIffzdHyqx6C0O8Opsh5_svCm2q5HOrYRvAJuoYYMXtxv-U0WJD3p8mfTZ-h4XqjhMQ4h3s4I_OKFkanNjr7QOk5Ppc2GNmKisgifbGv_O393gLIv6P5SBK1-wNUD11ZDiKND9eYxFrZWuInvEn5MQA2tLkojwdrx34O-2hAGE_2EPtshZ7Hj0zW_x6-EAAA.webp"
+        },
+        "languages": [
+          "en"
+        ],
+        "regions": [
+          "US"
+        ]
+      },
+      "about_page_link": "https://lens.google.com/search?q=About+https://lens.google.com/goto?url=CAESyQEB6zswFajsksfw-QN5yvHYz3907l0JQXxdS_tLbXNdA_Hz9hZEJH6bu6wFoZ_vvoDspBBjzxmbc-eFlzh4zQHgW8u8ylHUPX0ISpwEDPkQQaavKql6Mz4j47Tbyyt1vVcan3dg3LQ9Nd-EzyC638-1aCmaZrS224zIU3sweGI9q362dgRE18BgrYoASJHqilfA--FF0Gb3G5qmQ2B9zRXo8NJfXDN8kfdVY8ep9NHgnz119RU0bJaFO9VuTh7jeru6rQkILd5wLmI&tbm=ilp",
+      "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Flens.google.com%2Fgoto%3Furl%3DCAESyQEB6zswFajsksfw-QN5yvHYz3907l0JQXxdS_tLbXNdA_Hz9hZEJH6bu6wFoZ_vvoDspBBjzxmbc-eFlzh4zQHgW8u8ylHUPX0ISpwEDPkQQaavKql6Mz4j47Tbyyt1vVcan3dg3LQ9Nd-EzyC638-1aCmaZrS224zIU3sweGI9q362dgRE18BgrYoASJHqilfA--FF0Gb3G5qmQ2B9zRXo8NJfXDN8kfdVY8ep9NHgnz119RU0bJaFO9VuTh7jeru6rQkILd5wLmI",
+      "source": "Wikimedia Commons"
+    },
+    {
+      "position": 5,
+      "title": "Google inks Pentagon deal for classified AI work despite ...",
+      "link": "https://nypost.com/2026/04/28/business/google-inks-pentagon-deal-for-classified-ai-work-despite-uproar-from-employees-warning-of-irreparable-damage/",
+      "redirect_link": "https://lens.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAESzQEB6zswFZTDqKDqls3mVjX1Up4WVAdIb7Gapxim64iO5y4fTv5EQWtFbNEqqvirpw_pFu3nmpAtrCHfyOVHiMuUoFgwGoV1JOSt9Mq4tjbQHbwgxIe58A5IrW2vX391baBftUCCv2f7IyMEbDI1zBmhIhy7UE0DxDsY3FVUOgQJeTzYDgZkN3JDQxbYcu7Pis6KET2KzycExIoN2kRd43isAQ10VJRjvvLyYxIc9fyl0L98qRLc2LJ_v6Gt-8dRTPTJ0QIuLdc_Cg88Ofmy&ved=2ahUKEwjRm83drtWWAxXrL1kFHXjtMqcQFnoFCLsDEAE&uoh=1",
+      "displayed_link": "https://nypost.com › 2026/04/28 › business › google-in...",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFnjdTJWeE6YdrUOEXAYWsNii0dVA-KDwrrBiwwymIE2kTCfRXu6MQ&usqp=CAE&s",
+      "favicon": "https://serpapi.com/images/i/UklGRrgBAABXRUJQVlA4IKwBAAAwCQCdASocABwAPrUurVanIacnG_DgFolsAK5Vjbz3GA8QCoZXwDWBogHDE86P_Q8tf0d7BH6v9XQigUO_YnPU-g2gUK8RVsKGNO7fCOUJJ2PAAP6e620H4Vdx5ODx_n-UWOyLH9Q3lAXk_3X9UZ9WhXKFQ698vYLU1fhDHbyu8RP6u20wSM3NgK7tEB9xIU22iJFCjqdkF3KmUrRG7JXaDNdi8hVtMT_xIY5bMm9hgVfsCkLyJzhM7CmltAEIyKb7SNYBIbCn9DELqJ27ZnT8-pqzKXRrkIjFJfLOtzoOLa_3GD7Llr0wNVI-SVNz1efzhW2up7xe6A9BhyO4EWt3CMxHN-8133EAXFVpzwukBYx0TZt34dMX9FOCiF-MrRSzcu92cMVeUpeRsTR4o8OzmcLKifMucQbw-W8nWibl9mS5492oDKlLSQUF6AW82H0i0aw5-jG-Jxq6tIdO0PccqhBWASYnvvffP_V74L4ATVIXRG_QzP0_nZJP7CXZ5hiXKGf_7ub4MvPW5aRPEgernItTLp7UYaom7UWOgne_bm5-rM4dz_UK1AAAAA.webp",
+      "date": "Apr 28, 2026",
+      "snippet": "The deal allows the Pentagon to use Google's AI for “any lawful government purpose,” The Information reported, knowledge of the matter.",
+      "snippet_highlighted_words": [
+        "Google's AI"
+      ],
+      "about_this_result": {
+        "source": {
+          "description": "The deal allows the Pentagon to use Google's AI for “any lawful government purpose,” The Information reported, knowledge of the matter.",
+          "source_info_link": "https://nypost.com/2026/04/28/business/google-inks-pentagon-deal-for-classified-ai-work-despite-uproar-from-employees-warning-of-irreparable-damage/",
+          "icon": "https://serpapi.com/images/i/UklGRrgBAABXRUJQVlA4IKwBAAAwCQCdASocABwAPrUurVanIacnG_DgFolsAK5Vjbz3GA8QCoZXwDWBogHDE86P_Q8tf0d7BH6v9XQigUO_YnPU-g2gUK8RVsKGNO7fCOUJJ2PAAP6e620H4Vdx5ODx_n-UWOyLH9Q3lAXk_3X9UZ9WhXKFQ698vYLU1fhDHbyu8RP6u20wSM3NgK7tEB9xIU22iJFCjqdkF3KmUrRG7JXaDNdi8hVtMT_xIY5bMm9hgVfsCkLyJzhM7CmltAEIyKb7SNYBIbCn9DELqJ27ZnT8-pqzKXRrkIjFJfLOtzoOLa_3GD7Llr0wNVI-SVNz1efzhW2up7xe6A9BhyO4EWt3CMxHN-8133EAXFVpzwukBYx0TZt34dMX9FOCiF-MrRSzcu92cMVeUpeRsTR4o8OzmcLKifMucQbw-W8nWibl9mS5492oDKlLSQUF6AW82H0i0aw5-jG-Jxq6tIdO0PccqhBWASYnvvffP_V74L4ATVIXRG_QzP0_nZJP7CXZ5hiXKGf_7ub4MvPW5aRPEgernItTLp7UYaom7UWOgne_bm5-rM4dz_UK1AAAAA.webp"
+        },
+        "languages": [
+          "en"
+        ],
+        "regions": [
+          "US"
+        ]
+      },
+      "about_page_link": "https://lens.google.com/search?q=About+https://lens.google.com/goto?url=CAESzQEB6zswFZTDqKDqls3mVjX1Up4WVAdIb7Gapxim64iO5y4fTv5EQWtFbNEqqvirpw_pFu3nmpAtrCHfyOVHiMuUoFgwGoV1JOSt9Mq4tjbQHbwgxIe58A5IrW2vX391baBftUCCv2f7IyMEbDI1zBmhIhy7UE0DxDsY3FVUOgQJeTzYDgZkN3JDQxbYcu7Pis6KET2KzycExIoN2kRd43isAQ10VJRjvvLyYxIc9fyl0L98qRLc2LJ_v6Gt-8dRTPTJ0QIuLdc_Cg88Ofmy&tbm=ilp",
+      "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Flens.google.com%2Fgoto%3Furl%3DCAESzQEB6zswFZTDqKDqls3mVjX1Up4WVAdIb7Gapxim64iO5y4fTv5EQWtFbNEqqvirpw_pFu3nmpAtrCHfyOVHiMuUoFgwGoV1JOSt9Mq4tjbQHbwgxIe58A5IrW2vX391baBftUCCv2f7IyMEbDI1zBmhIhy7UE0DxDsY3FVUOgQJeTzYDgZkN3JDQxbYcu7Pis6KET2KzycExIoN2kRd43isAQ10VJRjvvLyYxIc9fyl0L98qRLc2LJ_v6Gt-8dRTPTJ0QIuLdc_Cg88Ofmy",
+      "source": "New York Post"
+    },
+    {
+      "position": 6,
+      "title": "Ceo Alphabet Google Sundar Pichai Joint Editorial Stock ...",
+      "link": "https://www.shutterstock.com/editorial/image-editorial/ceo-alphabet-google-sundar-pichai-joint-press-12872943t",
+      "redirect_link": "https://lens.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAESpgEB6zswFWJC-GjPZ8d-u9niotrvQDKQ2FppMphg60O95yzHMGnlqMf5zF3K4F1x-miHxGB-37Lg_Z6_xjMoEplRwhQL4QROpKxq7j8r9Zz0w5BgAzpeSWZA0OIEWG0u4kDdNafiVttCpoRlD-GUtkCzzjjlw7hqifpEWf_CGit_wS9jO11WHX_8DiWHFlsrCItj8RqcWlK-HS94lx8VEzg90ElsWKkh&ved=2ahUKEwjRm83drtWWAxXrL1kFHXjtMqcQFnoFCLwDEAE&uoh=1",
+      "displayed_link": "https://www.shutterstock.com › editorial › image-editorial",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQihSqFdBmLiAJS5reOu4WSdFoQBvo6_nfUSHDgm3cEbD7SHHQp18JgeKN1lD9HlTP2_qbD&s",
+      "favicon": "https://serpapi.com/images/i/UklGRvIAAABXRUJQVlA4IOYAAABQBQCdASocABwAPrkurlcnIacnG_DgFwlsAJ0yhHAQaTvLJERf7Ec-HkPPTSfFzkEMrCAA9wcPtppCx0XUSjLUeT05g9VwtkCR7Kh5-Y6ARUQyzRTUf_gZ_8baPeptkOnmv_8bxfJeV7_SrcUBNbrl7zBJBlYtindh0qveZFernNGO_FhU4hbZd9ZqeD5DdL4JnRTgGGUOvlugTH-ci1avxq8e_mqjzsHdrYb0MFTGlr4meoSR4w1heUaoEPSDM7Q9mkf3Hz_H7LFONfbaZhTSNXH-zlBvBUC45UMJGbC-a0U6EwAAAA.webp",
+      "date": "Mar 29, 2022",
+      "snippet": "CEO of Alphabet and Google Sundar Pichai joint press conference with Polish Prime Minister Mateusz Morawiecki at the Chancellery in Warsaw, ...",
+      "snippet_highlighted_words": [
+        "CEO of Alphabet and Google Sundar Pichai joint press conference"
+      ],
+      "about_this_result": {
+        "source": {
+          "description": "CEO of Alphabet and Google Sundar Pichai joint press conference with Polish Prime Minister Mateusz Morawiecki at the Chancellery in Warsaw, ...",
+          "source_info_link": "https://www.shutterstock.com/editorial/image-editorial/ceo-alphabet-google-sundar-pichai-joint-press-12872943t",
+          "icon": "https://serpapi.com/images/i/UklGRvIAAABXRUJQVlA4IOYAAABQBQCdASocABwAPrkurlcnIacnG_DgFwlsAJ0yhHAQaTvLJERf7Ec-HkPPTSfFzkEMrCAA9wcPtppCx0XUSjLUeT05g9VwtkCR7Kh5-Y6ARUQyzRTUf_gZ_8baPeptkOnmv_8bxfJeV7_SrcUBNbrl7zBJBlYtindh0qveZFernNGO_FhU4hbZd9ZqeD5DdL4JnRTgGGUOvlugTH-ci1avxq8e_mqjzsHdrYb0MFTGlr4meoSR4w1heUaoEPSDM7Q9mkf3Hz_H7LFONfbaZhTSNXH-zlBvBUC45UMJGbC-a0U6EwAAAA.webp"
+        },
+        "languages": [
+          "en"
+        ],
+        "regions": [
+          "US"
+        ]
+      },
+      "about_page_link": "https://lens.google.com/search?q=About+https://lens.google.com/goto?url=CAESpgEB6zswFWJC-GjPZ8d-u9niotrvQDKQ2FppMphg60O95yzHMGnlqMf5zF3K4F1x-miHxGB-37Lg_Z6_xjMoEplRwhQL4QROpKxq7j8r9Zz0w5BgAzpeSWZA0OIEWG0u4kDdNafiVttCpoRlD-GUtkCzzjjlw7hqifpEWf_CGit_wS9jO11WHX_8DiWHFlsrCItj8RqcWlK-HS94lx8VEzg90ElsWKkh&tbm=ilp",
+      "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Flens.google.com%2Fgoto%3Furl%3DCAESpgEB6zswFWJC-GjPZ8d-u9niotrvQDKQ2FppMphg60O95yzHMGnlqMf5zF3K4F1x-miHxGB-37Lg_Z6_xjMoEplRwhQL4QROpKxq7j8r9Zz0w5BgAzpeSWZA0OIEWG0u4kDdNafiVttCpoRlD-GUtkCzzjjlw7hqifpEWf_CGit_wS9jO11WHX_8DiWHFlsrCItj8RqcWlK-HS94lx8VEzg90ElsWKkh",
+      "source": "Shutterstock",
+      "read_more_link": "https://www.google.com/goto?url=CAES9QEB6zswFQaqtzwYSpNuK9V2HDoXX8jXZ2I3_Fp6VaAWiM2kImXnFi45ReHLKq3-dRk_-Drs0A2r3T6tu_PDR-CmS40zZQ5vQDhTegRgzKOVpoihuRseMHxmvvwVP-mnAQAK1K1XqFUrTiDKvaMakRM32yDZAMWU94zUu-V6litQU1VzomSzdg2cV7iEKasj2PN6ZYf0wCGtZHBtO77wCuDpRBZui9RyLDHnWytr8p5x9XTteVATvSU39HhETqy6kNSfznQf3RMTvnqlN1niy3Zo1_mbHWY3y1tXAa12Z03cne21fazBYhN63_7xRO3xFfb9FlVtZA"
+    },
+    {
+      "position": 7,
+      "title": "CEO Sundar Pichai addresses layoffs at Google's all-hands ...",
+      "link": "https://www.google.com/goto?url=CAESYwHrOzAVssFZ9nd9PaQRgTzbnzGyYXjC1hJ6eqMkzJukspLf58SEGNICmo80I6-9drmDGQXyZkfWghrntl18jZLHQ3CS7ba6kpoaqiIKOLMZt-oQkZbrWxMKqwfK-hT2hDXD5w",
+      "displayed_link": "8.9K+ views · 2 years ago",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAwhYxBSsRVu81-o65TX0GnVDiGnvDVZtr0Ngdm_gvkuIYoO5fqr7OmQ&s",
+      "favicon": "https://serpapi.com/images/i/UklGRpwAAABXRUJQVlA4IJAAAAAwBACdASoQABAAAsBMJbACdGsAYQB-gGWAbwASnnx4vADfdr4sQbHuTIgA_vQMxuNgMMWMsmouF7hbZvT51iCqgStGXinCzpYfdY0TLuw8u1p8i-R75HEyG3C9BMJ_SyeGe2BtG_fAxY-0nDUOWQ1YBl__mcybueh2sm_8KPzrhGf-yuX3HjbKaeK8Q3AcwAA.webp",
+      "snippet": "ndar pichai faced tough questions as he addressed the company's massive 2022 layoffs. Defending the decision to cut 6% of alphabet's workforce,",
+      "duration": "1:16",
+      "about_this_result": {
+        "source": {
+          "description": "ndar pichai faced tough questions as he addressed the company's massive 2022 layoffs. Defending the decision to cut 6% of alphabet's workforce,",
+          "icon": "https://serpapi.com/images/i/UklGRpwAAABXRUJQVlA4IJAAAAAwBACdASoQABAAAsBMJbACdGsAYQB-gGWAbwASnnx4vADfdr4sQbHuTIgA_vQMxuNgMMWMsmouF7hbZvT51iCqgStGXinCzpYfdY0TLuw8u1p8i-R75HEyG3C9BMJ_SyeGe2BtG_fAxY-0nDUOWQ1YBl__mcybueh2sm_8KPzrhGf-yuX3HjbKaeK8Q3AcwAA.webp"
+        }
+      },
+      "about_page_link": "https://lens.google.com/search?q=About+https://lens.google.com/goto?url=CAESYwHrOzAVssFZ9nd9PaQRgTzbnzGyYXjC1hJ6eqMkzJukspLf58SEGNICmo80I6-9drmDGQXyZkfWghrntl18jZLHQ3CS7ba6kpoaqiIKOLMZt-oQkZbrWxMKqwfK-hT2hDXD5w&tbm=ilp",
+      "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Flens.google.com%2Fgoto%3Furl%3DCAESYwHrOzAVssFZ9nd9PaQRgTzbnzGyYXjC1hJ6eqMkzJukspLf58SEGNICmo80I6-9drmDGQXyZkfWghrntl18jZLHQ3CS7ba6kpoaqiIKOLMZt-oQkZbrWxMKqwfK-hT2hDXD5w",
+      "video_link": "https://encrypted-vtbn0.gstatic.com/video?q=tbn:ANd9GcSCTf6e2K3gs16tN6NO0x6Qpq4iosuDnYlw2w",
+      "source": "YouTube · WION"
+    },
+    {
+      "position": 8,
+      "title": "Let's meet Sundar Pichai, the new CEO of Google",
+      "link": "https://www.wired.com/story/sundar-pichai-google-new-ceo/",
+      "redirect_link": "https://lens.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAEScQHrOzAVmjmjzt0Y-oMK5P3CN8IFtPxAg5GyGlsAZDSeKKjupY6n9vT36dKU7MHN_7kBH0D12QMkyQNh0w5osD2DS6CoP53khzz0G9cETKCAcv-Wi6l98lUdev69gdbYnrIyicd78eFXE6M55V4MgBeG&ved=2ahUKEwjRm83drtWWAxXrL1kFHXjtMqcQFnoFCLYDEAE&uoh=1",
+      "displayed_link": "https://www.wired.com › Business › business",
+      "favicon": "https://serpapi.com/images/i/UklGRpYAAABXRUJQVlA4IIoAAABwBACdASocABwAPrUurVanIacnG_DgFolpAACI549pp9fbbzbDYAQbQlYMwAD--b3zlWwN_5VLvERKvw907x2UBkKlwYSfBjoMFauwNtlrZvf-qwL8ghLAT_70Ca9Qs78MrN7UlMUKuvIJvRc8S9CCWhxs5pp5OWYAN7WWzfZ-uAnhT8d0xRpAAAA.webp",
+      "date": "Aug 10, 2015",
+      "snippet": "Google has a new CEO and his name is Sundar Pichai. will run a new holding company called Alphabet and Pichai will step up to run Google in ...",
+      "snippet_highlighted_words": [
+        "Google has a new CEO and his name is Sundar Pichai"
+      ],
+      "about_this_result": {
+        "source": {
+          "description": "Google has a new CEO and his name is Sundar Pichai. will run a new holding company called Alphabet and Pichai will step up to run Google in ...",
+          "source_info_link": "https://www.wired.com/story/sundar-pichai-google-new-ceo/",
+          "icon": "https://serpapi.com/images/i/UklGRpYAAABXRUJQVlA4IIoAAABwBACdASocABwAPrUurVanIacnG_DgFolpAACI549pp9fbbzbDYAQbQlYMwAD--b3zlWwN_5VLvERKvw907x2UBkKlwYSfBjoMFauwNtlrZvf-qwL8ghLAT_70Ca9Qs78MrN7UlMUKuvIJvRc8S9CCWhxs5pp5OWYAN7WWzfZ-uAnhT8d0xRpAAAA.webp"
+        },
+        "languages": [
+          "en"
+        ],
+        "regions": [
+          "US"
+        ]
+      },
+      "about_page_link": "https://lens.google.com/search?q=About+https://lens.google.com/goto?url=CAEScQHrOzAVmjmjzt0Y-oMK5P3CN8IFtPxAg5GyGlsAZDSeKKjupY6n9vT36dKU7MHN_7kBH0D12QMkyQNh0w5osD2DS6CoP53khzz0G9cETKCAcv-Wi6l98lUdev69gdbYnrIyicd78eFXE6M55V4MgBeG&tbm=ilp",
+      "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Flens.google.com%2Fgoto%3Furl%3DCAEScQHrOzAVmjmjzt0Y-oMK5P3CN8IFtPxAg5GyGlsAZDSeKKjupY6n9vT36dKU7MHN_7kBH0D12QMkyQNh0w5osD2DS6CoP53khzz0G9cETKCAcv-Wi6l98lUdev69gdbYnrIyicd78eFXE6M55V4MgBeG",
+      "source": "WIRED"
+    },
+    {
+      "position": 9,
+      "title": "Google CEO Sundar Pichai warns United States' ...",
+      "link": "https://timesofindia.indiatimes.com/technology/tech-news/google-ceo-sundar-pichai-warns-united-states-extraordinary-plans-for-search-and-chrome-may-kill-google/articleshow/120797912.cms",
+      "redirect_link": "https://lens.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=CAES8gEB6zswFV6H8LG4G6l-JfgsK757mGrD552jDAb8Fv0BfY0WasT6Uy40ah-EcN2HxNE42TV3vIWwPZNW2jYKNZBeUbJb_E8mLkiQArcvpfzWj-0anjwaupE_iNYVWyyzgEuLjsmaRyreeljqb6TWBaMdgp0wyP2OasT4j66Qzun-D9NW3kfYdMWGGMaST9ABJEA1ktXL90JaiqzLbeLZSOEcnj3-OIUgiGMVYuBqoZofrqKGxx36KFqr1mRGgShSCZE1tZV9rS6O2gjdRJoixKi0_WcUCORvprrDeYTj9U8_bzKLAB0N0AIz-IOdhs8urin39A&ved=2ahUKEwjRm83drtWWAxXrL1kFHXjtMqcQFnoFCL4DEAE&uoh=1",
+      "displayed_link": "https://timesofindia.indiatimes.com › ... › Tech News",
+      "favicon": "https://serpapi.com/images/i/UklGRigBAABXRUJQVlA4IBwBAADQBQCdASocABwAPrkurlcnIacnG_DgFwlsAJ0ygVYBvHFY5Ni6wkFdXZL5PhgGcseZjJjKvFSAAP7otMVc8SGRmJ63z-uivmIvaZzDJfNv-B8KAS_iEEdLnTx5afKOGIYJ5aXJKwMBX84ZQNUMfk1rT_89M_8f_S3ZNydxR9uUP96h-H9LM9MTafYA-hy4DFFEg78Nr4nb0j-5f4du70fb_P2bO1n83lvdNsufYtsu0klpzCpi5NHZO7u5rK5Y-Tl_x_yl_LETn7sP7__zQAzhnSF3YVcBh1H8jXvRaE1P5wx_yV5sK0FC7irX9M_BYCrmsCSAGS0fntj-Urozrth7-ssEVARAvBf4Lov9lFlQ6616Fvz0k2gqr7AAAA.webp",
+      "date": "May 1, 2025",
+      "snippet": "Tech News : Google CEO Sundar Pichai cautioned that the US Department of Justice's antitrust remedies could jeopardize Google Search, ...",
+      "snippet_highlighted_words": [
+        "Google CEO Sundar Pichai cautioned"
+      ],
+      "about_this_result": {
+        "source": {
+          "description": "Tech News : Google CEO Sundar Pichai cautioned that the US Department of Justice's antitrust remedies could jeopardize Google Search, ...",
+          "source_info_link": "https://timesofindia.indiatimes.com/technology/tech-news/google-ceo-sundar-pichai-warns-united-states-extraordinary-plans-for-search-and-chrome-may-kill-google/articleshow/120797912.cms",
+          "icon": "https://serpapi.com/images/i/UklGRigBAABXRUJQVlA4IBwBAADQBQCdASocABwAPrkurlcnIacnG_DgFwlsAJ0ygVYBvHFY5Ni6wkFdXZL5PhgGcseZjJjKvFSAAP7otMVc8SGRmJ63z-uivmIvaZzDJfNv-B8KAS_iEEdLnTx5afKOGIYJ5aXJKwMBX84ZQNUMfk1rT_89M_8f_S3ZNydxR9uUP96h-H9LM9MTafYA-hy4DFFEg78Nr4nb0j-5f4du70fb_P2bO1n83lvdNsufYtsu0klpzCpi5NHZO7u5rK5Y-Tl_x_yl_LETn7sP7__zQAzhnSF3YVcBh1H8jXvRaE1P5wx_yV5sK0FC7irX9M_BYCrmsCSAGS0fntj-Urozrth7-ssEVARAvBf4Lov9lFlQ6616Fvz0k2gqr7AAAA.webp"
+        },
+        "languages": [
+          "en"
+        ],
+        "regions": [
+          "US"
+        ]
+      },
+      "about_page_link": "https://lens.google.com/search?q=About+https://lens.google.com/goto?url=CAES8gEB6zswFV6H8LG4G6l-JfgsK757mGrD552jDAb8Fv0BfY0WasT6Uy40ah-EcN2HxNE42TV3vIWwPZNW2jYKNZBeUbJb_E8mLkiQArcvpfzWj-0anjwaupE_iNYVWyyzgEuLjsmaRyreeljqb6TWBaMdgp0wyP2OasT4j66Qzun-D9NW3kfYdMWGGMaST9ABJEA1ktXL90JaiqzLbeLZSOEcnj3-OIUgiGMVYuBqoZofrqKGxx36KFqr1mRGgShSCZE1tZV9rS6O2gjdRJoixKi0_WcUCORvprrDeYTj9U8_bzKLAB0N0AIz-IOdhs8urin39A&tbm=ilp",
+      "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Flens.google.com%2Fgoto%3Furl%3DCAES8gEB6zswFV6H8LG4G6l-JfgsK757mGrD552jDAb8Fv0BfY0WasT6Uy40ah-EcN2HxNE42TV3vIWwPZNW2jYKNZBeUbJb_E8mLkiQArcvpfzWj-0anjwaupE_iNYVWyyzgEuLjsmaRyreeljqb6TWBaMdgp0wyP2OasT4j66Qzun-D9NW3kfYdMWGGMaST9ABJEA1ktXL90JaiqzLbeLZSOEcnj3-OIUgiGMVYuBqoZofrqKGxx36KFqr1mRGgShSCZE1tZV9rS6O2gjdRJoixKi0_WcUCORvprrDeYTj9U8_bzKLAB0N0AIz-IOdhs8urin39A",
+      "source": "The Times of India"
+    }
+  ]
+}
