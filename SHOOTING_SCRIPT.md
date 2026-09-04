@@ -124,14 +124,14 @@ anything can be doubted.*
 **0:38–1:00 — when the ranked table lands. SLOW DOWN. This is the differentiator.**
 
 > "Now look at the ranking, because this is the part most people get wrong.
-> The *highest* scores — around 0.97 — are the same press photograph republished
-> by different outlets. Their face-region perceptual hash distance is around 12:
-> near-identical images.
+> The *highest* scores are the same press photograph republished by different
+> outlets — their face-region perceptual hash distance is small, in single
+> figures or low teens. Near-identical images.
 >
-> The one we select scores *lower* — around 0.83 — with a hash distance above 28.
-> That is a genuinely different photograph of the same person, and it is much
-> stronger evidence. Ranking by similarity alone would have returned the weakest
-> result with the biggest number.
+> The one we select scores *lower*, with a hash distance above the cutoff of
+> fifteen. That is a genuinely different photograph of the same person, and it
+> is much stronger evidence. Ranking by similarity alone would have returned the
+> weakest result with the biggest number.
 >
 > And the score is an interval, not a point. The input is a crop we chose, so we
 > embed it six ways and report the median with its range."
