@@ -100,15 +100,38 @@ are a single command.
 
 ```
 source : 1280x853  198KB  sha256 16f416cc...
-output : 460x306    19KB  sha256 1f6c56c4...
+output : 537x358    27KB  sha256 <read it off the screen>
 identical  : NO
 ```
 
+**Two things about this command, both learned the hard way.**
+
+It **overwrites `data/input.jpg`, which is a tracked file**, and it does *not*
+reproduce the committed bytes — the shipped `data/input.jpg` (460x306,
+`1f6c56c4...`) was produced by an earlier version of this tool, and no crop /
+scale / quality combination in the current one recreates it. So:
+
+* the dimensions and hash are **read off the screen**, never spoken from memory;
+* if Scene 1 runs, **Scene 2 must be a live run**, so the input on screen is the
+  input that was searched. Falling back to `--replay` of a run built from the
+  committed bytes would show one hash in Scene 1 and a different one in Scene 2;
+* afterwards, `git checkout -- data/input.jpg` puts the tracked file back.
+
+To record Scene 1 without touching the tracked file, write elsewhere and run
+Scene 2 on that path instead:
+
+```powershell
+.venv\Scripts\python.exe scripts\make_derived_input.py --source data\fixtures\B2_nadella_smiling.jpg --out data\input_take.jpg
+.venv\Scripts\python.exe -m app.main --image data\input_take.jpg
+```
+
+Scene 6 then needs `--genuine data\input_take.jpg` so its probes stay matched.
+
 **Say:**
 
-> "The input is a re-encoded crop — 460 by 306, a different SHA-256 from any
-> published file. These exact bytes exist nowhere on the web, so exact-file
-> matching cannot explain anything we find. Any match has to come from the face."
+> "The input is a re-encoded crop — a different SHA-256 from any published file.
+> These exact bytes exist nowhere on the web, so exact-file matching cannot
+> explain anything we find. Any match has to come from the face."
 
 *Why this is first: it is the claim everything else rests on. Establish it before
 anything can be doubted.*
