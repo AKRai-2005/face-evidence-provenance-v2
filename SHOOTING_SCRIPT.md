@@ -53,9 +53,23 @@ type .consent
 #    both must print VERIFIED. They read the live chain, so this also confirms
 #    the RPC is up before you start recording.
 
-# 6. CAPTURE A FALLBACK RUN NOW, so a network failure costs a retake, not the shoot
+# 6. BUILD THE WEB3-ONLY ENV Scene 4 shows. It does NOT exist until you make
+#    it, and Scene 4 is unrecordable without it. ~40 s, gitignored.
+python -m venv fresh
+fresh\Scripts\python.exe -m pip install web3
+#    then confirm exactly what Scene 4 puts on camera:
+fresh\Scripts\Activate.ps1
+pip list | findstr /I "insightface torch opencv scikit imagehash matplotlib"   # prints NOTHING
+(pip list | Measure-Object -Line).Lines                                        # prints 43
+python verify.py --bundle sample_run_2\bundle.json                             # VERIFIED
+deactivate
+
+# 7. CAPTURE A FALLBACK RUN NOW, so a network failure costs a retake, not the shoot
 .venv\Scripts\python.exe -m app.main --image data/input.jpg --yes
 #    note the run_id it prints -- that is your --replay safety net
+#    then prove the two demos that depend on it, BEFORE recording:
+.venv\Scripts\python.exe scripts\demo_negative_control.py --run runs\<run_id>
+.venv\Scripts\python.exe scripts\demo_duplicate.py --bundle runs\<run_id>\bundle.json
 ```
 
 **Windows terminal setup:** maximise, font ≥ 16 pt, and set the window to about
@@ -296,14 +310,24 @@ teams will not have it.*
 .venv\Scripts\python.exe scripts\demo_negative_control.py --run runs\<run_id>
 ```
 
-**Expect:** `0 / 11` false accepts, roughly a 3x margin, `PASS`.
+**Expect:** `0 / N` false accepts and `PASS`. **The impostor score and the
+margin move with the candidate set** — 0/12 at 0.0898 and 2.4x on the frozen
+Nadella run, 0/11 near 0.06 on an earlier one. Read them off the screen; the
+only fixed number in this scene is the threshold.
+
+**The probes are a matched pair.** `--impostor` defaults to Pichai and
+`--genuine` to `data/input.jpg` (Nadella), so this must point at a run of the
+**Nadella** input — which is what Scene 1 regenerates and Scene 2 runs. Aimed at
+a Pichai run the roles invert and every candidate reads as a false accept; the
+script now detects that and prints PROBES LOOK INVERTED (exit 2) instead of
+announcing a threshold failure, but it is not a demo. Rehearse it in pre-flight.
 
 **Say:**
 
 > "And the obvious question — does it ever say yes to the wrong person? Same
 > candidates, same threshold, but a different public figure as the probe. The
-> highest impostor score is 0.06 against a threshold of 0.21. Zero false
-> accepts, and every genuine score beats every impostor by nearly half a point."
+> highest impostor score is well under the calibrated threshold of 0.2149. Zero
+> false accepts, and every genuine score beats every impostor by a wide margin."
 
 *This is the answer to the sharpest question a judge can ask, and it costs no
 network, no quota and no gas — so it works even if everything else is down.

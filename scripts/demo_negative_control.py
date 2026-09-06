@@ -122,6 +122,29 @@ def main() -> int:
         print(f"  at least {gmin - worst:+.4f}. The threshold sits in that gap.")
 
     print()
+
+    # Guard against the probes being pointed at the wrong run. The defaults
+    # describe ONE pairing: impostor A3 (Pichai) against a run whose input is
+    # data/input.jpg (Nadella). Aim this at a run of the impostor's own subject
+    # and the roles invert -- every candidate "false accepts" and the script
+    # would announce THRESHOLD FAILED for a threshold that is working perfectly.
+    # That is a wrong and alarming thing to print, and worse to record on video.
+    if gen is not None and false_accepts:
+        gvals = [r[2] for r in rows if r[2] is not None]
+        if gvals and sorted(gvals)[len(gvals) // 2] < sorted(r[1] for r in rows)[len(rows) // 2]:
+            print("  PROBES LOOK INVERTED -- NOT A THRESHOLD FAILURE")
+            print()
+            print("  The impostor outscores the genuine probe on most candidates,")
+            print("  which happens when this run's subject IS the impostor image.")
+            print(f"    impostor : {args.impostor.name}")
+            print(f"    genuine  : {args.genuine.name}")
+            print(f"    run      : {args.run.name}")
+            print()
+            print("  Point --run at a run of the GENUINE subject, or pass")
+            print("  --impostor / --genuine explicitly. No conclusion is drawn here.")
+            print()
+            return 2
+
     if false_accepts:
         print("  THRESHOLD FAILED THIS CONTROL -- do not present the match demo")
         print("  without disclosing this.")

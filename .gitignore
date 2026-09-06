@@ -9,6 +9,9 @@
 # --- python ---
 .venv/
 venv/
+# the web3-only verifier environment built for the demo (README "Independent
+# verification"). Hundreds of files, rebuilt in one command, never committed.
+fresh/
 __pycache__/
 *.py[cod]
 .pytest_cache/
