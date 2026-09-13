@@ -19,6 +19,10 @@ __pycache__/
 
 # --- run artifacts (audit trail, regenerated per run) ---
 runs/
+# the tamper demo's working copy. Must be recreated fresh for every showing:
+# Copy-Item into an existing tampered/ nests the copy and leaves the previous,
+# already-edited bundle in place.
+tampered/
 spikes/faces/
 spikes/out/
 
