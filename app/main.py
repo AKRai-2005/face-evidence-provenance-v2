@@ -532,6 +532,17 @@ def main(argv: list[str] | None = None) -> int:
                f"score spread: {spread}; replay of {args.replay}, not notarised"))
     paths = write_artifacts(run_dir, ev, bundle)
 
+    # The visual page is a convenience built from what was just recorded. It is
+    # written after the bundle, and a failure here must never turn a finished,
+    # notarised run into an error.
+    report_line = ""
+    try:
+        from .report import write_report
+        report_line = (f"  Visual result -- input face, retrieved image, source links:\n"
+                       f"    {_shown(write_report(run_dir))}\n\n")
+    except Exception as e:                                  # noqa: BLE001
+        log.warning("visual result not written: %s", e)
+
     con.print()
     con.print(Panel(
         f"  run           : {run_id}\n"
@@ -541,6 +552,7 @@ def main(argv: list[str] | None = None) -> int:
         f"  evidence hash : {ev_hash}\n"
         f"  chain tx      : {chain_meta.get('tx_hash', '(not recorded)')}\n"
         f"  elapsed       : {time.time()-t_start:.1f}s\n\n"
+        f"{report_line}"
         f"  Verify independently (web3 only, none of this code):\n"
         f"    python verify.py --bundle {_shown(paths['bundle'])}\n\n"
         f"  Reproduce the hash with the standard library alone:\n"

@@ -114,6 +114,10 @@
         {
           "run": ".venv\\Scripts\\python.exe -m app.main --image data\\input_pichai_run2.jpg",
           "purpose": "Runs the full pipeline on the derived input and writes a complete audit trail to runs\\RUN_ID."
+        },
+        {
+          "run": ".venv\\Scripts\\python.exe scripts\\show_result.py --run RUN_ID",
+          "purpose": "Opens the run's visual result in the browser: the input face beside the retrieved image with the matched face boxed, the source image link, the source page link and title, the match figures, the chain transaction, and the other candidates that were scored."
         }
       ],
       "show": [
@@ -125,7 +129,8 @@
         "The DISTINCT-ARTIFACT PROOF panel: the input and matched SHA-256 values, whether the files are identical, the cosine interval, the calibrated threshold with its operating point, the face-region pHash distance against the same-photo cutoff, the verdict, and the evidence strength.",
         "The [EVIDENCE] line with the SHA-256 of the canonical evidence object.",
         "The [CHAIN] lines: network, block, gas and cost of the registry write.",
-        "The JUDGE SUMMARY panel."
+        "The JUDGE SUMMARY panel.",
+        "The visual result page: the input face and the retrieved image side by side; open the source image and source page links from it."
       ],
       "actions": [
         "Note RUN_ID and CHAIN_TX from the summary panel. Steps 3, 4, 6 and 7 use them."
