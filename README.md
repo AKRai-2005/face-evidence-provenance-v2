@@ -719,6 +719,15 @@ exists so a network failure during a recording costs a retake rather than the
 submission. A run directory without a `run.json` manifest is refused rather than
 faked.
 
+A replay **reads** the captured run and **writes to a new run directory** of its
+own; the capture is never modified, and a replay never writes to the chain. Its
+evidence hash is therefore not the notarised one — the evidence is re-stamped
+with a new `retrieved_at` — so to check what is on chain, verify the *original*
+run's `bundle.json`, not the replay's. (Replays used to write back into the
+captured run, which replaced a notarised bundle with one that was never
+recorded; `tests/test_replay.py` now requires the capture to come out
+byte-identical.)
+
 ---
 
 ## Tests
