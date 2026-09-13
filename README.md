@@ -205,6 +205,13 @@ load-bearing claim in the project, and it required discarding the obvious method
 
 ---
 
+## Live demonstration
+
+[`DEMO_STEPS.json`](DEMO_STEPS.json) is the step-by-step walkthrough used to demonstrate the
+pipeline live: setup, the eight steps with every command, what to show at each, and a
+replay fallback. `tests/test_demo_steps.py` keeps it honest — every file and flag it names
+must still exist, and its fallback must be the committed `sample_run_2`.
+
 ## Quickstart
 
 ```bash

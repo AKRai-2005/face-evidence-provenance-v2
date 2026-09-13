@@ -1,0 +1,280 @@
+{
+  "title": "Face-Derived Evidence Provenance - live demonstration",
+  "project": "HH Goa 2026 - Task 3",
+  "repository": "https://github.com/AKRai-2005/face-evidence-provenance-v2",
+  "purpose": "A step-by-step walkthrough of the pipeline running end to end: a derived face image is searched on the live web, candidates are verified with face embeddings, the evidence is canonicalised and its hash is recorded on Base Sepolia, and the record is then checked independently, tampered with, tested against the wrong person, and re-submitted.",
+  "conventions": {
+    "shell": "Windows PowerShell. Every command is run from the task3 directory.",
+    "terminal_A": "PowerShell in task3, using the project environment (.venv). Runs the pipeline and the demonstration scripts.",
+    "terminal_B": "A second PowerShell in task3, with the web3-only environment (fresh) activated. Contains web3 and the Python standard library only - none of the face, vision or search libraries the pipeline uses. Used for independent verification.",
+    "browser": "Base Sepolia block explorer, open on the registry contract: https://sepolia.basescan.org/address/0x38157D4652304BA251edCcffa435A0bC3F55305a#code",
+    "placeholders": {
+      "RUN_ID": "The run identifier printed in the summary panel at the end of step 2. Replace the whole word RUN_ID with it; for example runs\\RUN_ID\\bundle.json becomes runs\\20260913T150122Z_05eb3c\\bundle.json.",
+      "CHAIN_TX": "The chain transaction hash printed in the same summary panel at the end of step 2."
+    },
+    "input_image": "data\\input_pichai_run2.jpg - a re-encoded crop of a Wikimedia Commons photograph of a public figure. Live search results change over time; this walkthrough uses this input."
+  },
+  "setup": [
+    {
+      "id": "S1",
+      "title": "Confirm the project environment",
+      "where": "terminal_A",
+      "commands": [
+        {
+          "run": ".venv\\Scripts\\python.exe -m pytest -q",
+          "purpose": "Runs the full test suite, including hermetic in-process EVM tests of the registry contract."
+        }
+      ],
+      "show": [
+        "The test summary line."
+      ]
+    },
+    {
+      "id": "S2",
+      "title": "Confirm chain connectivity",
+      "where": "terminal_A",
+      "commands": [
+        {
+          "run": ".venv\\Scripts\\python.exe verify.py --bundle sample_run_2\\bundle.json",
+          "purpose": "Verifies a committed sample run against the live chain, which also confirms the RPC endpoint is reachable before the demonstration starts."
+        }
+      ],
+      "show": [
+        "The verification verdict line."
+      ]
+    },
+    {
+      "id": "S3",
+      "title": "Prepare the web3-only environment",
+      "where": "terminal_B",
+      "commands": [
+        {
+          "run": "python -m venv fresh",
+          "purpose": "Only if the fresh directory does not exist yet: creates an empty virtual environment.",
+          "only_if": "fresh\\ is missing"
+        },
+        {
+          "run": "fresh\\Scripts\\python.exe -m pip install web3",
+          "purpose": "Only if fresh was just created: installs web3 and nothing else.",
+          "only_if": "fresh\\ was just created"
+        },
+        {
+          "run": "fresh\\Scripts\\Activate.ps1",
+          "purpose": "Activates the web3-only environment. Leave this terminal activated for step 4."
+        }
+      ],
+      "show": [
+        "The prompt showing the fresh environment is active."
+      ]
+    },
+    {
+      "id": "S4",
+      "title": "Open the contract in the browser",
+      "where": "browser",
+      "actions": [
+        "Open the contract address page linked under conventions.browser.",
+        "Select the Contract tab so the published, verified Solidity source is visible."
+      ]
+    },
+    {
+      "id": "S5",
+      "title": "Make the terminals readable",
+      "where": "terminal_A and terminal_B",
+      "actions": [
+        "Set the font to 16 pt or larger.",
+        "Widen each window to about 100 columns so the ranked table and the proof panel do not wrap."
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "title": "The input is a derived artifact",
+      "where": "terminal_A",
+      "demonstrates": "The query image is created locally by cropping, rescaling and re-encoding a source photograph, so its exact bytes have never been published. An exact-file or reverse-hash lookup therefore cannot explain any match found later; a match has to come from the face.",
+      "commands": [
+        {
+          "run": ".venv\\Scripts\\python.exe scripts\\make_derived_input.py --source data\\fixtures\\A3_pichai_warsaw_crop.jpg --out data\\input_pichai_run2.jpg --scale 1.0 --quality 86 --crop 0.035",
+          "purpose": "Derives the query image from the source fixture and prints a byte-level comparison of the two files."
+        }
+      ],
+      "show": [
+        "The source file's dimensions, size and SHA-256.",
+        "The derived file's dimensions, size and SHA-256.",
+        "The transforms that were applied.",
+        "The line stating whether the two files are byte-identical."
+      ]
+    },
+    {
+      "step": 2,
+      "title": "Live search, face verification, ranking and chain write",
+      "where": "terminal_A",
+      "demonstrates": "One command runs the whole pipeline against the live web: face detection and embedding, a live Google Lens query, candidate download, per-candidate face verification, evidence ranking, canonicalisation, hashing, and the on-chain record. The run takes roughly a minute; narrate over the output as it appears.",
+      "commands": [
+        {
+          "run": ".venv\\Scripts\\python.exe -m app.main --image data\\input_pichai_run2.jpg",
+          "purpose": "Runs the full pipeline on the derived input and writes a complete audit trail to runs\\RUN_ID."
+        }
+      ],
+      "show": [
+        "[FACE] lines: RetinaFace detection confidence, face size in pixels, the sharpness gate, the model name (InsightFace buffalo_l, ArcFace w600k_r50, 512-dimension embedding, cosine on L2-normalised vectors), and the six test-time augmentation views.",
+        "[SEARCH] lines: the query image uploaded directly to the search provider (never to a public host) and the number of candidates returned by the live Google Lens query.",
+        "[FETCH] lines: each candidate image downloaded with its content type, size and SHA-256.",
+        "[VERIFY] lines: for each candidate, the cosine similarity with its range across the augmented views, the face-region perceptual hash distance, and the per-candidate verdict.",
+        "The ranked table. Explain the ordering: candidates are ranked by verdict tier first (distinct photograph above same-photograph republication), then evidence strength, then cosine. A republication of the same photograph can score a higher cosine than a genuinely different photograph and is still ranked below it, because near-identical pixels show that a file was copied rather than that a face was recognised.",
+        "The DISTINCT-ARTIFACT PROOF panel: the input and matched SHA-256 values, whether the files are identical, the cosine interval, the calibrated threshold with its operating point, the face-region pHash distance against the same-photo cutoff, the verdict, and the evidence strength.",
+        "The [EVIDENCE] line with the SHA-256 of the canonical evidence object.",
+        "The [CHAIN] lines: network, block, gas and cost of the registry write.",
+        "The JUDGE SUMMARY panel."
+      ],
+      "actions": [
+        "Note RUN_ID and CHAIN_TX from the summary panel. Steps 3, 4, 6 and 7 use them."
+      ]
+    },
+    {
+      "step": 3,
+      "title": "The record on chain",
+      "where": "browser",
+      "demonstrates": "The evidence hash from step 2 is held by a public, source-verified contract. The contract stores the hash, a salted subject commitment, the source domain and a first-seen timestamp - never an image, an embedding or a full URL.",
+      "actions": [
+        "Paste CHAIN_TX into the explorer's search box and open the transaction.",
+        "Show the transaction status, block, timestamp, and the From and To addresses; compare the To address with the contract address under conventions.browser.",
+        "Show the transaction's input data, which carries the evidence hash.",
+        "Return to the contract page, Contract tab, and show the verified source code, including recordEvidence and getEvidence."
+      ]
+    },
+    {
+      "step": 4,
+      "title": "Independent verification without the pipeline",
+      "where": "terminal_B",
+      "demonstrates": "The evidence can be checked by someone who does not trust, or even install, the pipeline. verify.py imports only web3 and the standard library, re-implements canonicalisation instead of importing it, recomputes the hash from the bundle, and reads the registry directly.",
+      "commands": [
+        {
+          "run": "pip list | findstr /I \"insightface torch opencv scikit imagehash matplotlib\"",
+          "purpose": "Searches this environment for any face, vision or machine-learning library the pipeline depends on."
+        },
+        {
+          "run": "(pip list | Measure-Object -Line).Lines",
+          "purpose": "Counts the packages installed in this environment."
+        },
+        {
+          "run": "python -c \"import hashlib,sys;print(hashlib.sha256(open(sys.argv[1],'rb').read()).hexdigest())\" runs\\RUN_ID\\canonical.json",
+          "purpose": "Reproduces the evidence hash with the Python standard library alone, from the exact bytes that were hashed."
+        },
+        {
+          "run": "python verify.py --bundle runs\\RUN_ID\\bundle.json",
+          "purpose": "Recomputes the hash from the bundle's evidence object and checks it against the on-chain registry."
+        }
+      ],
+      "show": [
+        "The result of the library search and the package count.",
+        "The standard-library hash, alongside the evidence hash from step 2.",
+        "verify.py: the claimed and recomputed hashes, the RPC endpoint and contract address, the on-chain record (first-seen time, recorder, subject commitment, source domain), and the verdict line."
+      ]
+    },
+    {
+      "step": 5,
+      "title": "Tamper detection",
+      "where": "terminal_A",
+      "demonstrates": "Any change to the notarised claim is detected. The notarised claim is the evidence object inside the bundle; its canonical SHA-256 is what the registry holds. Bundle context outside that object - notes, runner_up_scores, chain and run_id - is deliberately not part of the hash, so the record can be annotated later without appearing tampered, and the verifier never relies on those fields: it locates the on-chain record by hashing the evidence object itself.",
+      "commands": [
+        {
+          "run": "Remove-Item -Recurse -Force tampered -ErrorAction SilentlyContinue; Copy-Item -Recurse sample_run_2 tampered",
+          "purpose": "Makes a fresh working copy of a committed, notarised run. Removing any previous copy first ensures the edit starts from the original bundle every time."
+        },
+        {
+          "run": "notepad tampered\\bundle.json",
+          "purpose": "Opens the copied bundle for editing."
+        },
+        {
+          "run": ".venv\\Scripts\\python.exe verify.py --bundle tampered\\bundle.json",
+          "purpose": "Re-runs verification on the edited bundle."
+        }
+      ],
+      "actions": [
+        "In Notepad, change any single value inside the \"evidence\" object - one digit, one letter, one character of a URL or timestamp - then save and close.",
+        "Run the verification command."
+      ],
+      "alternative": {
+        "when": "To make the edit without an editor.",
+        "commands": [
+          {
+            "run": "(Get-Content tampered\\bundle.json -Raw) -replace 'businessinsider','bus1nessinsider' | Set-Content tampered\\bundle.json -Encoding utf8",
+            "purpose": "Changes one character of the source domain inside the evidence object. Run after the copy command and before the verification command."
+          }
+        ]
+      },
+      "show": [
+        "The claimed hash and the recomputed hash.",
+        "The verdict line."
+      ]
+    },
+    {
+      "step": 6,
+      "title": "The wrong person",
+      "where": "terminal_A",
+      "demonstrates": "The calibrated threshold rejects a different person. A probe image of a different public figure is scored against the same candidate set as step 2, with the same embedding pipeline and the same threshold, alongside the run's own input for comparison. Uses only images already on disk: no network, no search quota and no gas.",
+      "commands": [
+        {
+          "run": ".venv\\Scripts\\python.exe scripts\\demo_negative_control.py --run runs\\RUN_ID --impostor data\\input.jpg --genuine data\\input_pichai_run2.jpg",
+          "purpose": "Scores the impostor probe (data\\input.jpg, a different public figure) and the genuine probe (this run's input) against every candidate downloaded in step 2."
+        }
+      ],
+      "show": [
+        "The impostor and genuine probe names.",
+        "The per-candidate table with the impostor and genuine score columns.",
+        "The highest impostor score, the calibrated threshold and the margin between them.",
+        "The false-accept count and the genuine score range.",
+        "The final result line."
+      ]
+    },
+    {
+      "step": 7,
+      "title": "First-seen semantics",
+      "where": "terminal_A",
+      "demonstrates": "The registry records the first sighting of a piece of evidence. Re-submitting a hash that is already recorded is refused by the contract, so a record cannot be overwritten, re-dated, or claimed later by someone else.",
+      "commands": [
+        {
+          "run": ".venv\\Scripts\\python.exe scripts\\demo_duplicate.py --bundle runs\\RUN_ID\\bundle.json",
+          "purpose": "Reads the existing on-chain record for the evidence hash from step 2 and attempts to record the same hash again."
+        }
+      ],
+      "show": [
+        "The evidence hash and its existing on-chain timestamp.",
+        "The contract's response to the second submission."
+      ]
+    },
+    {
+      "step": 8,
+      "title": "What this does and does not establish",
+      "where": "discussion",
+      "points": [
+        "The chain notarises when a claim was made and that it has not changed since. It does not attest that the claim is correct.",
+        "A cosine above the threshold identifies a same-subject candidate. It is not a confirmed identity.",
+        "No biometric data is written to the chain: the registry holds a salted commitment, with a per-record salt kept off-chain.",
+        "Performance across demographic groups has not been measured; the attempts and why they were discarded are documented in ETHICS.md.",
+        "Demonstration subjects are public figures only."
+      ],
+      "references": [
+        "README.md",
+        "ETHICS.md",
+        "calibration\\METHOD.md"
+      ]
+    }
+  ],
+  "fallback": {
+    "when": "The live search in step 2 cannot run - no network, or the search provider is unavailable - or its candidates cannot be verified.",
+    "requires": "The captured run runs\\20260904T163955Z_c56949 on the demonstration machine. It is the run committed as sample_run_2 and uses the same input image.",
+    "commands": [
+      {
+        "run": ".venv\\Scripts\\python.exe -m app.main --replay 20260904T163955Z_c56949",
+        "purpose": "Replays step 2 from the captured provider responses and candidate images, with no network calls. A banner states that it is a replay. The replay writes to a new run directory, leaves the captured run unchanged, and writes nothing to the chain."
+      }
+    ],
+    "then": [
+      "Say that the output is a replay; the banner remains on screen.",
+      "A replay re-stamps the evidence with a new retrieval time, so its evidence hash is not the notarised one.",
+      "For steps 3 to 7, use the original run instead of the replay: RUN_ID = 20260904T163955Z_c56949 and CHAIN_TX = 0xe3b94010676d6881429d40139fd667f11de4ba987d565da200d16c52602ca754."
+    ]
+  }
+}
