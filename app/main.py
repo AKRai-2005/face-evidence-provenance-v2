@@ -85,6 +85,19 @@ def consent_gate(con: Console, *, assume: bool = False) -> bool:
     return True
 
 
+
+def _shown(path: pathlib.Path) -> pathlib.Path:
+    """A path for display: repo-relative when it can be, absolute otherwise.
+
+    Path.relative_to raises for anything outside the repository, and the
+    summary is printed AFTER the chain write -- so a run directory elsewhere
+    turned a successful, notarised run into a traceback on its last line.
+    """
+    try:
+        return path.relative_to(ROOT)
+    except ValueError:
+        return path
+
 def new_run_dir(run_id: str | None = None) -> tuple[pathlib.Path, str]:
     if run_id is None:
         run_id = (dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -209,37 +222,46 @@ def main(argv: list[str] | None = None) -> int:
 
     replaying = bool(args.replay)
     if replaying:
-        run_dir = RUNS / args.replay
-        if not run_dir.exists():
-            con.print(f"[red]No such run: {run_dir}[/]")
+        capture = RUNS / args.replay
+        if not capture.exists():
+            con.print(f"[red]No such run: {capture}[/]")
             return EXIT_BAD_INPUT
-        run_id = args.replay
-        if not (run_dir / "run.json").exists():
-            con.print(f"[red]RUN IS NOT REPLAYABLE[/] {run_dir}")
+        if not (capture / "run.json").exists():
+            con.print(f"[red]RUN IS NOT REPLAYABLE[/] {capture}")
             con.print("  No run.json manifest. Only runs captured by a live")
             con.print("  execution of this pipeline can be replayed.")
             return EXIT_BAD_INPUT
-    else:
-        run_dir, run_id = new_run_dir()
+    # A replay READS the capture and WRITES to a run directory of its own. It
+    # used to write back into the captured run, which replaced a notarised
+    # bundle with a freshly timestamped one that was never recorded -- so the
+    # original stopped verifying. Replay is the fallback reached for exactly
+    # when a live demo has already gone wrong; it must not break what it is
+    # falling back to.
+    run_dir, run_id = new_run_dir()
+    if not replaying:
+        capture = run_dir
 
     log = setup_logging(run_dir=run_dir, secrets=cfg.secret_values(), verbose=args.verbose)
     say = stage(log, "RUN")
 
     if replaying:
-        _m = json.loads((run_dir / "run.json").read_text(encoding="utf-8"))
+        _m = json.loads((capture / "run.json").read_text(encoding="utf-8"))
         con.print(Panel(
-            f"[bold yellow]REPLAY MODE[/] -- using captured responses from run {run_id}\n"
-            f"No live network calls. Original capture: {_m.get('started_at')}",
+            f"[bold yellow]REPLAY MODE[/] -- using captured responses from run {args.replay}\n"
+            f"No live network calls. Original capture: {_m.get('started_at')}\n"
+            f"Output: runs/{run_id} -- the captured run is read-only",
             border_style="yellow", expand=False))
 
     t_start = time.time()
     say("run %s", run_id)
+    if replaying:
+        say("replay of %s (read-only)", args.replay)
 
     # ---------------- FACE ------------------------------------------------
     import cv2
     if replaying:
-        meta = json.loads((run_dir / "run.json").read_text(encoding="utf-8"))
-        src = run_dir / "input" / meta["input_name"]
+        meta = json.loads((capture / "run.json").read_text(encoding="utf-8"))
+        src = capture / "input" / meta["input_name"]
     else:
         src = args.image
     if not src.exists():
@@ -302,10 +324,10 @@ def main(argv: list[str] | None = None) -> int:
          min(self_cons) if self_cons else 1.0)
 
     # ---------------- HOST + SEARCH --------------------------------------
-    raw_dir = run_dir / "raw"
+    raw_dir = capture / "raw"
     if replaying:
         from .search.base import Candidate, SearchResult
-        cached = json.loads((run_dir / "search.json").read_text(encoding="utf-8"))
+        cached = json.loads((capture / "search.json").read_text(encoding="utf-8"))
         search_res = SearchResult(
             provider=cached["provider"],
             candidates=[Candidate(**c) for c in cached["candidates"]],
@@ -359,7 +381,7 @@ def main(argv: list[str] | None = None) -> int:
     if replaying:
         # Replay must be fully offline, or the banner is a lie and a network
         # failure would break a replay exactly as it breaks a live run.
-        fetched = load_cached(search_res.candidates, run_dir / "candidates",
+        fetched = load_cached(search_res.candidates, capture / "candidates",
                               logger=stage(log, "FETCH"))
     else:
         fetcher = CandidateFetcher(timeout=cfg.fetch_timeout_s,
@@ -506,7 +528,8 @@ def main(argv: list[str] | None = None) -> int:
     bundle = build_bundle(
         evidence=ev, run_id=run_id, chain=chain_meta,
         runner_up=[s.as_record() for s in ranked[1:6]],
-        notes=f"score spread: {spread}")
+        notes=(f"score spread: {spread}" if not replaying else
+               f"score spread: {spread}; replay of {args.replay}, not notarised"))
     paths = write_artifacts(run_dir, ev, bundle)
 
     con.print()
@@ -519,11 +542,11 @@ def main(argv: list[str] | None = None) -> int:
         f"  chain tx      : {chain_meta.get('tx_hash', '(not recorded)')}\n"
         f"  elapsed       : {time.time()-t_start:.1f}s\n\n"
         f"  Verify independently (web3 only, none of this code):\n"
-        f"    python verify.py --bundle {paths['bundle'].relative_to(ROOT)}\n\n"
+        f"    python verify.py --bundle {_shown(paths['bundle'])}\n\n"
         f"  Reproduce the hash with the standard library alone:\n"
         f"    python -c \"import hashlib,sys;print(hashlib.sha256("
         f"open(sys.argv[1],'rb').read()).hexdigest())\" "
-        f"{paths['canonical'].relative_to(ROOT)}",
+        f"{_shown(paths['canonical'])}",
         title="[bold]JUDGE SUMMARY[/]", border_style="cyan", expand=False))
     return EXIT_OK
 
